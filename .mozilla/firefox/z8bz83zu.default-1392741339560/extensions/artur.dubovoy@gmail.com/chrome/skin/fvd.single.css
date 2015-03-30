@@ -1,0 +1,281 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+
+toolbarbutton#fvd_single_button
+{
+/*	list-style-image: url('chrome://fvd.single/skin/fvd.single.main_button.large.png');
+	-moz-image-region: rect(24px 24px 48px 0px);
+	-moz-box-orient: horizontal;*/
+	list-style-image: url('chrome://fvd.single/skin/fvd.single.main_button.small.png');
+	-moz-image-region: rect(16px 16px 32px 0px);
+}
+
+toolbarbutton#fvd_single_button[supported="true"]
+{
+/*	list-style-image: url('chrome://fvd.single/skin/fvd.single.main_button.large.png');
+	-moz-image-region: rect(0px 24px 24px 0px);*/
+	list-style-image: url('chrome://fvd.single/skin/fvd.single.main_button_detected_small.gif');
+	-moz-image-region: rect(0px 16px 16px 0px);
+}
+
+toolbar[iconsize="small"] toolbarbutton#fvd_single_button
+{
+	list-style-image: url('chrome://fvd.single/skin/fvd.single.main_button.small.png');
+	-moz-image-region: rect(16px 16px 32px 0px);
+}
+
+toolbar[iconsize="small"] toolbarbutton#fvd_single_button[supported="true"]
+{
+	list-style-image: url('chrome://fvd.single/skin/fvd.single.main_button_detected_small.gif');
+	-moz-image-region: rect(0px 16px 16px 0px);
+}
+
+toolbar[iconsize="small"] toolbarbutton#fvd_single_butto1n[download="true"]
+{
+	list-style-image: url('chrome://fvd.single/skin/fvd.single.main_button_detected_small.gif');
+	-moz-image-region: rect(0px 16px 16px 0px);
+}
+
+toolbar[iconsize="small"] toolbarbutton#fvd_single_button[downloading="true"]
+{
+	list-style-image: url('chrome://fvd.single/skin/fvd.single.main_button_download_small.gif');
+	-moz-image-region: rect(0px 16px 16px 0px);
+}
+
+toolbarpaletteitem[place="palette"] toolbarbutton#fvd_single_button,
+toolbarbutton#fvd_single_button[cui-areatype="menu-panel"]{
+  list-style-image: url(chrome://fvd.single/skin/fvd.single.icon.png) !important;
+  -moz-image-region: rect(0px 32px 32px 0px);
+}
+
+statusbarpanel#fvd_single_status_ff3
+{
+	cursor: pointer;
+	list-style-image: url('chrome://fvd.single/skin/fvd.single.main_button.small.png');
+	-moz-image-region: rect(16px 16px 32px 0px);
+}
+
+statusbarpanel#fvd_single_status_ff3[supported="true"]
+{
+	-moz-image-region: rect(0px 16px 16px 0px);
+}
+
+toolbarbutton#fvd_single_status
+{
+	cursor: pointer;
+	list-style-image: url('chrome://fvd.single/skin/fvd.single.main_button.small.png');
+	-moz-image-region: rect(16px 16px 32px 0px);
+}
+
+toolbarbutton#fvd_single_status[supported="true"]
+{
+	-moz-image-region: rect(0px 16px 16px 0px);
+}
+
+
+
+label#fvd_single_search_label
+{
+	color: gray;
+	font-size: 80%;
+	margin-left: 4px !important;
+}
+
+textbox#fvd_single_search_text
+{
+	margin-bottom: 0px !important;
+	min-width: 200px;
+}
+
+toolbarbutton#fvd_single_search_button
+{
+	list-style-image: url('chrome://fvd.single/skin/fvd.single.buttons.small.png');
+	-moz-image-region: rect(0px 16px 16px 0px);
+}
+
+toolbarbutton#fvd_single_search_button[disabled="true"]
+{
+	-moz-image-region: rect(16px 16px 32px 0px);
+}
+
+toolbarbutton#fvd_single_search_button > label
+{
+	color: MenuText;
+	padding-right: 8px;
+}
+
+toolbarbutton#fvd_single_search_button:hover > label
+{
+	color: -moz-menuhovertext;
+}
+
+toolbarbutton#fvd_single_search_button[disabled="true"] > label
+{
+	color: GrayText;
+}
+
+menu#fvd_single_tools_menu
+{
+	list-style-image: url('chrome://fvd.single/skin/fvd.single.buttons.small.png');
+	-moz-image-region: rect(0px 32px 16px 16px);
+}
+
+menuitem#fvd_single_betterfox
+{
+	list-style-image: url('chrome://fvd.single/skin/betterfox.png');
+	-moz-image-region: rect(0px 16px 16px 0px);
+}
+
+menuitem#fvd_single_nimbus
+{
+	list-style-image: url('chrome://fvd.single/skin/nimbus.png');
+	-moz-image-region: rect(0px 16px 16px 0px);
+}
+menuitem#full_hd_video_youtube
+{
+	list-style-image: url('chrome://fvd.single/skin/file_hd1080.png');
+	-moz-image-region: rect(0px 16px 16px 0px);
+}
+
+menu#fvd_single_tools_menu image.menu-iconic-icon
+{
+	-moz-margin-end: 2px !important;
+}
+
+menu#fvd_single_tools_menu[disabled="true"]
+{
+	-moz-image-region: rect(16px 32px 32px 16px);
+}
+
+
+menupopup#fvd_single_streams_menu menuitem.fullmode{
+	font-weight: bold;
+}
+menupopup#fvd_single_streams_menu .downloadall{
+	font-weight: bold;
+}
+menupopup#fvd_single_streams_menu .startmass{
+	font-weight: bold;
+	list-style-image: url('chrome://fvd.single/skin/fvd.single.main_button_detected_small.gif');
+	-moz-image-region: rect(0px 16px 16px 0px);
+}
+
+menupopup#fvd_single_streams_menu menuitem.fvdsd{
+	list-style-image: url('chrome://fvd.single/skin/fvdsd.png');
+	-moz-image-region: rect(0px 16px 16px 0px);
+}
+
+menupopup#fvd_single_streams_menu menuitem.betterfox{
+	list-style-image: url('chrome://fvd.single/skin/betterfox.png');
+	-moz-image-region: rect(0px 16px 16px 0px);
+}
+
+menupopup#fvd_single_streams_menu menuitem.nimbus{
+	list-style-image: url('chrome://fvd.single/skin/nimbus.png');
+	-moz-image-region: rect(0px 16px 16px 0px);
+}
+
+menupopup#fvd_single_streams_menu menuitem.rateus{
+	list-style-image: url('chrome://fvd.single/skin/like_icons.png');
+	-moz-image-region: rect(0px 50px 16px 35px);
+}
+menupopup#fvd_single_streams_menu menuitem.set{
+	list-style-image: url('chrome://fvd.single/skin/fvd.toolbar.main_buttons_part.png');
+	-moz-image-region: rect(0px 64px 16px 48px);
+}
+
+menupopup#fvd_single_streams_menu menuitem.converter{
+	list-style-image: url('chrome://fvd.single/skin/fvd_suite.png');
+	-moz-image-region: rect(0px 20px 16px 0px);
+}
+
+
+
+menupopup#fvd_single_streams_menu menuitem.donate{
+	list-style-image: url('chrome://fvd.single/skin/donate.png');
+	-moz-image-region: rect(0px 16px 16px 0px);
+}
+
+menuitem#fvd_single_alternative_download
+{
+	list-style-image: url('chrome://fvd.single/skin/fvd.single.download.png');
+	-moz-image-region: rect(0px 16px 16px 0px);
+}
+
+menuitem#fvd_single_alternative_download .menu-iconic-text
+{
+	font-weight: bold !important;
+}
+
+label#fvd_single_setup_note_close{
+	margin-left: 120px;
+	margin-top: 5px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+panel#fvd_single_fvd_speeddial{
+	border: 4px solid rgba(0,0,0,0.3);	
+	background-color: #fff;
+	background-clip: padding-box;
+	border-radius: 10px;
+	min-width: 250px;
+	max-width: 250px;
+	height: 140px;
+	
+	padding: 5px;
+}
+
+panel#fvd_single_fvd_speeddial .clickBox *{
+	cursor: pointer;
+}
+
+panel#fvd_single_fvd_speeddial .title{
+	font-weight: bold;
+	font-size: 18px;
+}
+
+panel#fvd_single_fvd_speeddial .sdIcon{
+	list-style-image: url('chrome://fvd.single/skin/fvdsd_big.png');
+	max-width: 32px;
+	max-height: 32px;
+}
+
+panel#fvd_single_fvd_speeddial image.stars{
+	list-style-image: url('chrome://fvd.single/skin/stars.png');
+	max-width: 89px;	
+	max-height: 16px;
+	margin-top: 15px;
+}
+
+
+.fvd_speed_dial_FastMenuItem{
+	-moz-binding:url("chrome://fvd.single/content/bindings/fvd_single.xml#fvd-speed-dial-fastmenu-item");
+}
+
+.fvd_speed_dial_FastMenuItem .fvd-speed-dial-fastmenu-item-percentage{
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.fvd_speed_dial_FastMenuItem[download_state="downloading"] > label{
+	font-weight: bold;
+	color: green;
+}
+
+.fvd_speed_dial_FastMenuItem[download_state="paused"] > label{
+	font-weight: bold;
+	color: gray;
+}
+
+.fvd_speed_dial_FastMenuItem[download_state="not"] .fvd-speed-dial-fastmenu-item-percentage{
+	display: none;
+}
+
+.fvd_speed_dial_FastMenuItem  .download{
+	font-weight: bold;
+}
+
+.fvd_speed_dial_FastMenuItem:hover > label{
+	color: inherit !important;
+}

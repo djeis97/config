@@ -1,0 +1,16 @@
+<!ENTITY txt.dialog.title		"Сервис закладок">
+
+<!ENTITY txt.your_url.title		"Ваша ссылка:">
+<!ENTITY txt.your_url.example		"Для примера - http://www.facebook.com/profile.php?id=728490282&amp;ref=sgm">
+
+<!ENTITY txt.your_alias.title		"Ваш короткое название:">
+<!ENTITY txt.your_alias.description	"Вам необходимо выбрать короткое название, для вашей ссылки, например, моя ссылка">
+
+<!ENTITY txt.generate_button.title	"Создать короткую ссылку!">
+
+
+<!ENTITY txt.short_url.title		"Короткая ссылка:">
+<!ENTITY txt.short_url.progress.title	"Создаем короткую ссылку...">
+<!ENTITY txt.short_url.error.title	"Возникла ошибка при генерации">
+
+

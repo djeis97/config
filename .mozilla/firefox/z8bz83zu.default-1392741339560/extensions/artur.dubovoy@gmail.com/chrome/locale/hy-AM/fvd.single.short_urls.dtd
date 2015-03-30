@@ -1,0 +1,16 @@
+<!ENTITY txt.dialog.title		"Կարճ վեբ հղման ծառայությունը">
+
+<!ENTITY txt.your_url.title		"Վեբ հղումը.">
+<!ENTITY txt.your_url.example		"Օրինակ՝ http://www.facebook.com/profile.php?id=728490282&amp;ref=sgm">
+
+<!ENTITY txt.your_alias.title		"Ձեր մականունը.">
+<!ENTITY txt.your_alias.description	"Կարող եք նաև ինքներդ ստեղծել Ձեր մականունը։ Օրինակ՝ ՀայՍոֆթ">
+
+<!ENTITY txt.generate_button.title	"Ստեղծել">
+
+
+<!ENTITY txt.short_url.title		"Կարճ վեբ հղումը.">
+<!ENTITY txt.short_url.progress.title	"Ստեղծվում է կարճ վեբ հղում…">
+<!ENTITY txt.short_url.error.title	"Կարճ վեբ հղման ստեղծման սխալ։">
+
+

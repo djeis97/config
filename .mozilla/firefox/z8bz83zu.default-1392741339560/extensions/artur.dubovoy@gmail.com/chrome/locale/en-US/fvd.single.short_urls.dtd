@@ -1,0 +1,16 @@
+<!ENTITY txt.dialog.title		"Short URL service">
+
+<!ENTITY txt.your_url.title		"Your URL:">
+<!ENTITY txt.your_url.example		"For example - http://www.facebook.com/profile.php?id=728490282&amp;ref=sgm">
+
+<!ENTITY txt.your_alias.title		"Your Alias:">
+<!ENTITY txt.your_alias.description	"You will also be able to create your own alias which will be much easier to remember. For example - Salin">
+
+<!ENTITY txt.generate_button.title	"Generate">
+
+
+<!ENTITY txt.short_url.title		"Short URL:">
+<!ENTITY txt.short_url.progress.title	"Generating short url...">
+<!ENTITY txt.short_url.error.title	"Error short url generation.">
+
+

@@ -1,0 +1,46 @@
+<!ENTITY txt.main_button.title			"FVD">
+<!ENTITY txt.popup.help.title			"Помощь">
+<!ENTITY txt.popup.video_converter.title	"Версия для Андроид">
+<!ENTITY txt.popup.search_video.title		"Искать видео">
+<!ENTITY txt.popup.feedback.title		"Напишите нам">
+<!ENTITY txt.popup.tools.title			"Инструменты">
+<!ENTITY txt.popup.settings.title		"Настройки">
+<!ENTITY txt.fvd_setup_note.do_not_display		"Больше не показывать">
+
+<!ENTITY fvdsd_hint.title		"FVD Speed Dial">
+<!ENTITY fvdsd_hint.text		"Организуй свои закладки!">
+<!ENTITY fvdsd_hint.dont_display		"Больше не показывать">
+
+
+<!ENTITY txt.popup.download_all.title				"Скачать все медиа файлы">
+<!ENTITY txt.start_mass_download.title				"Запуск закачивания всех файлов">
+<!ENTITY txt.set_default_formats.title				"Форматы по умолчанию">
+<!ENTITY txt.set_default_download_folder.title		"Директория для скачивания">
+<!ENTITY txt.set_file_types.title				    "Установка форматов файлов">
+<!ENTITY txt.give_us_rating.title					"Голосуйте за нас!">
+<!ENTITY txt.popup.switch_to_full_mode.title "Переключить в расширенный режим">
+<!ENTITY txt.popup.fvdsd.title "Fvd Speed Dial">
+
+<!ENTITY txt.popup.try_alternative_download	"Попробовать альтернативный способ">
+<!ENTITY txt.tools_popup.short_urls.title	"Укоротить ссылку">
+<!ENTITY txt.tools_popup.share_urls.title	"Распространить ссылку">
+<!ENTITY txt.tools_popup.javascript.title	"JavaScript">
+<!ENTITY txt.tools_popup.check_ip.title		"Проверить IP">
+<!ENTITY txt.tools_popup.speed_test.title	"Проверить скорость интернета">
+<!ENTITY txt.tools_popup.whois.title		"Whois">
+<!ENTITY txt.tools_popup.free_registry_scan.title "Сканировать Windows на ошибки">
+
+
+<!ENTITY txt.panel.help_text.title		"Например, лучшее видео">
+<!ENTITY txt.panel.search_button.title		"Искать">
+
+<!ENTITY txt.pause "Пауза">
+<!ENTITY txt.resume "Возобновить">
+<!ENTITY txt.cancel "Отменить">
+<!ENTITY txt.download "Скачать">
+<!ENTITY txt.copy_to_clipboard "Копировать URL в буфер обмена">
+<!ENTITY txt.make_donation "Сделать пожертвование">
+
+<!ENTITY txt.quick_download "Скачать быстро">
+
+<!ENTITY txt.popup.converter.title "Конвертировать видео в MP4, AVI, WMV">

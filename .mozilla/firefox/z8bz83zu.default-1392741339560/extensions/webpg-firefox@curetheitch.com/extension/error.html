@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>WebPG for Chrome Error Page</title>
+<link type="text/css" href="jquery/css/dot-luv/jquery-ui-1.8.22.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="jquery/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="jquery/js/jquery-ui-1.8.22.custom.min.js"></script>
+<script type="text/javascript" src="utils.js"></script>
+<script type="text/javascript" src="error.js"></script>
+<style>
+body{
+    font: 62.5% "Trebuchet MS", sans-serif;
+    min-width: 640px;
+    margin: 4px 40px 4px 40px;
+}
+#tabs {
+    margin: auto;
+    padding: 12px;
+    background-color: #000;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+}
+.error {
+    color: #fff;
+}
+.header {
+    text-shadow:#000 1px 1px 1px;
+}
+.error-text {
+    font-size: 16px;
+}
+#system-info {
+    margin: auto;
+    padding: 0 0 16px 8px;
+    background-color: #fff;
+    border: 1px dashed #888;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+}
+#system-info span {
+    font-size: 12px;
+}
+</style>
+</head>
+<body>
+<div id="tabs">
+    <h1 id="error-text-h1" class="error header ui-state-error"></h1>
+    <span id="error-text" class="error error-text">
+        <p id="error-text-p"></p>
+    </span>
+    <br/>
+    <div id="system-info">
+        <span id="system-info-list" class="system-info"></span>
+    </div>
+    <div id="window_functions" style="width:100%; text-align:right; clear:left;">
+        <br/><br/><input type="button" id="refresh" value="Try Again"/><input type="button" id="close" value="Finished"/>
+    </div>
+</div>
+</body>
+</html>

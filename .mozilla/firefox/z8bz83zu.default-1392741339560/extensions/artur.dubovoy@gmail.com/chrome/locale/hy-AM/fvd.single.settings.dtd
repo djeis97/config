@@ -1,0 +1,59 @@
+<!ENTITY txt.dialog.title		"Կարգավորումներ">
+
+<!ENTITY txt.dialog.button_ok.title	"ԼԱՎ">
+<!ENTITY txt.dialog.button_cancel.title	"Չեղարկել">
+<!ENTITY txt.prefpane.showfiles.title	"Ֆայլերի տեսակներ">
+<!ENTITY txt.prefpane.showfiles_yt.title	"Ֆայլերի տեսակներ YouTube">
+<!ENTITY txt.prefpane.about.title	"Մասին">
+<!ENTITY txt.prefpane.default.title	"Ֆորմատներ համար ակնթարթային ստանալ">
+<!ENTITY txt.prefpane.general.title	"Կարգավորումներ">
+<!ENTITY txt.prefpane.types	 "ֆորմատներ">
+<!ENTITY txt.prefpane.showfiles.descr	"Սահմանում ֆայլի ձեւաչափերով են ցուցադրվում է">
+<!ENTITY txt.prefpane.default.descr	 "Նշեք ֆայլի ֆորմատը օգտագործվում Mode: Ներբեռնել բոլոր ֆայլերը">
+
+<!ENTITY txt.prefpane.about.version.title		"Տարբերակը.">
+<!ENTITY txt.prefpane.about.home_site_visit.title	"Վեբ կայքը ">
+
+<!ENTITY txt.tabpanel.title.appearance	"Appearance">
+<!ENTITY txt.tabpanel.title.behavior	"Behavior">
+
+<!ENTITY txt.default_mode		"Հիմնական եղանակը.">
+<!ENTITY txt.default_mode.compact		"Կոմպակտ">
+<!ENTITY txt.default_mode.full		"Ամբողջական">
+<!ENTITY txt.group.interface.title		"Տեսքի կարգավորումները">
+<!ENTITY txt.display.youtube_button.title		"Ցուցադրել youtube-ից բեռնելու կոճակը">
+<!ENTITY txt.display.youtube_button.title		"Ցուցադրել vk.com-ից բեռնելու կոճակը">
+<!ENTITY txt.display.main_button.title		"Ցուցադրել հիմնական կոճակը">
+<!ENTITY txt.display.statusbar_button.title	"Ցուցադրել դրության վահանակի կոճակը">
+<!ENTITY txt.display.adult_warnings.title	"Չցուցադրել մեծահասակների էջի զգուշացումը">
+<!ENTITY txt.pages_in_new_tab.title 		"Նոր էջերը բացել նոր ներդիրում">
+
+<!ENTITY txt.group.hotkey.title			"Կարճուղիներ.">
+
+<!ENTITY txt.group.download_folder.title	"Բեռնումները">
+<!ENTITY txt.download.default.title		"Հիմնականը">
+<!ENTITY txt.download.custom.title		"Ընտրվածում՝">
+<!ENTITY txt.download.custom_button.title	"Ընտրել...">
+
+<!ENTITY txt.show_hints.title	"Չցուցադրել հուշումները">
+
+<!ENTITY txt.group.sniffer.title	"Տրաֆիկը">
+<!ENTITY txt.display_swf.title	"Միացնել .swf ֆայլերը (ՄԻԱՑ, եթե բեռնելու եք խաղեր)">
+
+<!ENTITY txt.prefpane.updated.title	"Updated">
+<!ENTITY txt.prefpane.question.title	"Support us">
+
+<!ENTITY txt.dialog.suggestions.title		"Please configure settings">
+<!ENTITY txt.enable_ads_suggestions.title	"Do you want to Enable Flash Video Downloader Ads suggestions?">
+<!ENTITY txt.enable_ads_suggestions.no	"No">
+<!ENTITY txt.enable_ads_suggestions.yes	"Yes">
+<!ENTITY module.enable_superfish "Enable Product Search">
+
+<!ENTITY txt.enable_refinements.title 		"Enable Refinements">
+<!ENTITY txt.fennec.download.custom_folder.title "Save downloads here">
+<!ENTITY txt.fennec.download.custom_folder.desc "Leave empty to save in default location">
+
+<!ENTITY txt.tabpanel.title.ffmpeg	"Setup Converter">
+<!ENTITY txt.group.ffmpeg_folder.title	"Set ffmpeg-file:">
+<!ENTITY txt.install.ffmpeg.title	"How to install the converter ffmpeg...">
+

@@ -1,0 +1,47 @@
+<!ENTITY txt.main_button.title			"FVD">
+<!ENTITY txt.popup.help.title			"Օգնություն">
+<!ENTITY txt.popup.video_converter.title	"Andoid Version">
+<!ENTITY txt.popup.search_video.title		"Փնտրել տեսանյութ">
+<!ENTITY txt.popup.feedback.title		"Ձեր արձագանքը">
+<!ENTITY txt.popup.tools.title			"Օգտակար գործիքներ">
+<!ENTITY txt.popup.settings.title		"Կարգավորումներ">
+<!ENTITY txt.fvd_setup_note.do_not_display		"Այլևս չցուցադրել">
+
+<!ENTITY fvdsd_hint.title		"FVD Speed Dial">
+<!ENTITY fvdsd_hint.text		"Խմբավորել էջանիշները">
+<!ENTITY fvdsd_hint.dont_display		"Այլևս չցուցադրել">
+
+<!ENTITY txt.popup.download_all.title		"Ներբեռնել բոլորը">
+<!ENTITY txt.start_mass_download.title				"Սկիզբ Զանգվածային Բեռնավորել">
+<!ENTITY txt.set_default_formats.title				"Լռակյաց ձեւաչափեր">
+<!ENTITY txt.set_default_download_folder.title		"Թղթապանակ բեռնավորել">
+<!ENTITY txt.set_file_types.title				    "ֆայլի ձեւաչափերով">
+<!ENTITY txt.give_us_rating.title					"Ձեր գնահատականը.">
+<!ENTITY txt.popup.switch_to_full_mode.title "Անցնել Ամբողջական եղանակին">
+<!ENTITY txt.popup.fvdsd.title "Fvd Speed Dial">
+
+<!ENTITY txt.popup.try_alternative_download	"Փորձել այլընտրանքային բեռնումը">
+<!ENTITY txt.tools_popup.short_urls.title	"Դարձնել կարճ վեբ հղում">
+<!ENTITY txt.tools_popup.share_urls.title	"Տարածել վեբ հղումը">
+<!ENTITY txt.tools_popup.javascript.title	"JavaScript">
+<!ENTITY txt.tools_popup.check_ip.title		"Ստուգել IP-ին">
+<!ENTITY txt.tools_popup.speed_test.title	"Ինտերնետի արագության թեստ">
+<!ENTITY txt.tools_popup.whois.title		"Whois">
+<!ENTITY txt.tools_popup.free_registry_scan.title "Windows-ի սխալների անվճար ստուգում">
+
+
+<!ENTITY txt.panel.help_text.title		"Նշեք տեսանյութի անունը">
+<!ENTITY txt.panel.search_button.title		"Փնտրել">
+
+<!ENTITY txt.pause "Դադար">
+<!ENTITY txt.resume "Շարունակել">
+<!ENTITY txt.cancel "Չեղարկել">
+<!ENTITY txt.download "Ներբեռնել">
+<!ENTITY txt.copy_to_clipboard "Պատճենել վեբ հղումը հիշապահեստ">
+<!ENTITY txt.make_donation "Ձեր նվիրատվությունը">
+
+
+
+<!ENTITY txt.quick_download "Արագ բեռնում">
+
+<!ENTITY txt.popup.converter.title "Փոխարկել այս տեսանյութը MP4, AVI, WMV-ի">

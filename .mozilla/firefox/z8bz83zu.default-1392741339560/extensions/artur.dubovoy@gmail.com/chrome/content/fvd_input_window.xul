@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://fvd.single/skin/fvd.single.input_window.css" type="text/css"?>
+
+<dialog id="fvd_single_input_window"
+	buttons="accept, cancel"
+	autosize="true"
+	resizable="no"
+	ondialogaccept="fvd_siw.accept()"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<script type="application/x-javascript" src="chrome://fvd.single/content/fvd_input_window.js" />
+	<vbox>
+		<label id="fvd_single_text_label" value="URL to share:"/>
+		<textbox id="fvd_single_textbox" />
+	</vbox>
+
+</dialog>

@@ -1,0 +1,11 @@
+You can only use Flash Video Downloader software to download video in case its rightful owner allowed you to do that. Please, don't use Flash Video Downloader for finding video whose rightful owners haven't allowed you to download it. We hereby disclaim all responsibility for the video you have downloaded without being allowed to do so.
+
+We do not download video protected by copyright - such as video from Vevo, Warner Bros, Sony Music, etc.
+
+Before getting down to using this plug-in, please, take the time to read the terms of use stated in the current license agreement. Any use of this program implies that you have read and accepted these terms to the fullest extent.
+
+1) Flash Video Downloader Plug-In is designed for downloading flash-content (video, games, music, etc.) with the help of the http://flashvideodownloader.org/ service, which gets opened in a new Firefox Internet browser window when needed.
+
+2) All the information received by http://flashvideodownloader.org/ is used solely for purposes listed in clause 1.
+
+3) http://flashvideodownloader.org/ disclaims any legal responsibility for further use of the content downloaded with the help of the service.

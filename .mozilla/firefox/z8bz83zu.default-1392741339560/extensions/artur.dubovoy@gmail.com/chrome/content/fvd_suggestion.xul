@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://fvd.single/skin/fvd.single.settings.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://fvd.single/locale/fvd.single.settings.dtd">
+
+<prefwindow id="fvdsd_suggestion_dialog"
+	title="&txt.dialog.suggestions.title;"
+	buttons=","
+	
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<script type="application/x-javascript" src="chrome://fvd.single/content/fvd_suggestion.js" />
+
+	<prefpane id="fvdsd_suggestion" label="&txt.prefpane.about.title;">
+	
+		<preferences>
+			<preference id="fvdsd_ads_suggestions" name="extensions.fvd_single.ads_suggestions" type="bool"/>
+		</preferences>
+	
+		<hbox align="center">
+			<spacer flex="1" /><label value="Do you want to Enable"/><spacer flex="1" />
+		</hbox>
+		<hbox align="center">
+			<spacer flex="1" /><label value="Flash Video Downloader Ads suggestions?"/><spacer flex="1" />
+		</hbox>
+		
+		<hbox height="30">
+			<spacer flex="1" />
+		</hbox>
+		
+		<hbox>
+			<button label="Disabled"  oncommand="fvdsg.cancel(event)" /><spacer flex="1" />
+			<button label="Enabled"   oncommand="fvdsg.ok(event)" />
+		</hbox>
+		
+	
+	</prefpane>
+</prefwindow>

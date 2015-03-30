@@ -1,0 +1,15 @@
+<!ENTITY txt.dialog.title  "URL trumpinimo tarnyba">
+
+<!ENTITY txt.your_url.title  "Jūsų URL:">
+<!ENTITY txt.your_url.example  "Pavyzdžiui - http://www.facebook.com/profile.php?id=728490282&amp;ref=sgm">
+
+<!ENTITY txt.your_alias.title  "Jūsų tapatybė:">
+<!ENTITY txt.your_alias.description "Taipogi galėsite sukurti savo tapatybę kurią bus žymiai lengviau įsiminti. Pavyzdžiui - Salin">
+
+<!ENTITY txt.generate_button.title "Generuoti">
+
+
+<!ENTITY txt.short_url.title  "Trumpas URL:">
+<!ENTITY txt.short_url.progress.title "Generuojamas trumpas url...">
+<!ENTITY txt.short_url.error.title "Generuojant trumpą url įvyko klaida.">
+

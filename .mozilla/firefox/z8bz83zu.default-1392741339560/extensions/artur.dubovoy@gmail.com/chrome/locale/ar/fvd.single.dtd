@@ -1,0 +1,47 @@
+<!ENTITY txt.main_button.title			"مُنزّل فيديو الفلاش">
+<!ENTITY txt.popup.help.title			"مساعدة">
+<!ENTITY txt.popup.video_converter.title	"نسخة أندرويد">
+<!ENTITY txt.popup.search_video.title		"بحث عن فيديو">
+<!ENTITY txt.popup.feedback.title		"تواصل مع المطور">
+<!ENTITY txt.popup.tools.title			"أدوات مفيدة">
+<!ENTITY txt.popup.settings.title		"الإعدادات">
+<!ENTITY txt.fvd_setup_note.do_not_display		"لا تعرضها مرة أخرى">
+
+<!ENTITY fvdsd_hint.title		"إضافة الوصول السريع">
+<!ENTITY fvdsd_hint.text		"رتّب علاماتك!">
+<!ENTITY fvdsd_hint.dont_display		"لا تعرضها مرة أخرى">
+
+<!ENTITY txt.popup.download_all.title		"Download From All Tabs">
+<!ENTITY txt.start_mass_download.title				"Start Mass Download">
+<!ENTITY txt.set_default_formats.title				"Set Default Formats">
+<!ENTITY txt.set_default_download_folder.title		"Set Default Download Folder">
+<!ENTITY txt.set_file_types.title				    "Set File Types">
+<!ENTITY txt.give_us_rating.title					"Rate US!">
+<!ENTITY txt.popup.switch_to_full_mode.title "انتقل إلى الوضع الكامل">
+<!ENTITY txt.popup.fvdsd.title "إضافة الوصول السريع">
+
+<!ENTITY txt.popup.try_alternative_download	"Try alternative download">
+<!ENTITY txt.tools_popup.short_urls.title	"إنشاء رابط قصير">
+<!ENTITY txt.tools_popup.share_urls.title	"مشاركة الرابط">
+<!ENTITY txt.tools_popup.javascript.title	"JavaScript">
+<!ENTITY txt.tools_popup.check_ip.title		"تحقق من الآي بي خاصتك">
+<!ENTITY txt.tools_popup.speed_test.title	"اختبار سرعة الإنترنت لديك">
+<!ENTITY txt.tools_popup.whois.title		"Whois">
+<!ENTITY txt.tools_popup.free_registry_scan.title "فحص أخطاء ويندوز بالمجان">
+
+
+<!ENTITY txt.panel.help_text.title		"أدخِل كلمات للبحث عن فيديو">
+<!ENTITY txt.panel.search_button.title		"ابحث">
+
+<!ENTITY txt.pause "إلباث">
+<!ENTITY txt.resume "استئناف">
+<!ENTITY txt.cancel "إلغاء">
+<!ENTITY txt.download "تنزيل">
+<!ENTITY txt.copy_to_clipboard "نسخ الرابط إلى الحافظة">
+<!ENTITY txt.make_donation "تبرع لدعم الإضافة">
+
+
+
+<!ENTITY txt.quick_download "تنزيل للاطلاع فقط">
+
+<!ENTITY txt.popup.converter.title "تحويل هذا الفيديو إلى MP4, AVI, WMV">

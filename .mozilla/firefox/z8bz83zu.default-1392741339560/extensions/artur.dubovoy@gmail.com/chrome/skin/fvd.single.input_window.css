@@ -1,0 +1,9 @@
+@import url("chrome://global/skin/");
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+
+dialog#fvd_single_input_window
+{
+	min-width: 300px;
+	min-height: 100px;
+}

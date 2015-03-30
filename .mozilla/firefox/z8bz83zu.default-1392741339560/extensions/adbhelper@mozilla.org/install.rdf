@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+  <Description about="urn:mozilla:install-manifest">
+    <em:id>adbhelper@mozilla.org</em:id>
+    <em:version>0.7.4</em:version>
+    <em:type>2</em:type>
+    <em:bootstrap>true</em:bootstrap>
+    <em:unpack>true</em:unpack>
+
+    <!-- Firefox -->
+    <em:targetApplication>
+      <Description>
+        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+        <em:minVersion>26.0a1</em:minVersion>
+        <em:maxVersion>27.0</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+
+    <!-- Front End MetaData -->
+    <em:name>ADB Helper</em:name>
+    <em:description>An addon to ease connecting to Firefox OS devices.</em:description>
+    <em:creator>Mozilla &amp; Android Open Source Project</em:creator>
+    <em:homepageURL>https://github.com/mozilla/adbhelper</em:homepageURL>
+    <em:updateURL>https://ftp.mozilla.org/pub/mozilla.org/labs/fxos-simulator/adb-helper/linux64/update.rdf</em:updateURL>
+  
+  </Description>
+</RDF>

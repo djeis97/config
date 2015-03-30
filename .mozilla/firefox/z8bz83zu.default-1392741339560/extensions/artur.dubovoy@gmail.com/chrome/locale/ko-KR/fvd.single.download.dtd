@@ -1,0 +1,56 @@
+<!ENTITY txt.window.title		"FlashVideoDownloader 로 비디오 다운로드">
+<!ENTITY txt.download_all.title		"모두 다운로드">
+<!ENTITY txt.download_all.format.title		"기본 포맷 설정">
+<!ENTITY txt.download_all.folder.title		"기본 다운로드 폴더 설정">
+<!ENTITY txt.download.title		"다운로드">
+<!ENTITY txt.menu.pause.title "일시정지">
+<!ENTITY txt.menu.resume.title "재개">
+<!ENTITY txt.menu.cancel.title "취소">
+
+
+<!ENTITY txt.fvd_suite.title		"이 비디오를 MP4, AVI, WMV로 변환">
+<!ENTITY txt.fvdsd.title		"Fvd 스피드 다이얼">
+
+
+
+<!ENTITY txt.download.save_to		"저장:">
+<!ENTITY txt.download.close_after_download		"다운로드가 완료된 후 창을 닫아주세요.">
+<!ENTITY txt.download.always_on_top		"맨 위에 고정">
+<!ENTITY txt.browse_folders.title	"찾아보기...">
+
+<!ENTITY txt.content_from	"발견된 컨텐츠: ">
+<!ENTITY txt.nothing_to_download	"다운로드할 것이 없거나 비디오가 플레이중이 아닙니다.">
+
+<!ENTITY txt.write_review.title		"평가를 작성해서 저희를 지원해주세요!">
+<!ENTITY txt.already_woite_review.title "이미 작성되었습니다. 다른 일을 즐기세요!">
+<!ENTITY txt.write_review_comment.title "당신의 의견을 보내주세요. 당신의 의견은 저희에게 매우 중요합니다!">
+
+
+<!ENTITY txt.must_start_video.title "다운로드를 시작하기 위해서는 비디오 재생을 시작해야 합니다.">
+<!ENTITY txt.must_start_video.description "탐지 기능은 현재 베타 테스트 모드에서 사용이 가능합니다. 당신에게 어떤 문제가 생기면 저희에게 알려주세요.">
+
+<!ENTITY txt.ad.end_message		"광고가 끝날때까지 기다려주세요...">
+<!ENTITY txt.ad.view_link		"(링크 보기)">
+
+<!ENTITY txt.menuselect.label	"페이지 선택...">
+<!ENTITY txt.button.switch_to_tab.label	"해당 탭으로 전환">
+<!ENTITY txt.button.next_tab.label	"다음 탭">
+<!ENTITY txt.button.close_tab.label	"탭 닫기">
+
+<!ENTITY txt.download.display_swf	".swf 파일 활성화 (게임 다운로드시 활성화)">
+
+<!ENTITY txt.default_mode "전체 모드를 기본으로 설정">
+
+<!ENTITY txt.download.button.play "재생">
+<!ENTITY txt.download.button.close_player "플레이어 닫기">
+
+<!ENTITY like.give_us_rating "이 애드온을 평가해주세요:">
+<!ENTITY like.post_review "평가 작성">
+<!ENTITY like.already_done "이미 완료됨">
+<!ENTITY like.like_addon "이 애드온이 괜찮습니까?">
+<!ENTITY like.like_addon.yes "네">
+<!ENTITY like.like_addon.no "아니오">
+
+<!ENTITY txt.copy_to_clipboard "클립보드로 URL 복사">
+
+<!ENTITY txt.donate.title "Make a donation">

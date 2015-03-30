@@ -1,0 +1,11 @@
+#include "nsISupports.idl"
+
+
+
+[scriptable, uuid(a03acbb8-8497-4f8a-a35e-7958895bafbb)]
+interface IFVDSingleDetector : nsISupports {
+      boolean is_ad(in wstring url);
+	  boolean is_supported(in wstring url);
+	  boolean is_adult(in wstring url);     
+};
+

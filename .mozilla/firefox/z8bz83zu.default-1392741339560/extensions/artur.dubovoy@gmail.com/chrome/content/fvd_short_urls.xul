@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="chrome://fvd.single/skin/fvd.single.short_urls.css" type="text/css"?>
+<!DOCTYPE dialog SYSTEM "chrome://fvd.single/locale/fvd.single.short_urls.dtd">
+<window id="fvd_single_short_urls"
+	autosize="true"
+	resizable="no"
+	title="&txt.dialog.title;"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<script type="application/x-javascript" src="chrome://fvd.single/content/fvd_short_urls.js" />
+
+	<vbox>
+		<label value="&txt.your_url.title;"/>
+		<textbox id="fvd_single_url" />
+		<label id="fvd_single_url_example" value="&txt.your_url.example;" />
+	</vbox>
+	<hbox id="fvd_single_alias_wrapper">
+		<vbox>
+			<label value="&txt.your_alias.title;"/>
+			<textbox id="fvd_single_alias" />
+		</vbox>
+		<vbox>
+			<spacer flex="1" />
+			<description id="fvd_single_alias_desc" dir="normal" hidden="false" width="258">&txt.your_alias.description;</description>
+		</vbox>
+	</hbox>
+	<button id="fvd_single_generate" label="&txt.generate_button.title;" oncommand="fvd_sl.generate(event)" />
+	<deck id="fvd_single_generate_resdeck" selectedIndex="3" flex="1" orient="vertical" align="center">
+		<vbox>
+			<label value="&txt.short_url.title;"/>
+			<textbox id="fvd_single_short_url" readonly="true"/>
+		</vbox>
+		<vbox align="center">
+			<label value="&txt.short_url.progress.title;"/>
+		</vbox>
+
+		<vbox align="center">
+			<label class="error" value="&txt.short_url.error.title;"/>
+		</vbox>
+	</deck>
+</window>

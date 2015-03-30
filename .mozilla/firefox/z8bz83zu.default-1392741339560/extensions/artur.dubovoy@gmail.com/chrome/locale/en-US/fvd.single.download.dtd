@@ -1,0 +1,56 @@
+<!ENTITY txt.window.title		"Download video with FlashVideoDownloader">
+<!ENTITY txt.download_all.title		"Download All">
+<!ENTITY txt.download_all.format.title		"Set Default Formats">
+<!ENTITY txt.download_all.folder.title		"Set Default Download Folder">
+<!ENTITY txt.download.title		"Download">
+<!ENTITY txt.menu.pause.title "Pause">
+<!ENTITY txt.menu.resume.title "Resume">
+<!ENTITY txt.menu.cancel.title "Cancel">
+
+
+<!ENTITY txt.fvd_suite.title		"Convert This Video to MP4, AVI, WMV">
+<!ENTITY txt.fvdsd.title		"Fvd Speed Dial">
+
+
+
+<!ENTITY txt.download.save_to		"Save to:">
+<!ENTITY txt.download.close_after_download		"Close this window after download">
+<!ENTITY txt.download.always_on_top		"Always On Top">
+<!ENTITY txt.browse_folders.title	"Browse...">
+
+<!ENTITY txt.content_from	"Content of ">
+<!ENTITY txt.nothing_to_download	"Nothing to download or video not playing">
+
+<!ENTITY txt.write_review.title		"Support us by posting your rating!">
+<!ENTITY txt.already_woite_review.title "I've already posted, keep up the good work!">
+<!ENTITY txt.write_review_comment.title "Send your opinion. Your vote is very important for us!">
+
+
+<!ENTITY txt.must_start_video.title "You need to start playing video in order to download it.">
+<!ENTITY txt.must_start_video.description "The sniffer function is available in beta testing mode for now. Please, let us know about errors if you notice any.">
+
+<!ENTITY txt.ad.end_message		"Please wait when commercial video ends...">
+<!ENTITY txt.ad.view_link		"(view link)">
+
+<!ENTITY txt.menuselect.label	"Select page...">
+<!ENTITY txt.button.switch_to_tab.label	"Switch To Tab">
+<!ENTITY txt.button.next_tab.label	"Next Tab">
+<!ENTITY txt.button.close_tab.label	"Close Tab">
+
+<!ENTITY txt.download.display_swf	"Enable .swf Files (Turn ON if you download games)">
+
+<!ENTITY txt.default_mode "Make Full mode as default">
+
+<!ENTITY txt.download.button.play "Play">
+<!ENTITY txt.download.button.close_player "Close player">
+
+<!ENTITY like.give_us_rating "Give us rating pls.:">
+<!ENTITY like.post_review "Post review">
+<!ENTITY like.already_done "Already done">
+<!ENTITY like.like_addon "Like this addon?">
+<!ENTITY like.like_addon.yes "Yes">
+<!ENTITY like.like_addon.no "No">
+
+<!ENTITY txt.copy_to_clipboard "Copy URL to clipboard">
+
+<!ENTITY txt.donate.title "Make a donation">

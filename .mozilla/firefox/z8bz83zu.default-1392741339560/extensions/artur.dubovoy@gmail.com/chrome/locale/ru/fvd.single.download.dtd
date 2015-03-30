@@ -1,0 +1,54 @@
+<!ENTITY txt.window.title		"Скачать видео с помощью FlashVideoDownloader">
+<!ENTITY txt.download_all.title		"Скачать все медиа файлы">
+<!ENTITY txt.download_all.format.title		"Установить форматы по умолчанию">
+<!ENTITY txt.download_all.folder.title		"Установить директорию для скачивания">
+<!ENTITY txt.download.title		"Скачать">
+<!ENTITY txt.menu.pause.title "Приостановить">
+<!ENTITY txt.menu.resume.title "Возобновить">
+<!ENTITY txt.menu.cancel.title "Отменить">
+
+<!ENTITY txt.fvd_suite.title		"Сконвертировать видео в MP4, AVI, WMV">
+<!ENTITY txt.fvdsd.title		"Fvd Speed Dial">
+
+
+
+<!ENTITY txt.download.save_to		"Сохранить в:">
+<!ENTITY txt.download.close_after_download		"Закрыть окно, после окончания загрузки">
+<!ENTITY txt.download.always_on_top		"Поверх всех окон">
+<!ENTITY txt.browse_folders.title	"Обзор...">
+
+<!ENTITY txt.content_from	"Содержимое ">
+<!ENTITY txt.nothing_to_download	"Ничего не найдено или видео не работает">
+
+<!ENTITY txt.write_review.title		"Хотите нам помочь ? Поставьте нам рейтинг!">
+<!ENTITY txt.already_woite_review.title "Я уже написал, спасибо за хорошую работу!">
+<!ENTITY txt.write_review_comment.title "Напишите свое мнения о плагине. Нам это очень важно!">
+
+
+<!ENTITY txt.must_start_video.title "Прежде чем начать скачивать - запустите видео">
+
+<!ENTITY txt.ad.end_message		"Подождите пока закончится реклама...">
+<!ENTITY txt.ad.view_link		"(view link)">
+
+<!ENTITY txt.menuselect.label	"Выбрать страницу...">
+<!ENTITY txt.button.switch_to_tab.label	"Следующая ссылка">
+<!ENTITY txt.button.next_tab.label	"Следующая страница">
+<!ENTITY txt.button.close_tab.label	"Закрыть страницу">
+
+<!ENTITY txt.download.display_swf	"Разрешить обнаружение .swf файлов (Например, если вам нужно скачать swf-игру)">
+
+<!ENTITY txt.default_mode "Поставить расширенный режим по умолчанию">
+
+<!ENTITY txt.download.button.play "Смотреть">
+<!ENTITY txt.download.button.close_player "Закрыть плеер">
+
+<!ENTITY like.give_us_rating "Поставьте нам рейтинг:">
+<!ENTITY like.post_review "Оставить отзыв">
+<!ENTITY like.already_done "Уже сделал :)">
+<!ENTITY like.like_addon "Понравилось дополнение?">
+<!ENTITY like.like_addon.yes "Да">
+<!ENTITY like.like_addon.no "Нет">
+
+<!ENTITY txt.copy_to_clipboard "Скопировать URL в буфер обмена">
+
+<!ENTITY txt.donate.title "Сделать пожертвование">

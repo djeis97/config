@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://fvd.single/skin/fvd.single.css" type="text/css"?>
+
+<!DOCTYPE overlay [
+<!ENTITY % fvd.singleDTD SYSTEM "chrome://fvd.single/locale/fvd.single.dtd">
+%fvd.singleDTD;
+]>
+
+<overlay id="fvd-single-Overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<script type="application/x-javascript" src="chrome://fvd.single/content/fvd_single.js" />
+	<script type="application/x-javascript" src="chrome://fvd.single/content/fvd_download.js" />	
+	<script type="application/x-javascript" src="chrome://fvd.single/content/include/yt_button.js" />	
+	<script type="application/x-javascript" src="chrome://fvd.single/content/include/vk_button.js" />	
+	<script type="application/x-javascript" src="chrome://fvd.single/content/include/dm_button.js" />	
+	<script type="application/x-javascript" src="chrome://fvd.single/content/include/rkmMessage.js" />	
+	<script type="application/x-javascript" src="chrome://fvd.single/content/include/ext_api.js" />	
+	
+	<popupset id="mainPopupSet">
+		
+		<!-- Prototype for fast menu item -->
+		<menupopup>
+			<menu id="fvd_single_fast_menu_item_prototype" class="menu-iconic fvd_speed_dial_FastMenuItem" crop="center" download_state="not" >
+				<menupopup>
+					<menuitem class="download" label="&txt.download;"/>
+					<menuitem class="quick_download" label="&txt.quick_download;"/>
+					<menuitem class="pause" disabled="true" label="&txt.pause;" onclick="fvd_single.pauseDownload( this.parentNode.parentNode.getAttribute( 'urlHash' ) );event.stopPropagation();"/>
+					<menuitem class="resume" disabled="true" label="&txt.resume;" onclick="fvd_single.resumeDownload( this.parentNode.parentNode.getAttribute( 'urlHash' ) );event.stopPropagation();"/>
+					<menuitem class="cancel" disabled="true" label="&txt.cancel;" onclick="fvd_single.cancelDownload( this.parentNode.parentNode.getAttribute( 'urlHash' ) );event.stopPropagation();"/>					
+					<menuitem class="copy" label="&txt.copy_to_clipboard;" onclick="fvd_single.downloadInstance.copyToClipBoard( this.parentNode.parentNode.getAttribute( 'url' ) );event.stopPropagation();"/>
+				</menupopup>			
+			</menu>
+		</menupopup>
+		
+		<menupopup>
+			<menu id="fvd_single_fast_menu_fullHD_prototype" class="menu-iconic fvd_speed_dial_FastMenuItem" crop="center" download_state="not" >
+				<menupopup>
+					<menuitem class="download" label="&txt.download;"/>
+					<menuitem class="cancel" disabled="true" label="&txt.cancel;" onclick="fvd_single.cancelDownload( this.parentNode.parentNode.getAttribute( 'urlHash' ) );event.stopPropagation();"/>					
+				</menupopup>			
+			</menu>
+		</menupopup>
+		
+		<menupopup id="fvd_single_popup_menu">
+			<menuitem id="fvd_single_nimbus" class="menuitem-iconic" label="Make Screenshot, Edit, Upload" oncommand="fvd_single.goto_site(event, 'nimbus')" />
+			<menuitem id="fvd_single_betterfox" class="menuitem-iconic" label="Make your Firefox 15% faster!" oncommand="fvd_single.goto_site(event, 'betterfox')" />
+			<menuitem label="&txt.popup.help.title;" oncommand="fvd_single.goto_site(event, 'help')" />
+			<menuitem label="&txt.popup.video_converter.title;" oncommand="fvd_single.goto_site(event, 'android_version')" />
+			<menuitem label="&txt.popup.search_video.title;" oncommand="fvd_single.display_search(event)" />
+			<menuitem label="&txt.popup.feedback.title;" oncommand="fvd_single.goto_site(event, 'feedback')" />
+			<menuseparator />
+			<menu id="fvd_single_tools_menu" label="&txt.popup.tools.title;" class="menu-iconic">
+				<menupopup id="fvd_single_tools_popup_menu" onpopupshowing="fvd_single.tools_menu_showing(event)" oncommand="fvd_single.tools_menu_command(event)">
+					<menuitem id="fvd_single_tools_short_urls" label="&txt.tools_popup.short_urls.title;" />
+					<menuitem id="fvd_single_tools_share_urls" label="&txt.tools_popup.share_urls.title;" />
+					<menuitem id="fvd_single_tools_js_enabled" type="checkbox" autocheck="false" label="&txt.tools_popup.javascript.title;" />
+					<menuitem id="fvd_single_tools_check_ip" label="&txt.tools_popup.check_ip.title;" />
+					<menuitem id="fvd_single_tools_speed_test" label="&txt.tools_popup.speed_test.title;" />
+					<menuitem id="fvd_single_tools_whois" label="&txt.tools_popup.whois.title;" />
+					<menuitem class="fvd_tools_free_registry_scan" id="fvd_tools_free_registry_scan" label="&txt.tools_popup.free_registry_scan.title;" oncommand="fvd_single.navigate_url(this.getAttribute('adurl')); fvd_single_AD.incrementRotateCounter('buttonmenu'); event.stopPropagation();" />
+				</menupopup>
+			</menu>
+			<menuseparator />
+			<menuitem label="&txt.popup.settings.title;" oncommand="fvd_single.display_settings(event)" />
+		</menupopup>
+
+		<menupopup id="fvd_single_streams_menu">
+			<menuitem class="fullmode" label="&txt.popup.switch_to_full_mode.title;" oncommand="fvd_single.showDownloadWindow(event)" />
+			<menuitem  id="fvd_single_rate_us" label="&txt.give_us_rating.title;"   oncommand="fvd_single.give_us_rating(event);" class="rateus menuitem-iconic"/>
+			<menuitem   label="&txt.set_file_types.title;"   oncommand="fvd_single.set_file_types(event);"  class="set menuitem-iconic"/>
+			<menuseparator/>
+			<menuitem class="fvdsd menuitem-iconic" label="&txt.popup.fvdsd.title;" oncommand="fvd_single.navigate_url('https://addons.mozilla.org/en-US/firefox/addon/fvd-speed-dial')" />
+			<menuitem class="converter menuitem-iconic" label="&txt.popup.converter.title;" adurl="http://flashvideodownloader.org/fvd-suite/to/s/ff_mozilla_conve/" oncommand="fvd_single.navigate_url(this.getAttribute('adurl')); fvd_single_AD.incrementRotateCounter()" />
+			<menuitem hidden="true" class="donate menuitem-iconic" label="&txt.make_donation;" oncommand="fvd_single.openDonateDialog()" />
+			<menuitem class="betterfox menuitem-iconic" label="Make your Firefox 15% faster!" oncommand="fvd_single.navigate_url('https://addons.mozilla.org/En-us/firefox/addon/betterfox/')" />
+			<menuitem class="nimbus menuitem-iconic" label="Make Screenshot, Edit, Upload" oncommand="fvd_single.navigate_url('https://addons.mozilla.org/en-US/firefox/addon/nimbus-Screenshot/')" />
+		</menupopup>
+		
+		<panel id="fvd_single_fvd_speeddial">	
+					
+
+			<vbox flex="2" align="center" class="clickBox" onclick="fvd_single.toMozillaFVDSD()">			
+				<hbox align="center">
+					<image class="sdIcon"/>
+					<vbox>
+						<label class="title" value="&fvdsd_hint.title;"/>
+						<description>&fvdsd_hint.text;</description>
+					</vbox>
+				</hbox>				
+				<hbox flex="2">
+					<image class="stars"/>
+				</hbox>
+			</vbox>
+		
+			<hbox pack="center">
+				<checkbox label="&fvdsd_hint.dont_display;" oncommand="fvd_single.setFVDSDHintDontDisplayStatus(  )" />
+			</hbox>
+
+			
+			
+		</panel>
+		
+		<panel id="fvd_single_search_panel" orient="horizontal" align="top">
+			<vbox>
+				<textbox id="fvd_single_search_text" oninput="fvd_single.input_search(event);" onkeypress="fvd_single.keypress_search(event);" />
+				<label id="fvd_single_search_label" value="&txt.panel.help_text.title;" />
+			</vbox>
+			<toolbarbutton id="fvd_single_search_button" label="&txt.panel.search_button.title;" oncommand="fvd_single.start_search(event)" />
+		</panel>
+		
+		<panel id="fvd-setup-note"
+	           type="arrow"
+	           orient="vertical"
+	           ignorekeys="true">	   	    
+	    <vbox>
+	     <image src="chrome://fvd.single/skin/alt_download_feature.jpg"/>	
+	    <spacer flex="2"/>
+	    <hbox>
+	    	<checkbox id="fvd_singl_do_not_display_new_features" label="&txt.fvd_setup_note.do_not_display;" value="1" oncommand="fvd_single.notDisplaySetupNote(this.checked)"/><label id="fvd_single_setup_note_close" value="close(x)" onclick="fvd_single.closeSetupNote()"/>
+	    </hbox>
+	    </vbox>
+	    
+	    </panel>
+
+	</popupset>
+	<toolbarpalette id="BrowserToolbarPalette">    
+		<toolbarbutton class="toolbarbutton-1 chromeclass-toolbar-additional" id="fvd_single_button" label="&txt.main_button.title;" type="menu-button" oncommand="fvd_single.main_button_click(event)"  tooltiptext="Flash Video Downloader"/>
+		<!--<toolbarbutton id="fvd_single_status" class="toolbarbutton-1 chromeclass-toolbar-additional" type="button" context="fvd_single_popup_menu" oncommand="fvd_single.status_button_click(event)" />-->
+	</toolbarpalette>
+</overlay>

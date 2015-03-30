@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
+         xmlns:NC="http://home.netscape.com/NC-rdf#"
+         xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <RDF:Description RDF:about="urn:mozilla:install-manifest"
+                   em:id="artur.dubovoy@gmail.com"
+		   em:unpack="true"
+                   em:version="7.2.0"
+                   em:iconURL="chrome://fvd.single/skin/fvd.single.icon.png"
+                   em:homepageURL="http://www.flashvideodownloader.org/"
+                   em:optionsURL="chrome://fvd.single/content/fvd_settings.xul"
+                   em:type="2"
+                   em:name="Flash Video Downloader - YouTube HD Download [4K]"
+                   em:description="Flash Video Downloader helps you to download any video (flv, mp4, HD) from YouTube-like, Facebook, Break, Metacafe and more in one click. You can download mp3, music (iPod), avi and more. Download Flash games. Download Helper." >
+
+    <em:targetApplication RDF:resource="rdf:#$7qlS51"/>
+    <em:targetApplication RDF:resource="rdf:#$7qlS53"/>
+  </RDF:Description>
+  
+  <!-- Firefox -->
+  <RDF:Description RDF:about="rdf:#$7qlS51"
+                   em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+                   em:minVersion="3.0"
+                   em:maxVersion="39.*"				   
+				   />	
+				   
+  <!-- Fennec Native Java UI -->			   
+  <RDF:Description RDF:about="rdf:#$7qlS53"
+                   em:id="{aa3c5121-dab2-40e2-81ca-7ea25febc110}"
+                   em:minVersion="11.0a1"
+                   em:maxVersion="39.0a1"				   
+				   />			   
+				      
+				   
+</RDF:RDF>

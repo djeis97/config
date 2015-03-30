@@ -1,0 +1,20 @@
+EMCheckCompatibility=true
+ProductName=Firefox
+Vendor=Mozilla
+InstallTime=1418363056
+Theme=LCARStrek
+Notes=OpenGL: NVIDIA Corporation -- GeForce GTX 650/PCIe/SSE2 -- 4.5.0 NVIDIA 346.35 -- texture_from_pixmap\nWebGL? libGL.so.1? libGL.so.1+ GL Context? GL Context+ WebGL+ 
+Version=31.3.0
+ReleaseChannel=esr
+ServerURL=https://crash-reports.mozilla.com/submit?id={ec8030f7-c20a-464f-9b0e-13a3a9e97384}&version=31.3.0&buildid=20141125031119
+useragent_locale=en-US
+Add-ons=lmnPopVideo%40lshai.com:0.6.8,%7B73a6fe31-595d-460b-a920-fcc0f8843232%7D:2.6.9.11,%7B46551EC9-40F0-4e47-8E18-8E5CF550CFB8%7D:2.0.1,LCARStrek%40kairo.at:2.28,pentadactyl%40dactyl.googlecode.com:hg7127,jid0-YCM0p5WlCGjvBJcZhAusQ5h26wM%40jetpack:2.2.0
+BuildID=20141125031119
+ProductID={ec8030f7-c20a-464f-9b0e-13a3a9e97384}
+CrashTime=1423160925
+StartupTime=1422852225
+PluginHang=1
+ProcessType=plugin
+PluginVersion=11.2.202.440
+PluginName=Shockwave Flash
+PluginFilename=libflashplayer.so

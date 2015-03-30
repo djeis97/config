@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://fvd.single/skin/fvd.single.donate.css" type="text/css"?>
+<!DOCTYPE dialog SYSTEM "chrome://fvd.single/locale/fvd.single.donate.dtd">
+
+<dialog id="donate_dialog"
+	buttons=","
+	autosize="true"
+	resizable="no"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	title="&dialog.title;">
+
+	<script type="application/x-javascript" src="chrome://fvd.single/content/donate.js" />
+
+	<label id="donateText" flex="1" style="white-space:pre-line">&donate_text;</label>
+
+	<hbox pack="center" align="center" id="paypalButtonContainer">
+		<label id="paypalButton" class="text-link" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=6QDJAQL3ESP3Q"/>
+		<label class="text-link" value="&close;" onclick="window.close()"/>
+	</hbox>
+
+</dialog>

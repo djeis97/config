@@ -1,0 +1,58 @@
+<!ENTITY txt.dialog.title		"설정">
+
+<!ENTITY txt.dialog.button_ok.title	"확인">
+<!ENTITY txt.dialog.button_cancel.title	"취소">
+<!ENTITY txt.prefpane.general.title	"설정">
+<!ENTITY txt.prefpane.about.title	"정보">
+<!ENTITY txt.prefpane.showfiles.title	"파일 타입">
+<!ENTITY txt.prefpane.showfiles_yt.title	"유튜브 파일 타입">
+<!ENTITY txt.prefpane.default.title	"자동 다운로드 파일 타입">
+<!ENTITY txt.prefpane.types	 "타입">
+<!ENTITY txt.prefpane.showfiles.descr	"다운로드 전에 애드온에 표시할 파일 형식을 지정합니다.">
+<!ENTITY txt.prefpane.default.descr	 "'모든 미디어 파일 다운로드' 모드를 사용할 때 표시할 파일 형식을 지정합니다.">
+
+<!ENTITY txt.prefpane.about.version.title		"버전:">
+<!ENTITY txt.prefpane.about.home_site_visit.title	"홈페이지 ">
+
+<!ENTITY txt.tabpanel.title.appearance	"외부 모양">
+<!ENTITY txt.tabpanel.title.behavior	"동작">
+
+<!ENTITY txt.default_mode		"기본 모드:">
+<!ENTITY txt.default_mode.compact		"간소화">
+<!ENTITY txt.default_mode.full		"전체">
+<!ENTITY txt.group.interface.title		"인터페이스 설정:">
+<!ENTITY txt.display.youtube_button.title		"유튜브 다운로드 버튼 표시">
+<!ENTITY txt.display.vk_button.title		"VK.com 다운로드 버튼 표시">
+<!ENTITY txt.display.main_button.title		"메인 버튼 표시">
+<!ENTITY txt.display.statusbar_button.title	"상태바 버튼 표시">
+<!ENTITY txt.display.adult_warnings.title	"성인물 표시하지 않음">
+<!ENTITY txt.pages_in_new_tab.title 		"새 탭에서 새 페이지 열기">
+
+<!ENTITY txt.group.hotkey.title			"단축키:">
+
+<!ENTITY txt.group.download_folder.title	"다운로드 위치:">
+<!ENTITY txt.download.default.title		"기본 폴더">
+<!ENTITY txt.download.custom.title		"사용자 지정 폴더">
+<!ENTITY txt.download.custom_button.title	"찾아보기...">
+
+<!ENTITY txt.show_hints.title	"힌트 표시하지 않음">
+
+<!ENTITY txt.group.sniffer.title	"탐지 기능">
+<!ENTITY txt.display_swf.title	".swf 파일 활성화 (게임 다운로드시 활성화)">
+
+<!ENTITY txt.prefpane.updated.title	"업데이트됨">
+<!ENTITY txt.prefpane.question.title	"저희를 지원해주세요.">
+
+<!ENTITY txt.dialog.suggestions.title		"설정을 구성해주세요.">
+<!ENTITY txt.enable_ads_suggestions.title	"플래쉬 비디오 다운로더에 광고 제안 기능을 사용할까요?">
+<!ENTITY txt.enable_ads_suggestions.no	"아니오">
+<!ENTITY txt.enable_ads_suggestions.yes	"예">
+<!ENTITY module.enable_superfish "제품 검색 활성화">
+
+<!ENTITY txt.enable_refinements.title 		"상세 검색 활성화">
+<!ENTITY txt.fennec.download.custom_folder.title "여기에 다운로드">
+<!ENTITY txt.fennec.download.custom_folder.desc "저장을 위해 기본 경로에 빈 공간을 남겨주세요.">
+
+<!ENTITY txt.tabpanel.title.ffmpeg	"Setup Converter">
+<!ENTITY txt.group.ffmpeg_folder.title	"Set ffmpeg-file:">
+<!ENTITY txt.install.ffmpeg.title	"How to install the converter ffmpeg...">

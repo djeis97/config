@@ -1,0 +1,16 @@
+<!ENTITY txt.dialog.title		"단축 URL 서비스">
+
+<!ENTITY txt.your_url.title		"당신의 URL:">
+<!ENTITY txt.your_url.example		"예시 - http://www.facebook.com/profile.php?id=728490282&amp;ref=sgm">
+
+<!ENTITY txt.your_alias.title		"당신의 별칭:">
+<!ENTITY txt.your_alias.description	"별칭을 사용하다면 이 단축 URL을 기억하기가 훨씬 더 쉬워질 것입니다. 예를 들면 - Salin">
+
+<!ENTITY txt.generate_button.title	"생성">
+
+
+<!ENTITY txt.short_url.title		"단축 URL:">
+<!ENTITY txt.short_url.progress.title	"단축 URL 생성중...">
+<!ENTITY txt.short_url.error.title	"단축 URL 생성에 오류가 발생했습니다.">
+
+

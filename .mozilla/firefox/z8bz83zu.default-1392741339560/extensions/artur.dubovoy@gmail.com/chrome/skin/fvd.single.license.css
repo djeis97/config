@@ -1,0 +1,23 @@
+@import url("chrome://global/skin/");
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+
+dialog#fvd_single_license_dialog
+{
+	min-width: 450px;
+	min-height: 300px;
+}
+
+#fvd_single_accept_check{
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.dialog-button.accept{
+	list-style-image: url('fvd.single.download.png');
+	-moz-image-region: rect(16px 16px 32px 0px);	
+}
+
+.dialog-button.accept image{
+	margin-right: 5px;
+}

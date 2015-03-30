@@ -1,0 +1,22 @@
+@import url("chrome://global/skin/");
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+dialog
+{
+	min-width: 450px;
+	max-width: 450px;
+	min-height: 300px;
+}
+
+#paypalButtonContainer{
+	margin-top: 7px;
+}
+
+#paypalButton{
+	
+	min-width: 197px;
+	min-height: 78px;
+	background: url( chrome://fvd.single/skin/paypal_donate.png ) no-repeat;
+	
+}
+

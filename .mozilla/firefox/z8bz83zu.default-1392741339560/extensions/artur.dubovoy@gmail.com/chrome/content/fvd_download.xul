@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://fvd.single/skin/fvd.single.download.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://fvd.single/locale/fvd.single.download.dtd">
+
+<window id="fvd_single_download_window"
+	autosize="true"
+	resizable="yes"
+	onresize="fvd_dl.setupElementsSize();fvd_dl.saveWindowSize();"
+	title="&txt.window.title;"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	onclose="fvd_dl.saveWindowSize()"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	>
+
+	<script type="application/x-javascript" src="chrome://fvd.single/content/fvd_download.js" />
+	<script>
+		var fvd_dl = new FVD_SINGLE_DOWNLOAD();
+	</script>	
+
+	<hbox id="fvd_single_download_snipet" class="fvd_single_download_snippet_content" align="center" onmouseover="fvd_dl.item_mouse_over(event);" onmouseout="fvd_dl.item_mouse_out(event);">
+		<image class="fvd_dltp_img"  style="display:none" />
+		<label class="fvd_dltp" style="display:none;" />
+		<label class="fvd_dllb" crop="center" flex="1" />
+		<label class="fvd_dlsize" hidden="true" />
+		<image src="chrome://fvd.single/skin/fvd.single.download.ad_showing.gif" class="fvd_dl_update_size_loading"/>	
+		<button class="fvd_dlplaybtn" oncommand="fvd_dl.click_display_player( event )" label="&txt.download.button.play;" style="display:none"/>
+
+		<image class="copyToClipBoard" tooltiptext="&txt.copy_to_clipboard;" onclick="fvd_dl.copyToClipBoard( this.parentNode.getAttribute( 'url' ) )" />
+		
+		<button oncommand="fvd_dl.download(event);" class="fvd_dlbtn" label="&txt.download.title;"/>		
+		
+		<button class="ddButton" hidden="true" type="menu">
+			<menupopup>
+				<menuitem class="pause" oncommand="fvd_dl.pauseDownload( this.parentNode.parentNode.parentNode.getAttribute('url') );event.stopPropagation()" label="&txt.menu.pause.title;"/>
+				<menuitem class="resume" oncommand="fvd_dl.resumeDownload( this.parentNode.parentNode.parentNode.getAttribute('url') );event.stopPropagation()" label="&txt.menu.resume.title;"/>
+				<menuitem class="cancel" oncommand="fvd_dl.cancelDownload( this.parentNode.parentNode.parentNode.getAttribute('url') );event.stopPropagation()" label="&txt.menu.cancel.title;"/>
+			</menupopup>	
+		</button>		
+
+	</hbox>	
+	
+	<hbox id="fvd_toolbar_main_hbox">
+		<vbox id="fvd_toolbar_download_vbox" >
+			<vbox id="fvd_toolbar_vbox_threads" flex="2">
+			
+				<hbox>
+					<menulist id="fvd_single_download_pages_list"  label="&txt.menuselect.label;" crop="center" oncommand="fvd_dl.setCurrentPage(this.value)">
+					<menupopup >
+					</menupopup>
+					</menulist>
+					<button label="&txt.button.next_tab.label;" oncommand="fvd_dl.goToNextTab()"/>
+					<button label="&txt.button.switch_to_tab.label;" oncommand="fvd_dl.switchToTab()"/>
+					<button label="&txt.button.close_tab.label;" oncommand="fvd_dl.closeTab()"/>
+				</hbox>	
+				<separator class="groove" />
+
+				<vbox>
+					<hbox id="hbox_content_of"  align="center">
+						<label value="&txt.content_from;" /><image id="fvd_single_download_favicon" width="16" height="16"/><label id="fvd_single_download_content_of" crop="center" flex="1" value="" tooltiptext="" /><label id="fvd_single_download_count_content" flex="1" />		
+					</hbox>
+				</vbox>
+
+				<vbox id="fvd_single_download_snipets_list" flex="1">
+					
+					<hbox id="fvd_single_download_ad_snipet" align="center">
+						<hbox>
+						<image id="fvd_sinle_download_ad_sniped_image" src='chrome://fvd.single/skin/fvd.single.download.ad_showing.gif' width='15' height='15'/>
+						</hbox>
+						<hbox>
+						<label id="fvd_sinle_download_ad_title" class="fvd_dllb" crop="center" flex="1" value="&txt.ad.end_message;" /><label id="fvd_single_download_view_ad_link" value="&txt.ad.view_link;"/>
+						</hbox>
+					</hbox>
+					
+					<hbox id="fvd_single_download_nothing_to_download">
+					<label value="&txt.nothing_to_download;"/>
+					</hbox>	
+				
+				</vbox>
+
+				<hbox>
+					<button  oncommand="fvd_dl.download_all();" class="fvd_dlbtn_all" label="&txt.download_all.title;" />
+
+					<!--box valign="middle" id="buttonbox"  >
+					<toolbarbutton id="fvd_download_all"   label="&txt.download_all.title;"   type="menu-button" tooltiptext="&txt.download_all.title;"  class="button-menubutton-dropmarker" 
+									image="chrome://fvd.single/skin/fvd.single.main_button_detected_small.gif"
+									orient="horizontal"
+					                oncommand="fvd_dl.button_download_all(event, 'all');">
+						<menupopup>
+							<menuitem id="fvd_download_all_format" label="&txt.download_all.format.title;"           class="menuitem-iconic"      oncommand="fvd_dl.button_download_all(event, 'format');  event.preventBubble();" />
+							<menuitem id="fvd_download_all_folder" label="&txt.download_all.folder.title;"   class="menuitem-iconic"      oncommand="fvd_dl.button_download_all(event, 'folder');  event.preventBubble();" />
+						</menupopup>
+					</toolbarbutton>
+					</box-->
+					
+					<spacer flex="1" />
+					<vbox id="fvd_single_review_block" pack="center">
+						<hbox id="like_review" align="center">
+							<label value="&like.give_us_rating;"/> <button oncommand="fvd_dl.likePostReview()" class="likeIcon postReview" label="&like.post_review;"/> <label value="/"/> <hbox onclick="fvd_dl.likeAlreadyDone()" class="likeIcon alreadyDone"><image/><label value="&like.already_done;"/></hbox>
+						</hbox>
+						
+						<hbox id="like_yes_no">
+							<label value="&like.like_addon;"/> <hbox onclick="fvd_dl.likeAddon()" class="likeIcon yes"><image/><label value="&like.like_addon.yes;"/></hbox> <label value="/"/> <hbox class="likeIcon no" onclick="fvd_dl.dislikeAddon()"><image/><label value="&like.like_addon.no;"/></hbox>
+						</hbox>
+					</vbox>
+				</hbox>
+
+				<separator class="groove" />
+				
+				<vbox>
+					<hbox  id="fvd_single_always_in_box">
+						<checkbox id="fvd_single_close_after_download" label="&txt.download.close_after_download;" oncommand="fvd_dl.update_cad_state()" /><spacer flex="1"/>
+						<button id="fvd_single_suite_button" adurl="" onclick="fvd_dl.navigate_url(this.getAttribute('adurl')); fvd_single_AD.incrementRotateCounter();fvd_dl.setupADButton()" label="&txt.fvd_suite.title;" />	
+					</hbox>
+					<hbox>
+						<checkbox id="fvd_single_download_always_on_top" label="&txt.download.always_on_top;" oncommand="fvd_dl.update_always_on_top_state( this.checked )" /><spacer flex="1"/>
+						<button id="fvdsd_button" onclick="fvd_dl.navigate_url('https://addons.mozilla.org/en-US/firefox/addon/fvd-speed-dial');" label="&txt.fvdsd.title;" />
+					</hbox>
+					<hbox>
+						<checkbox id="fvd_single_download_display_swf" label="&txt.download.display_swf;" oncommand="fvd_dl.update_swf_display_state( this.checked )"  hidden="true"  /><spacer flex="1"/>
+						<button id="donate_button" onclick="fvd_dl.openDonateWindow()" label="&txt.donate.title;" hidden="true" />
+					</hbox>
+					
+					<hbox>
+						<checkbox id="defaultMode" oncommand="fvd_dl.changeDefaultMode()" label="&txt.default_mode;" /><spacer flex="1"/>
+						<button id="fvd_betterfox_button" onclick="fvd_dl.navigate_url('https://addons.mozilla.org/En-us/firefox/addon/betterfox/');" label="Make your Firefox 15% faster!" />
+					</hbox>
+				
+					<hbox>
+						<spacer flex="1" />
+						<button id="fvd_nimbus_button" onclick="fvd_dl.navigate_url('https://addons.mozilla.org/en-US/firefox/addon/nimbus-Screenshot/');" label="Make Screenshot, Edit, Upload" />
+					</hbox>
+				
+				</vbox>
+					
+
+
+				<hbox id="fvd_single_muststart_comment">
+					<vbox id="fvd_single_muststart_iconbox">
+						<spacer flex="1" />
+						<image src="chrome://fvd.single/skin/fvd.single.exclamation.png" />
+						<spacer flex="1" />
+					</vbox>
+					<vbox>
+						<hbox>
+							<label value="&txt.must_start_video.title;"  />
+							<spacer flex="1" />
+						</hbox>
+					</vbox>
+				</hbox>
+			
+			</vbox>			
+		</vbox>
+		
+		<separator class="groove" orient="vertical" />		
+		<vbox id="fvd_toolbar_player_vbox">
+			<html:div id="fvd_toolbar_download_player_div"></html:div>
+			<hbox>
+				<button id="fvd_toolbar_button_close_player" label="&txt.download.button.close_player;"  oncommand="fvd_dl.hide_player_click()" />
+			</hbox>
+		</vbox>
+
+	</hbox>
+	
+</window>

@@ -1,0 +1,47 @@
+<!ENTITY txt.main_button.title			"FVD">
+<!ENTITY txt.popup.help.title			"Help">
+<!ENTITY txt.popup.video_converter.title	"Android Version">
+<!ENTITY txt.popup.search_video.title		"Search Video">
+<!ENTITY txt.popup.feedback.title		"Feedback">
+<!ENTITY txt.popup.tools.title			"Useful Tools">
+<!ENTITY txt.popup.settings.title		"Settings">
+<!ENTITY txt.fvd_setup_note.do_not_display		"Dont show it again">
+
+<!ENTITY fvdsd_hint.title		"FVD Speed Dial">
+<!ENTITY fvdsd_hint.text		"Organize your bookmarks!">
+<!ENTITY fvdsd_hint.dont_display		"Dont show it again">
+
+<!ENTITY txt.popup.download_all.title		"Download From All Tabs">
+<!ENTITY txt.start_mass_download.title				"Start Mass Download">
+<!ENTITY txt.set_default_formats.title				"Set Default Formats">
+<!ENTITY txt.set_default_download_folder.title		"Set Default Download Folder">
+<!ENTITY txt.set_file_types.title				    "Set File Types">
+<!ENTITY txt.give_us_rating.title					"Rate US!">
+<!ENTITY txt.popup.switch_to_full_mode.title "Switch to Full Mode">
+<!ENTITY txt.popup.fvdsd.title "Fvd Speed Dial">
+
+<!ENTITY txt.popup.try_alternative_download	"Try alternative download">
+<!ENTITY txt.tools_popup.short_urls.title	"Make Short URL">
+<!ENTITY txt.tools_popup.share_urls.title	"Share Url">
+<!ENTITY txt.tools_popup.javascript.title	"JavaScript">
+<!ENTITY txt.tools_popup.check_ip.title		"Check IP">
+<!ENTITY txt.tools_popup.speed_test.title	"Internet Speed Test">
+<!ENTITY txt.tools_popup.whois.title		"Whois">
+<!ENTITY txt.tools_popup.free_registry_scan.title "Free Windows errors scan">
+
+
+<!ENTITY txt.panel.help_text.title		"Enter the keywords to search video">
+<!ENTITY txt.panel.search_button.title		"Search">
+
+<!ENTITY txt.pause "Pause">
+<!ENTITY txt.resume "Resume">
+<!ENTITY txt.cancel "Cancel">
+<!ENTITY txt.download "Download">
+<!ENTITY txt.copy_to_clipboard "Copy URL to clipboard">
+<!ENTITY txt.make_donation "Make a donation">
+
+
+
+<!ENTITY txt.quick_download "Quick download">
+
+<!ENTITY txt.popup.converter.title "Convert This Video to MP4, AVI, WMV">

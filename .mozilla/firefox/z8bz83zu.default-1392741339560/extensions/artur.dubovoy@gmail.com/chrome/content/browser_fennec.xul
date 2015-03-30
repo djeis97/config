@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://fvd.single/skin/fvd.single.css" type="text/css"?>
+
+<!DOCTYPE overlay [
+<!ENTITY % fvd.singleDTD SYSTEM "chrome://fvd.single/locale/fvd.single.dtd">
+%fvd.singleDTD;
+]>
+
+<overlay id="fvd-single-Overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<script type="application/x-javascript" src="browser_fennec.js" />
+	<script type="application/x-javascript" src="fvd_download.js" />	
+		
+</overlay>

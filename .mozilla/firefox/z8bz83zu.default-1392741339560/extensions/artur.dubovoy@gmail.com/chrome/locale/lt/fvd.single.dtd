@@ -1,0 +1,45 @@
+<!ENTITY txt.main_button.title   "FVD">
+<!ENTITY txt.popup.help.title   "Žinynas">
+<!ENTITY txt.popup.video_converter.title "Android Version">
+<!ENTITY txt.popup.search_video.title  "Ieškoti video">
+<!ENTITY txt.popup.feedback.title  "Atsiliepimai">
+<!ENTITY txt.popup.tools.title   "Naudingi įrankiai">
+<!ENTITY txt.popup.settings.title  "Nustatymai">
+<!ENTITY txt.fvd_setup_note.do_not_display  "Daugiau neberodyti">
+
+<!ENTITY fvdsd_hint.title  "FVD greitasis rinkimas">
+<!ENTITY fvdsd_hint.text  "Tvarkykite savo žymeles!">
+<!ENTITY fvdsd_hint.dont_display  "Daugiau neberodyti">
+
+<!ENTITY txt.popup.download_all.title		"Atsisiųsti visus">
+<!ENTITY txt.start_mass_download.title				"Sākot augšupielādēt visus failus">
+<!ENTITY txt.set_default_formats.title				"Noklusējuma formāti">
+<!ENTITY txt.set_default_download_folder.title		"Katalogs lejupielādei">
+<!ENTITY txt.set_file_types.title				    "Instalācijas failu formāti">
+<!ENTITY txt.give_us_rating.title					"Įvertinkite mus">
+<!ENTITY txt.popup.switch_to_full_mode.title "Persijungti į pilną režimą">
+<!ENTITY txt.popup.fvdsd.title "Fvd greitasis rinkimas">
+
+<!ENTITY txt.popup.try_alternative_download "Pabandyti alternatyvų siuntimą">
+<!ENTITY txt.tools_popup.short_urls.title "Sutrumpinti URL">
+<!ENTITY txt.tools_popup.share_urls.title "Dalintis URL">
+<!ENTITY txt.tools_popup.javascript.title "JavaScript">
+<!ENTITY txt.tools_popup.check_ip.title  "Tikrinti IP">
+<!ENTITY txt.tools_popup.speed_test.title "Interneto Greičio Testas">
+<!ENTITY txt.tools_popup.whois.title  "Whois">
+<!ENTITY txt.tools_popup.free_registry_scan.title "Nemokamas Windows klaidų skenavimas">
+
+
+<!ENTITY txt.panel.help_text.title  "Įveskite video paieškos žodžius">
+<!ENTITY txt.panel.search_button.title  "Ieškoti">
+
+<!ENTITY txt.pause "Pristabdyti">
+<!ENTITY txt.resume "Tęsti">
+<!ENTITY txt.cancel "Atsisakyti">
+<!ENTITY txt.download "Atsisiųsti">
+<!ENTITY txt.copy_to_clipboard "Kopijuoti URL į iškarpinę">
+<!ENTITY txt.make_donation "Paaukoti">
+
+<!ENTITY txt.quick_download "Quick download">
+
+<!ENTITY txt.popup.converter.title "Convert This Video to MP4, AVI, WMV">

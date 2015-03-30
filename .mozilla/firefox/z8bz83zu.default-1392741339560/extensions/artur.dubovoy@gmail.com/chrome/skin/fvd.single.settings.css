@@ -1,0 +1,124 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+prefwindow#fvdsd_settings_dialog {
+	width: 450px;
+	height: 550px;
+	font-size: 11px;
+}
+
+prefpane  { 
+	overflow: -moz-hidden-unscrollable;
+	-moz-box-flex: 1;
+} 
+
+
+.paneButtonIcon  {
+  width: 64px;
+  height: 32px;
+}
+
+radio[pane="fvdsd_general"] {
+	list-style-image: url('fvd.single.settings.png');
+	-moz-image-region: rect(0px 96px 48px 0px);
+}
+
+radio[pane="fvdsd_about"] {
+	list-style-image: url('fvd.single.settings.png');
+	-moz-image-region: rect(0px 192px 48px 96px);
+}
+radio[pane="fvdsd_showfiles"] {
+	list-style-image: url('fvd.single.settings.png');
+	-moz-image-region: rect(0px 288px 48px 192px);
+}
+
+radio[pane="fvdsd_showfiles_yt"] {
+	list-style-image: url('fvd.single.settings.png');
+	-moz-image-region: rect(0px 384px 48px 288px);
+}
+
+radio[pane="fvdsd_updated"]  {
+	list-style-image: url('fvd.single.notification.png');
+	-moz-image-region: rect(0px 96px 48px 0px);
+}
+
+label#fvdsd_about_title  {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+
+label#fvdsd_hokey_ctrl  {
+	font-weight: bold;
+}
+
+image#fvdsd_folder_icon  {
+	margin-right: 4px;
+}
+
+label.text_label  {
+	color: gray;
+}
+description.text_descr  {
+	color: gray;
+	width: 250px;
+	word-wrap: break-word;
+}
+
+#label_download_folder[path="general"]  {
+	color: default;
+	font-weight: default;
+}
+#label_download_folder[path="folder"]  {
+	color: red;
+	font-weight: bold;
+}
+
+#label_file_types[path="general"]  {
+	color: default;
+	font-weight: default;
+}
+#label_file_types[path="formats"]  {
+	color: red;
+	font-weight: bold;
+}
+
+#label_file_types_yt[path="general"]  {
+	color: default;
+	font-weight: default;
+}
+#label_file_types_yt[path="formats"]  {
+	color: red;
+	font-weight: bold;
+}
+
+
+button.next_step0 {
+	color: white;
+	font-weight: bold;
+	background-color: #60b044;
+    -moz-appearance: none;
+}
+/*button.back_step {
+	font-weight: bold;
+    -moz-appearance: none;
+}
+button.next_step0 {
+	font-weight: bold;
+    -moz-appearance: none;
+}*/
+label#fvdsd_updated_title {
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+/* ----------------------  SUGGESTION ---------------------------------  */
+
+prefwindow#fvdsd_suggestion_dialog  {
+	width: 350px;
+	min-height: 100px;
+}
+
+label.label_ads_suggestions {
+	text-align: center;
+}

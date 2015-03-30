@@ -1,0 +1,340 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+button{
+	cursor: pointer;
+}
+
+window#fvd_single_download_window
+{
+	min-width: 900px;
+	min-height: 400px;
+	max-width: 800px;
+	padding: 8px !important;
+}
+
+.fvd_single_download_snippet_content{
+	-moz-transition-duration: 50ms;
+}
+
+.fvd_single_download_snippet_content:hover{
+	background-color: Highlight;
+	color: HighlightText !important;
+	text-shadow: 1px 1px 1px #000;
+}
+
+.fvd_single_download_snippet_content image.copyToClipBoard{
+	list-style-image: url('chrome://fvd.single/skin/copy_icon.png');
+	margin-left: 5px;
+	margin-right: 5px;	
+	cursor: pointer;
+}
+
+button.fvd_dlbtn
+{
+	text-align: center;
+	min-width: 100px;
+	min-height: 27px;
+	max-height: 27px;
+	list-style-image: url('chrome://fvd.single/skin/fvd.single.download.png');
+	-moz-image-region: rect(0px 16px 16px 0px);
+	color: #000000;
+	margin-right: 0px;
+}
+
+#buttonbox {
+    min-height: 40px !important;  
+	max-height: 40px !important;
+	padding: 0px; 
+	margin: 0px; 
+    border-style:outset; 
+	border-width:2px; 
+    border-color:#999;
+	cursor: pointer;
+    }
+
+#fvd_download_all
+{
+	font-family: Arial,Helvetica,SunSans-Regular,Sans-Serif;
+	font-size: 12pt;
+	font-weight: bold;
+}	
+
+#fvd_download_all .toolbarbutton-icon {
+  display: block;
+}	
+
+
+	
+	
+
+button.ddButton{
+	list-style-image: url('chrome://fvd.single/skin/dd_button.png');
+	-moz-image-region: rect(0px 13px 11px 0px);
+	max-width: 20px !important;
+	min-width: 20px !important;
+	min-height: 27px;
+	max-height: 27px;
+	margin: 0px;
+	padding: 0px;
+}
+
+button.ddButton:hover{
+	-moz-image-region: rect(0px 26px 11px 13px);
+}
+
+button.ddButton .button-menu-dropmarker{
+	display: none;
+}
+
+button.ddButton .box-inherit.button-box{
+	padding: 0px;
+}
+
+button.ddButton .box-inherit > label{
+	display: none;
+}
+
+button.ddButton image:first-child{
+	margin: 0px;
+	display: block;
+}
+
+button.fvd_dlbtn[state="1"]
+{
+	-moz-image-region: rect(0px 16px 16px 0px) !important;
+}
+
+button.fvd_dlbtn[state="2"]
+{
+	/*-moz-image-region: rect(16px 16px 32px 0px) !important;*/
+	list-style-image: url('chrome://fvd.single/skin/fvd_suite.png');
+	-moz-image-region: rect(0px 16px 16px 0px);
+}
+
+button.fvd_dlbtn[state="3"]
+{
+	-moz-image-region: rect(32px 16px 48px 0px) !important;
+}
+
+button.fvd_dlbtn[state="4"]
+{
+	-moz-image-region: rect(64px 16px 80px 0px) !important;
+}
+
+button.fvd_dlbtn image
+{
+	padding-right: 4px !important;
+}
+
+button.fvd_dlbtn menupopup
+{
+	text-align: left;
+}
+
+button.fvd_dlbtn_all
+{
+	list-style-image: url('chrome://fvd.single/skin/fvd.single.main_button.large.png');
+	-moz-image-region: rect(0px 24px 24px 0px);
+
+	font-size: 1.4em;
+	font-weight: bold;
+}
+
+
+
+button.fvd_dlbtn_all image
+{
+	padding-right: 4px !important;
+}
+
+hbox#fvd_single_download_snipet
+{
+	display: none;
+}
+
+
+#fvd_sinle_download_ad_title
+{
+
+}
+
+#fvd_sinle_download_ad_sniped_image
+{
+	margin-top:5px;
+}
+
+hbox#fvd_single_download_ad_snipet
+{
+	display: none;
+	margin-top: 50px;
+}
+
+label.fvd_dltp
+{
+	font-size: 1.2em;
+	font-weight: bold;
+	width: 30px;
+}
+
+.download_item_hovered
+{
+	background-color: Highlight;
+}
+
+.download_item_hovered > label
+{
+	color: HighlightText !important;
+}
+
+vbox#fvd_single_download_snipets_list
+{
+	margin-top: 4px;
+	/*max-height: 300px;*/
+	overflow-y: auto;
+}
+
+hbox#fvd_single_bottom
+{
+	margin-top: 4px;
+}
+
+checkbox#fvd_single_always_in
+{
+	-moz-padding-start: 0px !important;
+}
+
+button#fvd_single_suite_button{
+	list-style-image: url('chrome://fvd.single/skin/fvd_suite.png');
+	-moz-image-region: rect(0px 20px 16px 0px);
+}
+
+button#fvdsd_button{
+	list-style-image: url('chrome://fvd.single/skin/fvdsd.png');
+}
+
+button#fvd_betterfox_button{
+	list-style-image: url('chrome://fvd.single/skin/betterfox.png');
+}
+button#fvd_betterfox_button image{
+	margin-right: 5px;
+}
+
+button#fvd_nimbus_button{
+	list-style-image: url('chrome://fvd.single/skin/nimbus.png');
+}
+button#fvd_nimbus_button image{
+	margin-right: 5px;
+}
+
+button#fvdsd_button image{
+	margin-right: 5px;
+}
+
+button#donate_button{
+	list-style-image: url('chrome://fvd.single/skin/donate.png');
+}
+
+button#donate_button image{
+	margin-right: 5px;
+}
+
+label#fvd_single_review_comment
+{
+	color: gray;
+	font-size: 80%;
+}
+
+
+button#fvd_single_review_button
+{
+	list-style-image: url('chrome://fvd.single/skin/fvd.single.download.png');
+	-moz-image-region: rect(48px 16px 64px 0px);
+}
+
+button#fvd_single_review_button image
+{
+	padding-right: 4px !important;
+}
+
+
+
+
+#hbox_content_of{
+	margin-top: 8px;
+	font-weight: bolder;
+}
+
+#fvd_single_download_content_of{
+	max-width: 400px;
+}
+
+#fvd_single_download_nothing_to_download{
+	margin-top: 10px;
+}
+
+label.fvd_dlsize{
+	font-weight: bolder;
+}
+
+#fvd_single_download_pages_list{
+	max-width: 400px;
+	min-width: 300px;
+}
+
+#defaultModeLabel{
+	margin-left: -8px;
+	margin-top: 2px;
+}
+
+#defaultMode{
+	font-weight: bold;
+}
+
+.likeIcon{
+	cursor: pointer;
+}
+
+.likeIcon image
+{
+	list-style-image: url('chrome://fvd.single/skin/like_icons.png');	
+	width: 16px;
+	height: 16px;	
+}
+
+.likeIcon label{
+	cursor: pointer;
+	-moz-transition-duration: 300ms;	
+}
+
+.likeIcon.yes  image{
+	-moz-image-region: rect(0px 16px 16px 0px);	
+}
+.likeIcon.yes:hover > label, .likeIcon.postReview:hover > label, .likeIcon.alreadyDone:hover > label{	
+	text-shadow: 0px 0px 8px #0f0;
+}
+.likeIcon.no  image{
+	-moz-image-region: rect(0px 34px 16px 18px);
+}
+.likeIcon.no:hover > label{
+	text-shadow: 0px 0px 8px #f00;
+}
+
+.likeIcon.postReview image{
+	-moz-image-region: rect(0px 50px 16px 34px);	
+	margin-right: 4px;
+}
+
+.likeIcon.postReview:hover{
+	-moz-transition-duration: 300ms;	
+	box-shadow: 0px 0px 5px #0F0;
+}
+
+.likeIcon.alreadyDone image{
+	-moz-image-region: rect(0px 67px 16px 51px);	
+}
+
+.button-menubutton-dropmarker dropmarker  {
+	width:20px;
+	list-style-image: url('chrome://fvd.single/skin/dropmarker.png');
+	}
+

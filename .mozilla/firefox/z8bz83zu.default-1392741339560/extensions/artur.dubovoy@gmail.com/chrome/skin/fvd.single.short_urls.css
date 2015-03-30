@@ -1,0 +1,45 @@
+@import url("chrome://global/skin/");
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+window#fvd_single_short_urls
+{
+	min-width: 400px;
+	min-height: 250px;
+	padding: 1em;
+}
+
+
+label#fvd_single_url_example
+{
+	color:gray;
+	font-size:80%;
+}
+
+hbox#fvd_single_alias_wrapper
+{
+	margin-top: 1em;
+}
+
+description#fvd_single_alias_desc
+{
+	color:gray;
+	font-size:80%;
+	margin-bottom: 0px !important;
+}
+
+button#fvd_single_generate
+{
+	min-width:200px;
+	min-height:30px;
+	margin-top:2em;
+}
+
+deck#fvd_single_generate_resdeck
+{
+	margin-top:2em;
+}
+
+label.error
+{
+	color: red;
+}

@@ -1,0 +1,16 @@
+<!ENTITY txt.dialog.title		"خدمة الروابط القصيرة">
+
+<!ENTITY txt.your_url.title		"الرابط:">
+<!ENTITY txt.your_url.example		"مثال: http://www.facebook.com/profile.php?id=728490282&amp;ref=sgm">
+
+<!ENTITY txt.your_alias.title		"الاسم المستعار:">
+<!ENTITY txt.your_alias.description	"سوف تتمكن أيضا من إنشاء الاسم المستعار الذي تريده للرابط، ليصبح من السهل عليك تذكره. مثلا استخدم اسمك أو نحو ذلك">
+
+<!ENTITY txt.generate_button.title	"توليد">
+
+
+<!ENTITY txt.short_url.title		"الرابط القصير:">
+<!ENTITY txt.short_url.progress.title	"يوّلد الرابط القصير...">
+<!ENTITY txt.short_url.error.title	"خطأ في توليد الرابط القصير.">
+
+

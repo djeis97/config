@@ -1,0 +1,56 @@
+<!ENTITY txt.window.title		"Ներբեռնե՛ք տեսանյութերը FlashVideoDownloader-ով">
+<!ENTITY txt.download_all.title		"Ներբեռնել բոլորը">
+<!ENTITY txt.download_all.format.title		"Սահմանել լռելյայն ձեւաչափեր">
+<!ENTITY txt.download_all.folder.title		"Տեղադրեք գրացուցակը ներբեռնման համար">
+<!ENTITY txt.download.title		"Ներբեռնել">
+<!ENTITY txt.menu.pause.title "Դադար">
+<!ENTITY txt.menu.resume.title "Շարունակել">
+<!ENTITY txt.menu.cancel.title "Չեղարկել">
+
+
+<!ENTITY txt.fvd_suite.title		"Փոխարկել այս տեսանյութը MP4, AVI, WMV-ի">
+<!ENTITY txt.fvdsd.title		"Fvd Speed Dial">
+
+
+
+<!ENTITY txt.download.save_to		"Պահպանել՝">
+<!ENTITY txt.download.close_after_download		"Բեռնելուց հետո փակել այս պատուհանը">
+<!ENTITY txt.download.always_on_top		"Միշտ առջևում">
+<!ENTITY txt.browse_folders.title	"Ընտրել...">
+
+<!ENTITY txt.content_from	"Բովանդակությունը ">
+<!ENTITY txt.nothing_to_download	"Ոչինչ չկա բեռնելու համար կամ տեսանյութը չի խաղարկվում">
+
+<!ENTITY txt.write_review.title		"Աջակցեք մեզ՝ տալով Ձեր գնահատականը">
+<!ENTITY txt.already_woite_review.title "Ես արդեն գնահատել եմ">
+<!ENTITY txt.write_review_comment.title "Ուղարկեք Ձեր կարծիքը: Ձեր կարծիքը շատ կաևրոր է մեզ համար:">
+
+
+<!ENTITY txt.must_start_video.title "Տեսանյութը բեռնելու համար նախ պետք է խաղարկեք այն:">
+<!ENTITY txt.must_start_video.description "Տրաֆիկի հնարավորությունը հասանելի է փորձարկման համար: Խնդրում ենք հաղորդել հայտնաբերված սխալների մասին:">
+
+<!ENTITY txt.ad.end_message		"Սպասեք, մինչ գովազդային տեսանյութը կավարտվի...">
+<!ENTITY txt.ad.view_link		"(view link)">
+
+<!ENTITY txt.menuselect.label	"Ընտրեք էջը...">
+<!ENTITY txt.button.switch_to_tab.label	"Անցնել էջին">
+<!ENTITY txt.button.next_tab.label	"Հաջորդ էջը">
+<!ENTITY txt.button.close_tab.label	"Փակել էջը">
+
+<!ENTITY txt.download.display_swf	"Միացնել .swf ֆայլերը (ՄԻԱՑ, եթե բեռնելու եք խաղեր)">
+
+<!ENTITY txt.default_mode "Ամբողջական տարբերակը դարձնել հիմնականը">
+
+<!ENTITY txt.download.button.play "Խաղարկել">
+<!ENTITY txt.download.button.close_player "Փակել">
+
+<!ENTITY like.give_us_rating "Ձեր գնահատականը.">
+<!ENTITY like.post_review "Ձեր կարծիքը">
+<!ENTITY like.already_done "Արդեն արել եմ :)">
+<!ENTITY like.like_addon "Հավանեցի՞ք այս հավելումը">
+<!ENTITY like.like_addon.yes "Այո">
+<!ENTITY like.like_addon.no "Ոչ">
+
+<!ENTITY txt.copy_to_clipboard "Պատճենել վեբ հղումը հիշապահեստ">
+
+<!ENTITY txt.donate.title "Ձեր նվիրատվությունը">

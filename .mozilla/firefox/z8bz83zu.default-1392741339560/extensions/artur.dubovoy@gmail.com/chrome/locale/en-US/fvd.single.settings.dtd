@@ -1,0 +1,59 @@
+<!ENTITY txt.dialog.title		"Settings">
+
+<!ENTITY txt.dialog.button_ok.title	"OK">
+<!ENTITY txt.dialog.button_cancel.title	"Cancel">
+<!ENTITY txt.prefpane.general.title	"Settings">
+<!ENTITY txt.prefpane.about.title	"About">
+<!ENTITY txt.prefpane.showfiles.title	"File Types">
+<!ENTITY txt.prefpane.showfiles_yt.title	"YouTube File Types">
+<!ENTITY txt.prefpane.default.title	"Auto Download File Types">
+<!ENTITY txt.prefpane.types	 "types">
+<!ENTITY txt.prefpane.showfiles.descr	"Specify the file types that will be displayed in addon before download">
+<!ENTITY txt.prefpane.default.descr	 "Specify the file types that will be used in 'Download All Media files' mode">
+
+<!ENTITY txt.prefpane.about.version.title		"Version:">
+<!ENTITY txt.prefpane.about.home_site_visit.title	"Visit ">
+
+<!ENTITY txt.tabpanel.title.appearance	"Appearance">
+<!ENTITY txt.tabpanel.title.behavior	"Behavior">
+
+<!ENTITY txt.default_mode		"Default mode:">
+<!ENTITY txt.default_mode.compact		"Compact">
+<!ENTITY txt.default_mode.full		"Full">
+<!ENTITY txt.group.interface.title		"Interface settings:">
+<!ENTITY txt.display.youtube_button.title		"Display youtube download button">
+<!ENTITY txt.display.vk_button.title		"Display vk.com download button">
+<!ENTITY txt.display.main_button.title		"Display main button">
+<!ENTITY txt.display.statusbar_button.title	"Display statusbar button">
+<!ENTITY txt.display.adult_warnings.title	"Don't display adult warnings">
+<!ENTITY txt.pages_in_new_tab.title 		"Open new pages in new tab">
+
+<!ENTITY txt.group.hotkey.title			"Hotkey:">
+
+<!ENTITY txt.group.download_folder.title	"Download to:">
+<!ENTITY txt.download.default.title		"Default folder">
+<!ENTITY txt.download.custom.title		"Custom folder">
+<!ENTITY txt.download.custom_button.title	"Browse...">
+
+<!ENTITY txt.show_hints.title	"Don't show hints">
+
+<!ENTITY txt.group.sniffer.title	"Sniffer">
+<!ENTITY txt.display_swf.title	"Enable .swf Files (Turn ON if you download games)">
+
+<!ENTITY txt.prefpane.updated.title	"Updated">
+<!ENTITY txt.prefpane.question.title	"Support us">
+
+<!ENTITY txt.dialog.suggestions.title		"Please configure settings">
+<!ENTITY txt.enable_ads_suggestions.title	"Do you want to Enable Flash Video Downloader Ads suggestions?">
+<!ENTITY txt.enable_ads_suggestions.no	"No">
+<!ENTITY txt.enable_ads_suggestions.yes	"Yes">
+<!ENTITY module.enable_superfish "Enable Product Search">
+
+<!ENTITY txt.enable_refinements.title 		"Enable Refinements">
+<!ENTITY txt.fennec.download.custom_folder.title "Save downloads here">
+<!ENTITY txt.fennec.download.custom_folder.desc "Leave empty to save in default location">
+
+<!ENTITY txt.tabpanel.title.ffmpeg	"Setup Converter">
+<!ENTITY txt.group.ffmpeg_folder.title	"Set ffmpeg-file:">
+<!ENTITY txt.install.ffmpeg.title	"How to install the converter ffmpeg...">
+

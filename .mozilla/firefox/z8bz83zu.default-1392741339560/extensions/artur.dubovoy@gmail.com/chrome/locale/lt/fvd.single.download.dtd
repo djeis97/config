@@ -1,0 +1,56 @@
+<!ENTITY txt.window.title  "Parsiųsti video su FlashVideoDownloader">
+<!ENTITY txt.download_all.title  "Atsisiųsti visus">
+<!ENTITY txt.download_all.format.title		"Noklusējuma formātus">
+<!ENTITY txt.download_all.folder.title		"Instalēt katalogs lejupielādei">
+<!ENTITY txt.download.title  "Atsisiųsti">
+<!ENTITY txt.menu.pause.title "Pristabdyti">
+<!ENTITY txt.menu.resume.title "Tęsti">
+<!ENTITY txt.menu.cancel.title "Atšaukti">
+
+
+<!ENTITY txt.fvd_suite.title  "Konvertuoti šį video į MP4, AVI, WMV">
+<!ENTITY txt.fvdsd.title  "Fvd greitas rinkimas">
+
+
+
+<!ENTITY txt.download.save_to  "Išsaugoti į:">
+<!ENTITY txt.download.close_after_download  "Parsiuntus užverti šį langą">
+<!ENTITY txt.download.always_on_top  "Visada viršuje">
+<!ENTITY txt.browse_folders.title "Naršyti...">
+
+<!ENTITY txt.content_from "Turinys">
+<!ENTITY txt.nothing_to_download "Nėra ką parsiųsti arba video negroja">
+
+<!ENTITY txt.write_review.title  "Palaikykite mus įrašydami savo įvertinimą!">
+<!ENTITY txt.already_woite_review.title "Aš jau įrašiau, tęskite gerą darbą!">
+<!ENTITY txt.write_review_comment.title "Atsiųskite savo nuomonę. Mums jūsų balsas labai svarbus!">
+
+
+<!ENTITY txt.must_start_video.title "Norėdami parsiųsti pirmiausiai turite paleisti video.">
+<!ENTITY txt.must_start_video.description "Kol kas ieškyklės funkcija prieinama tik beta testavimo režime. Praneškite mums jei susidūrėte su bėda.">
+
+<!ENTITY txt.ad.end_message  "Palaukite kol baigsis komercinis video...">
+<!ENTITY txt.ad.view_link  "(žiūrėti nuorodą)">
+
+<!ENTITY txt.menuselect.label "Pasirinkite puslapį...">
+<!ENTITY txt.button.switch_to_tab.label "Persijungti į kortelę">
+<!ENTITY txt.button.next_tab.label "Kita kortelė">
+<!ENTITY txt.button.close_tab.label "Užverti kortelę">
+
+<!ENTITY txt.download.display_swf "Įjungti .swf failus (įjunkite jei siunčiatės žaidimus)">
+
+<!ENTITY txt.default_mode "Padaryti pilną režimą numatytuoju">
+
+<!ENTITY txt.download.button.play "Groti">
+<!ENTITY txt.download.button.close_player "Užverti grotuvą">
+
+<!ENTITY like.give_us_rating "Įvertinkite mus:">
+<!ENTITY like.post_review "Parašykite atsiliepimą">
+<!ENTITY like.already_done "Jau parašiau">
+<!ENTITY like.like_addon "Patiko šis papildinys?">
+<!ENTITY like.like_addon.yes "Taip">
+<!ENTITY like.like_addon.no "Ne">
+
+<!ENTITY txt.copy_to_clipboard "Kopijuoti URL į iškarpinę">
+
+<!ENTITY txt.donate.title "Paaukoti">

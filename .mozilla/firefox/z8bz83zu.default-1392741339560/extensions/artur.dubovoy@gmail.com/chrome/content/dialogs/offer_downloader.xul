@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="offer_downloader.css" type="text/css"?>
+
+<!DOCTYPE window SYSTEM "chrome://fvd.single/locale/fvd.offer_downloader.dtd">
+
+<window
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	title="&window.title;"
+	xmlns:html="http://www.w3.org/1999/xhtml" 
+>
+
+	<script src="offer_downloader.js"/>
+	
+	<vbox class="desc">
+		
+		<label value="Unfortunately, Google forced us to remove Youtube Download from this extension."/>
+		<label value="Still, You can download from all other thousands of websites using this extension!"/>
+		<label value="Please, do not post negative reviews. This is not our fault. Hope you understand that.We do our best to resolve this issue."/>
+		<label value="If you still need Youtube Downloader, you can install same extension form different user:"/>
+				
+	</vbox>
+		
+		
+	<hbox pack="center">
+		
+		<deck id="installationDeck">
+			
+			<html:button class="button green fvdButton main" onclick="goToMozilla()" >Install YouTube Downloader form Mozilla.org</html:button>
+			<vbox  pack="center" align="center">
+				<progressmeter mode="undetermined"/>
+			</vbox>
+			
+		</deck>
+
+	</hbox>
+
+</window>

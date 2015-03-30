@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<overlay id="fvd-single-ff3-status-bar-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<statusbar id="status-bar">
+		<statusbarpanel oncommand="fvd_single.status_button_click(event)" context="fvd_single_popup_menu" class="statusbarpanel-iconic" id="fvd_single_status_ff3" hidden="true">			
+		</statusbarpanel>
+	</statusbar>
+	
+</overlay>

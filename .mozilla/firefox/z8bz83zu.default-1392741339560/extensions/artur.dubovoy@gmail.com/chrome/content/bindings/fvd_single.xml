@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<bindings id="fvd_speed_dial_Bindings"
+   xmlns="http://www.mozilla.org/xbl"
+   xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   xmlns:xbl="http://www.mozilla.org/xbl">
+   
+   
+   <binding id="fvd-speed-dial-fastmenu-item"
+           extends="chrome://global/content/bindings/menu.xml#menu-iconic">
+    <content>
+      <xul:hbox class="menu-iconic-left" align="center" pack="center">
+        <xul:image class="menu-iconic-icon" xbl:inherits="src=image"/>
+      </xul:hbox>
+	  <xul:hbox class="fvd-speed-dial-fastmenu-item-percentage" xbl:inherits="value=accesskey"/>
+      <xul:label class="menu-iconic-text" flex="1" xbl:inherits="value=label,accesskey,crop" crop="right"/>
+      <xul:hbox class="menu-accel-container" anonid="accel">
+        <xul:label class="menu-iconic-accel" xbl:inherits="value=acceltext"/>
+      </xul:hbox>
+      <xul:hbox align="center" class="menu-right" xbl:inherits="_moz-menuactive,disabled">
+        <xul:image/>
+      </xul:hbox>
+      <children includes="menupopup|template"/>
+    </content>
+  </binding>
+   
+   
+</bindings>
