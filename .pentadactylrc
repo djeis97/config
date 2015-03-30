@@ -1,0 +1,43 @@
+"hg7123
+
+autocmd!
+unmap!
+delcommand!
+loadplugins '\.(js|penta)$'
+group user
+
+highlight -link=FontFixed CmdLine /* The command line */ padding: 0px !important;
+map -count -modes=n <A-a> <count>h
+map -count -modes=n <A-d> <count>k
+map -count -modes=n <A-f> <count>l
+map -count -modes=n <A-g>d <count>:tgroup-delete<Space>
+map -count -modes=n,v <A-g>e <count>:tgs<Space>e<Return>
+map -count -modes=n,v <A-g>i <count>:tgroup-init<Return>
+map -count -modes=n <A-g>m <count>:tgroup-move<Space>
+map -count -modes=n <A-g>n <count>:tgroup-new<Space>
+map -count -modes=n <A-g>o <count>:tgroup-open<Space>
+map -count -modes=n,v <A-g>q <count>:tgs<Space>q<Return>
+map -count -modes=n <A-g>s <count>:tgroup-switch<Space>
+map -count -modes=n,v <A-g>w <count>:tgs<Space>w<Return>
+map -count -modes=n <A-s> <count>j
+map -count -modes=n,v Po <count>:private<Space>wo<Space>
+map -count -modes=n,v <A-g>r <count>:tgs<Space>r<Return>
+map -count -modes=i <A-a> <Left>
+map -count -modes=i <A-d> <Up>
+map -count -modes=i <A-s> <Down>
+map -count -modes=i <A-f> <Right>
+set guioptions=CsnT
+
+autocmd LocationChange bandcamp.com set hinttags& hinttags+=a>div[class*=play]
+autocmd LocationChange 8tracks.com set hinttags& hinttags+=div.player_button
+autocmd LocationChange !bandcamp.com,!8tracks.com,* set hinttags&
+
+group xkcd -l xkcd.com
+map -js e content.location.hostname='www.explainxkcd.com'
+map w o whatif.xkcd.com<cr>
+map x o xkcd.com<cr>
+map xr o http://c.xkcd.com/random/comic/<cr>
+group exkcd -l explainxkcd.com
+map -js x content.location.href= "http://xkcd.com/" + content.location.pathname.replace(/[^0-9]/g, '')
+group default
+" vim: set ft=pentadactyl:
