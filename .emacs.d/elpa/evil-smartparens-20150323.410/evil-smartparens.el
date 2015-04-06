@@ -32,6 +32,14 @@
 
 ;;; Code:
 
+
+(defmacro evil-sp--with-stringlike-navigation (&rest body)
+  `(unwind-protect
+       (progn
+         (push major-mode sp-navigate-consider-stringlike-sexp)
+         ,@body)
+     (pop sp-navigate-consider-stringlike-sexp)))
+
 (require 'evil)
 (require 'smartparens)
 (require 'subr-x)
@@ -261,12 +269,6 @@ proper dispatching."
   (when evil-smartparens-mode
     (evil-sp--enable)))
 
-(defmacro evil-sp--with-stringlike-navigation (&rest body)
-  `(unwind-protect
-       (progn
-         (push major-mode sp-navigate-consider-stringlike-sexp)
-         ,@body)
-     (pop sp-navigate-consider-stringlike-sexp)))
 
 (defun evil-sp--fast-depth-at (&optional point)
   "Finds the depth at POINT using native code.

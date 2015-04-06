@@ -8,16 +8,14 @@
 (push '("melpa" . "http://melpa.milkbox.net/packages/")
       package-archives)
 
-(require 'evil-smartparens)
-(add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
-(setq smartparens-strict-mode t)
-
 (require 'smartparens-config)
 
 (require 'evil)
 (evil-mode 1)
 (autoload 'python-mode "python-mode.el" "Python mode." t)
 (setq auto-mode-alist (append '(("/.*\.py\'" . python-mode)) auto-mode-alist))
+
+(require 'evil-smartparens)
 
 
 (smartparens-global-mode t)
