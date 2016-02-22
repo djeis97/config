@@ -288,12 +288,7 @@ layers configuration."
 
   ;;  (define-key evil-insert-state-map (kbd "S-<return>") (lambda () (interactive) (newline-and-indent)))
   ;;  (define-key evil-insert-state-map (kbd "RET") (kbd "<escape>"))
-  (let ((default-directory "~/.emacs.d/local-projects/"))
-    (normal-top-level-add-to-load-path '("."))
-    (normal-top-level-add-subdirs-to-load-path))
-  (require 'scad-mode)
-  (require 'parinfer-mode))
-
+)
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables

@@ -1,5 +1,3 @@
-(require 'package)
-
 (setq package-enable-at-startup nil)
 (package-initialize)
 
@@ -8,6 +6,16 @@
 (push '("melpa" . "http://melpa.milkbox.net/packages/")
       package-archives)
 
+(add-to-list 'load-path "/home/jay/quicklisp/dists/quicklisp/software/slime-2.4/")
+(require 'slime)
+(add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
+(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
+(setq inferior-lisp-program "ccl64")
+
+(require 'evil-smartparens)
+(add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
+
+
 (require 'smartparens-config)
 
 (require 'evil)
@@ -15,10 +23,28 @@
 (autoload 'python-mode "python-mode.el" "Python mode." t)
 (setq auto-mode-alist (append '(("/.*\.py\'" . python-mode)) auto-mode-alist))
 
-(require 'evil-smartparens)
+(evil-define-key 'normal smartparens-mode-map "sh" 'sp-backward-slurp-sexp)
+(evil-define-key 'normal smartparens-mode-map "sl" 'sp-forward-slurp-sexp)
+(evil-define-key 'normal smartparens-mode-map "bh" 'sp-backward-barf-sexp)
+(evil-define-key 'normal smartparens-mode-map "bl" 'sp-forward-barf-sexp)
+
+(evil-define-operator evil-slime-eval (begin end)
+  "Evaluate the region with slime"
+  (slime-eval-region begin end))
+
+(evil-define-key 'normal slime-mode "<space>x" 'evil-slime-eval)
+
+(require 'god-mode)
+(require 'evil-god-state)
+(define-key evil-motion-state-map (kbd "SPC") nil)
+(define-key evil-normal-state-map (kbd "SPC") 'evil-execute-in-god-state)
+(evil-define-key 'god global-map [escape] 'evil-god-state-bail)
+(evil-define-key 'visual lisp-interaction-mode "<space>Gx" 'slime-eval-region)
 
 
-(smartparens-global-mode t)
+(message "Hello")
+
+(smartparens-global-strict-mode t)
 
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode)

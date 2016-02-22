@@ -1,9 +1,0 @@
-<UserScriptConfig>
-	<Script basedir="Import_Bandcamp_releases_into_MB" checkRemoteUpdates="1" dependhash="c186e821f77a7e9fcdcfd095e051537d3ffb3c18" description="" enabled="true" filename="bandcamp_importer.user.js" installTime="1414309957000" modified="1436935616000" name="Import Bandcamp releases into MB" namespace="http://userscripts.org/users/22504" noframes="false" runAt="document-end" updateMetaStatus="fail" uuid="6a0fe1b3-2aee-40e8-afae-e4d51a57385a" version="2014.10.18.1" installurl="https://raw.github.com/murdos/musicbrainz-userscripts/master/bandcamp_importer.user.js" updateurl="https://raw.github.com/murdos/musicbrainz-userscripts/master/bandcamp_importer.user.js">
-		<Grant>none</Grant>
-		<Include>http*://*.bandcamp.com/album/*</Include>
-		<Include>http*://*.bandcamp.com/track/*</Include>
-		<Require filename="jquery.js"/>
-		<Require filename="import_functions.js"/>
-	</Script>
-</UserScriptConfig>
