@@ -1,5 +1,0 @@
-/home/jay/.emacs.d/elpa/slime-20150830.1446/swank.asd
-/home/jay/.emacs.d/.cache/.rollback/15-07-25_23.47.42/slime-20150709.613/swank.asd
-/home/jay/.emacs.d/.cache/.rollback/15-09-05_08.07.24/slime-20150718.414/swank.asd
-/home/jay/.emacs.d/.cache/.rollback/15-06-21_00.36.21/slime-20150529.1319/swank.asd
-/home/jay/.emacs.d/.cache/.rollback/15-07-10_12.34.57/slime-20150614.1439/swank.asd
