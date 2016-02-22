@@ -528,10 +528,9 @@ BindingsListController.prototype = {
   onEvent: function BLC_OnEvent(aEvent) {}
 }
 
-let (commands = BindingsListController.prototype.commands) {
-  commands.cmdEditCopyFileURI.prototype = new cmdEditCopySimpleStringBase();
-  commands.cmdEditViewFileURI.prototype = new cmdEditViewFileURIBase();
-}
+let commands = BindingsListController.prototype.commands;
+commands.cmdEditCopyFileURI.prototype = new cmdEditCopySimpleStringBase();
+commands.cmdEditViewFileURI.prototype = new cmdEditViewFileURIBase();
 
 function ResourceTreeController(aTree) {}
 
@@ -582,10 +581,9 @@ ResourceTreeController.prototype = {
   onEvent: function RTC_OnEvent(aEvent) {}
 }
 
-let (commands = ResourceTreeController.prototype.commands) {
-  commands.cmdEditCopyFileURI.prototype = new cmdEditCopySimpleStringBase();
-  commands.cmdEditViewFileURI.prototype = new cmdEditViewFileURIBase();
-}
+commands = ResourceTreeController.prototype.commands;
+commands.cmdEditCopyFileURI.prototype = new cmdEditCopySimpleStringBase();
+commands.cmdEditViewFileURI.prototype = new cmdEditViewFileURIBase();
 
 //////////////////////////////////////////////////////////////////////////////
 //// MethodTreeView

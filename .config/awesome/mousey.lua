@@ -70,7 +70,7 @@ local function init (c, dragging)
         g = c:geometry()
         current = {startx=g.x, starty=g.y, x=g.width, y=g.height}
     else
-        current = {startx=0, starty=0, x=1920, y=1080}
+        current = {startx=0, starty=0, x=3200, y=1080}
     end
     step = {x = math.floor(current.x/2), y = math.floor(current.y/2)}
     coords = {x = math.floor(current.x/2 + current.startx), y = math.floor(current.y/2 + current.starty)}

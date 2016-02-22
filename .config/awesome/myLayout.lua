@@ -496,8 +496,4 @@ layout.latch = latches.latch("layout controls", {
     {n="Dec Space", {"Mod1"}, "-", decClientsInSection, latches.continue},
     {n="Inc Skip", {modkey}, "=", incSkip, latches.continue},
     {n="Dec Skip", {modkey}, "-", decSkip, latches.continue}})
-
-
-
-table.insert(layouts, layout)
 return layout

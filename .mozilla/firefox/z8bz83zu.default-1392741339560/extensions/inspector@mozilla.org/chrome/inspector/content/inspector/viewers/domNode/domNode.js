@@ -385,7 +385,7 @@ cmdEditInsert.prototype.promptFor = function DNVr_Insert_PromptFor()
 
   window.openDialog("chrome://inspector/content/viewers/domNode/" +
                     "domNodeDialog.xul", "insert",
-                    "chrome,modal,centerscreen", this, title, doc);
+                    "dialog,modal,centerscreen,resizable", this, title, doc);
 
   this.subject = viewer.subject;
 
@@ -471,7 +471,7 @@ cmdEditEdit.prototype.promptFor = function DNVr_Edit_PromptFor()
 
   window.openDialog("chrome://inspector/content/viewers/domNode/" +
                     "domNodeDialog.xul", "edit",
-                    "chrome,modal,centerscreen", this, title, doc);
+                    "dialog,modal,centerscreen,resizable", this, title, doc);
 
   return this.accepted ? this : null;
 };

@@ -3,17 +3,16 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 const { Cu } = require("chrome");
-const { devtools } =
-  Cu.import("resource://gre/modules/devtools/Loader.jsm", {});
-const devtoolsRequire = devtools.require;
-const EventEmitter = devtoolsRequire("devtools/toolkit/event-emitter");
+const EventEmitter =
+  require("./devtools-require")("devtools/shared/event-emitter");
 const { Task } = Cu.import("resource://gre/modules/Task.jsm", {});
 const { when: unload } = require("sdk/system/unload");
 const { ConnectionManager } =
-  devtoolsRequire("devtools/client/connection-manager");
+  require("./devtools-require")("devtools/shared/client/connection-manager");
 const { Devices } =
-  Cu.import("resource://gre/modules/devtools/Devices.jsm", {});
-const Runtimes = devtoolsRequire("devtools/webide/runtimes");
+  require("./devtools-import")("resource://devtools/shared/apps/Devices.jsm");
+const Runtimes =
+  require("./devtools-require")("devtools/client/webide/modules/runtimes");
 
 let promise;
 try {
@@ -136,7 +135,7 @@ FirefoxOSRuntime.prototype = Object.create(Runtime.prototype);
 
 Object.defineProperty(FirefoxOSRuntime.prototype, "name", {
   get: function() {
-    return "Firefox OS (" + (this._model || this.device.id) + ")";
+    return this._model || this.device.id;
   }
 });
 
@@ -153,7 +152,7 @@ FirefoxOnAndroidRuntime.detect = Task.async(function*(device, model) {
   let rawSocketInfo = yield device.shell(query);
   let socketInfos = rawSocketInfo.split("\r\n");
   // Filter to lines with "firefox-debugger-socket"
-  socketInfos = socketInfos.filter(l => l.contains("firefox-debugger-socket"));
+  socketInfos = socketInfos.filter(l => l.includes("firefox-debugger-socket"));
   // It's possible to have multiple lines with the same path, so de-dupe them
   let socketPaths = new Set();
   for (let socketInfo of socketInfos) {

@@ -1068,17 +1068,16 @@ DOMViewer.prototype =
     var ignorableSelectedNodes = [];
     var nonIgnorableSelectedNodes = [];
     var nonIgnorableSelectedIndexes = [];
-    let (selectedIndexes = this.getSelectedIndexes()) {
-      for (let i = 0, n = selectedIndexes.length; i < n; ++i) {
-        let idx = selectedIndexes[i];
-        let node = this.getNodeFromRowIndex(idx);
-        if (this.isIgnorableNode(node)) {
-          ignorableSelectedNodes.push(node);
-        }
-        else {
-          nonIgnorableSelectedNodes.push(node);
-          nonIgnorableSelectedIndexes.push(idx);
-        }
+    let selectedIndexes = this.getSelectedIndexes();
+    for (let i = 0, n = selectedIndexes.length; i < n; ++i) {
+      let idx = selectedIndexes[i];
+      let node = this.getNodeFromRowIndex(idx);
+      if (this.isIgnorableNode(node)) {
+        ignorableSelectedNodes.push(node);
+      }
+      else {
+        nonIgnorableSelectedNodes.push(node);
+        nonIgnorableSelectedIndexes.push(idx);
       }
     }
 

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://itsalltext/locale/itsalltext.dtd" >
+
+<overlay id="itsalltextOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript" src="chrome://itsalltext/content/itsalltext.js" />
+
+  <!-- The merge point is contentAreaContextMenu -->
+  <popup id="contentAreaContextMenu">
+    <menu id="itsalltext-contextmenu" label="&top.label;" accesskey="&top.key;">
+      <menupopup id="itsalltext-context-popup">
+        <menuitem label="&edit.label;" 
+                  oncommand="itsalltext.onEditNode(document.popupNode)"
+                  accesskey="&edit.key;" />
+        <menuitem label="&newext.label;"
+                  accesskey="&newext.key;"
+                  oncommand="itsalltext.menuNewExtEdit(event);" />
+        <menuseparator/>
+        <menuitem label=".txt" oncommand="itsalltext.menuExtEdit(event, '.txt');"/>
+        <menuseparator/>
+        <menuitem label="&readme.label;"
+                  oncommand="itsalltext.openReadme();"/>
+        <menuitem label="&pref.label;"
+                  accesskey="&pref.key;"
+                  oncommand="itsalltext.openPreferences();"/>
+      </menupopup>
+    </menu>
+  </popup>
+
+  <!-- The merge point is main-window -->
+  <window id="main-window">
+    <popupset id="itsalltext-optionmenu-set">
+      <menupopup id="itsalltext-optionmenu">
+        <menuitem label="&newext.label;"
+                  accesskey="&newext.key;"
+                  oncommand="itsalltext.menuNewExtEdit(event);" />
+        <menuseparator/>
+        <menuitem label=".txt" oncommand="itsalltext.menuExtEdit(event,'.txt');"/>
+        <menuseparator/>
+        <menuitem label="&readme.label;"
+                  oncommand="itsalltext.openReadme();"/>
+        <menuitem label="&pref.label;"
+                  accesskey="&pref.key;"
+                  oncommand="itsalltext.openPreferences();"/>
+      </menupopup>
+    </popupset>
+  </window>
+
+  <!-- The merge point is the Tools menu -->
+  <menupopup id="menu_ToolsPopup">
+    <menu id="menu_itsalltext" class="menuitem-iconic"
+          image="chrome://itsalltext/content/icon.png"
+          label="&top.label;"
+          insertbefore="sanitizeSeparator">
+      <menupopup>
+        <menuitem label="&readme.label;"
+                  oncommand="itsalltext.openReadme();"/>
+        <menuitem label="&pref.label;"
+                  accesskey="&pref.key;"
+                  oncommand="itsalltext.openPreferences();"/>
+      </menupopup>
+    </menu>
+  </menupopup>
+
+</overlay>
+<!-- Local Variables: -->
+<!-- mode: xml -->
+<!-- End: -->

@@ -226,24 +226,24 @@ function utils.subSectionCycleCounterClockwise (screen)
 end
 
 function utils.nextTagGrp ()
-    for t = 1, #tags[tags.grp] do
-        awful.tag.setproperty(tags[tags.grp][t], "hide", true)
+    for t = 1, #tags[mouse.screen][tags[mouse.screen].grp] do
+        awful.tag.setproperty(tags[mouse.screen][tags[mouse.screen].grp][t], "hide", true)
     end
-    tags.grp = tags.grp + 1
-    if tags.grp > 3 then tags.grp = 1 end
-    for t = 1, #tags[tags.grp] do
-        awful.tag.setproperty(tags[tags.grp][t], "hide", false)
+    tags[mouse.screen].grp = tags[mouse.screen].grp + 1
+    if tags[mouse.screen].grp > 3 then tags[mouse.screen].grp = 1 end
+    for t = 1, #tags[mouse.screen][tags[mouse.screen].grp] do
+        awful.tag.setproperty(tags[mouse.screen][tags[mouse.screen].grp][t], "hide", false)
     end
 end
 
 function utils.prevTagGrp ()
-    for t = 1, #tags[tags.grp] do
-        awful.tag.setproperty(tags[tags.grp][t], "hide", true)
+    for t = 1, #tags[mouse.screen][tags[mouse.screen].grp] do
+        awful.tag.setproperty(tags[mouse.screen][tags[mouse.screen].grp][t], "hide", true)
     end
-    tags.grp = tags.grp - 1
-    if tags.grp < 1 then tags.grp = 3 end
-    for t = 1, #tags[tags.grp] do
-        awful.tag.setproperty(tags[tags.grp][t], "hide", false)
+    tags[mouse.screen].grp = tags[mouse.screen].grp - 1
+    if tags[mouse.screen].grp < 1 then tags[mouse.screen].grp = 3 end
+    for t = 1, #tags[mouse.screen][tags[mouse.screen].grp] do
+        awful.tag.setproperty(tags[mouse.screen][tags[mouse.screen].grp][t], "hide", false)
     end
 end
 
@@ -362,4 +362,37 @@ function utils.clientSendKey (c, key)
   io.popen("xdotool key --window " .. tostring(c.window) .. " " .. key)
 end
 
+function utils.summonAll(from, to)
+  local newclients = from:clients()
+  local screen = awful.tag.getscreen(to)
+  for i, client in ipairs(newclients) do
+    client.screen = screen
+    client:tags({ to })
+  end
+end
+
+function utils.updateTransparency (c)
+  if not c then
+    for i,client in ipairs(awful.client.visible(1)) do
+      utils.updateTransparency(client)
+    end
+    for i,client in ipairs(awful.client.visible(2)) do
+      utils.updateTransparency(client)
+    end
+    return nil
+  end
+  if capi.keygrabber.isrunning() then
+    c.opacity = 0.5
+    return nil
+  end
+  if c == client.focus then
+    c.opacity = 0.95
+  elseif c.sticky then
+    c.opacity = 0.95
+  elseif c.fullscreen then
+    c.opacity = 0.95
+  else
+    c.opacity = 0.7
+  end
+end
 return utils

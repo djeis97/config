@@ -22,17 +22,30 @@
      ;;      git-gutter-use-fringe t)
      ;; markdown
      ;; org
+     git
      (auto-completion :variables
                       auto-completion-enable-snippets-in-popup t)
      emacs-lisp
-     shell
+     (shell :variables
+            shell-default-shell 'eshell
+            shell-enable-smart-eshell t
+            )
      syntax-checking
-     slime
+     org
+     common-lisp
      clojure
+     lua
+     java
+     themes-megapack
+     python
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
-   dotspacemacs-additional-packages '(slime-company)
+   dotspacemacs-additional-packages '(macrostep
+                                      hc-zenburn-theme
+                                      slime-company
+                                      gruber-darker-theme
+                                      apropospriate-theme)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'
@@ -66,7 +79,11 @@ before layers configuration."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(solarized-light
+   dotspacemacs-themes '(zen-and-art
+                         hc-zenburn
+                         gruber-darker-theme
+                         apropospriate-dark
+                         solarized-light
                          solarized-dark
                          leuven
                          monokai
@@ -149,14 +166,221 @@ before layers configuration."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
-  (setq inferior-lisp-program "ccl64")
+  (setq inferior-lisp-program "sbcl")
   (defadvice switch-to-buffer (before save-buffer-now activate)
     (when buffer-file-name (save-buffer)))
   (defadvice other-window (before other-window-now activate)
     (when buffer-file-name (save-buffer)))
+  (setq powerline-default-separator 'curve)
   (slime-setup '(slime-company))
+  (load-file "~/.emacs.d/anchored-transpose.el")
+  
+  (defun fake-key (key)
+    (let ((command (key-binding (kbd "RET")))
+          (keys (function 'this-command-keys))
+          (vector-keys (function 'this-command-keys-vector))
+          (read-key-seq (function 'read-key-sequence))
+          (read-key-seq-vec (function 'read-key-sequence-vector))
+          (indirecting t))
+      (flet ((this-command-keys ()
+                                (if indirecting
+                                    [?\n]
+                                  (funcall keys)))
+             (this-command-keys-vector ()
+                                       (if indirecting
+                                           [?\n]
+                                         (funcall keys)))
+             (read-key-sequence ()
+                                (setq indirecting nil)
+                                (funcall read-key-seq))
+             (read-key-sequence-vector ()
+                                       (setq indirecting nil)
+                                       (funcall read-key-seq-vec)))
+        (setq this-command command)
+        (call-interactively command))))
+  (defvar use-enter-escape-mode t)
+  (define-minor-mode enter-escape-mode
+    "Advanced enter key."
+    :keymap (let ((map (make-sparse-keymap)))
+              (define-key map (kbd "RET") (lambda ()
+                                            (interactive)
+                                            (enter-escape-mode 0)
+                                            (evil-normal-state)))
+              (define-key map (kbd "S-<return>") (lambda ()
+                                                   (interactive)
+                                                   (enter-escape-mode 0)
+                                                   (enter-newline-mode)
+                                                   (let ((command (key-binding (kbd "RET")))
+                                                         (keys (function 'this-command-keys))
+                                                         (vector-keys (function 'this-command-keys-vector))
+                                                         (read-key-seq (function 'read-key-sequence))
+                                                         (read-key-seq-vec (function 'read-key-sequence-vector))
+                                                         (indirecting t))
+                                                     (flet ((this-command-keys ()
+                                                                               (if indirecting
+                                                                                   [?\n]
+                                                                                 (funcall keys)))
+                                                            (this-command-keys-vector ()
+                                                                                      (if indirecting
+                                                                                          [?\n]
+                                                                                        (funcall keys)))
+                                                            (read-key-sequence ()
+                                                                               (setq indirecting nil)
+                                                                               (funcall read-key-seq))
+                                                            (read-key-sequence-vector ()
+                                                                                      (setq indirecting nil)
+                                                                                      (funcall read-key-seq-vec)))
+                                                       (setq this-command command)
+                                                       (call-interactively command)))))
+              (define-key map (kbd "C-j") (lambda ()
+                                            (interactive)
+                                            (enter-escape-mode 0)
+                                            (enter-newline-mode)
+                                            (let ((command (key-binding (kbd "RET")))
+                                                  (keys (function 'this-command-keys))
+                                                  (vector-keys (function 'this-command-keys-vector))
+                                                  (read-key-seq (function 'read-key-sequence))
+                                                  (read-key-seq-vec (function 'read-key-sequence-vector))
+                                                  (indirecting t))
+                                              (flet ((this-command-keys ()
+                                                                        (if indirecting
+                                                                            [?\n]
+                                                                          (funcall keys)))
+                                                     (this-command-keys-vector ()
+                                                                               (if indirecting
+                                                                                   [?\n]
+                                                                                 (funcall keys)))
+                                                     (read-key-sequence ()
+                                                                        (setq indirecting nil)
+                                                                        (funcall read-key-seq))
+                                                     (read-key-sequence-vector ()
+                                                                               (setq indirecting nil)
+                                                                               (funcall read-key-seq-vec)))
+                                                (setq this-command command)
+                                                (call-interactively command)))))
+              map))
+  (define-minor-mode enter-newline-mode
+    "Advanced enter key."
+    :keymap (let ((map (make-sparse-keymap)))
+              (define-key map (kbd "S-<return>") (lambda ()
+                                                   (interactive)
+                                                   (enter-newline-mode 0)
+                                                   (enter-escape-mode)
+                                                   (evil-normal-state)))
+              map))
 
-)
+  (defun toggle-enter-escape-mode ()
+    (interactive)
+    (setq use-enter-escape-mode (not use-enter-escape-mode)))
+  (spacemacs|add-toggle enter->escape
+    :status use-enter-escape-mode
+    :on (setq use-enter-escape-mode t)
+    :off (setq use-enter-escape-mode nil)
+    :documentation "Enable rebinding enter to escape in insert mode."
+    :evil-leader "te")
+  (spacemacs|diminish enter-escape-mode " e")
+  (spacemacs|diminish enter-newline-mode " E")
+  (add-hook 'evil-insert-state-entry-hook (lambda () (if use-enter-escape-mode (enter-escape-mode))))
+  (add-hook 'evil-insert-state-exit-hook (lambda ()
+                                           (enter-escape-mode 0)
+                                           (enter-newline-mode 0)))
+  (evil-leader/set-key-for-mode 'lisp-mode "dm" 'spacemacs/macrostep-micro-state)
+
+  ;;  (define-key evil-insert-state-map (kbd "S-<return>") (lambda () (interactive) (newline-and-indent)))
+  ;;  (define-key evil-insert-state-map (kbd "RET") (kbd "<escape>"))
+  (let ((default-directory "~/.emacs.d/local-projects/"))
+    (normal-top-level-add-to-load-path '("."))
+    (normal-top-level-add-subdirs-to-load-path))
+  (require 'scad-mode)
+  (require 'parinfer-mode))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#eee8d5" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#839496"])
+ '(ansi-term-color-vector
+   [unspecified "#424242" "#EF9A9A" "#C5E1A5" "#FFEE58" "#64B5F6" "#E1BEE7" "#80DEEA" "#E0E0E0"])
+ '(beacon-color "#ec4780")
+ '(compilation-message-face (quote default))
+ '(cua-global-mark-cursor-color "#2aa198")
+ '(cua-normal-cursor-color "#657b83")
+ '(cua-overwrite-cursor-color "#b58900")
+ '(cua-read-only-cursor-color "#859900")
+ '(custom-enabled-themes (quote (LCARS)))
+ '(custom-safe-themes
+   (quote
+    ("868f73b5cf78e72ca2402e1d48675e49cc9a9619c5544af7bf216515d22b58e7" "27b2ef08bfb2f93f90c74bcb36162593bec9fe5c30c05621259baac95edb7137" "34e91dd54521213bfc88b0fd851d434f9de3ce8c1120bfc32b4c2972b2cfb288" "3302a3c048adfaefe36f3c46819e608fbda46c42662d390e905655bb8ecc8b3a" "7c63592fde37aa731a057ea6f9aa96966230785f7aba108357fb175c0191c6f6" "bf478be41439d9cc355f9c2d1b307e1dfebba7bf9b16e6ea651b1469b6307f66" "44d23f972730816fd6ebb0d621820344fa39bfeafb7a5246ca1c0b71b2e9e451" "c7ba6ff9a5db0a64f858b3a49ab410de51988fa2c52630eeb95aee847a6711b3" "f9adafd67c2ec471d1b304fb545efa14fe7265355839bf7c6812c4271714a05c" default)))
+ '(evil-emacs-state-cursor (quote ("#E57373" bar)) t)
+ '(evil-insert-state-cursor (quote ("#E57373" hbar)) t)
+ '(evil-normal-state-cursor (quote ("#FFEE58" box)) t)
+ '(evil-visual-state-cursor (quote ("#C5E1A5" box)) t)
+ '(fci-rule-color "#eee8d5" t)
+ '(frame-brackground-mode (quote dark))
+ '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
+ '(highlight-symbol-colors
+   (--map
+    (solarized-color-blend it "#fdf6e3" 0.25)
+    (quote
+     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
+ '(highlight-symbol-foreground-color "#586e75")
+ '(highlight-tail-colors
+   (quote
+    (("#eee8d5" . 0)
+     ("#B4C342" . 20)
+     ("#69CABF" . 30)
+     ("#69B7F0" . 50)
+     ("#DEB542" . 60)
+     ("#F2804F" . 70)
+     ("#F771AC" . 85)
+     ("#eee8d5" . 100))))
+ '(hl-bg-colors
+   (quote
+    ("#DEB542" "#F2804F" "#FF6E64" "#F771AC" "#9EA0E5" "#69B7F0" "#69CABF" "#B4C342")))
+ '(hl-fg-colors
+   (quote
+    ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
+ '(magit-diff-use-overlays nil)
+ '(pos-tip-background-color "#eee8d5")
+ '(pos-tip-foreground-color "#586e75")
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
+ '(tabbar-background-color "#353535")
+ '(term-default-bg-color "#fdf6e3")
+ '(term-default-fg-color "#657b83")
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#dc322f")
+     (40 . "#c85d17")
+     (60 . "#be730b")
+     (80 . "#b58900")
+     (100 . "#a58e00")
+     (120 . "#9d9100")
+     (140 . "#959300")
+     (160 . "#8d9600")
+     (180 . "#859900")
+     (200 . "#669b32")
+     (220 . "#579d4c")
+     (240 . "#489e65")
+     (260 . "#399f7e")
+     (280 . "#2aa198")
+     (300 . "#2898af")
+     (320 . "#2793ba")
+     (340 . "#268fc6")
+     (360 . "#268bd2"))))
+ '(vc-annotate-very-old-color nil)
+ '(weechat-color-list
+   (quote
+    (unspecified "#fdf6e3" "#eee8d5" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#657b83" "#839496"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:background nil))))
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))

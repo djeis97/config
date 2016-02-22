@@ -65,7 +65,24 @@ function startup(data, reason) {
     return Services.prefs.getBoolPref(LOGPREF);
   }
 
-  const { ConsoleAPI } = Cu.import("resource://gre/modules/devtools/Console.jsm");
+  // In Firefox 44 and later, many DevTools modules were relocated.
+  // See https://bugzil.la/912121
+  let ConsoleAPI;
+  let consolePaths = [
+    "resource://gre/modules/Console.jsm",
+    "resource://gre/modules/devtools/shared/Console.jsm",
+    "resource://gre/modules/devtools/Console.jsm",
+  ];
+  for (let path of consolePaths) {
+    try {
+      ({ ConsoleAPI } = Cu.import(path));
+      // We loaded a path successfully
+      break;
+    } catch (e) {
+      // We'll try the next path
+    }
+  }
+
   let _console = new ConsoleAPI();
   loaderOptions.globals = {
     console: {
@@ -77,6 +94,9 @@ function startup(data, reason) {
       },
       error: function(...args) {
         canLog() && _console.error(LOGPREFIX, ...args);
+      },
+      exception: function(...args) {
+        canLog() && _console.exception(LOGPREFIX, ...args);
       },
       debug: function(...args) {
         canLog() && _console.debug(LOGPREFIX, ...args);

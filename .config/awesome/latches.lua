@@ -31,6 +31,7 @@ local function exit ()
     stack.position = 0
     currentLatch:set_markup("None")
     keygrabber.stop(latches.grabberFunc)
+    utils.updateTransparency()
 end
 
 local function pop ()
@@ -104,6 +105,7 @@ local function latch (name, table)
         latches.running = name
         stack.position = stack.position + 1
         stack[stack.position] = name
+        utils.updateTransparency()
     end
     latches[name].func = ret
     return ret

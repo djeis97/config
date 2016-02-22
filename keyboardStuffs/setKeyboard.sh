@@ -1,2 +1,2 @@
 #! /bin/bash
-xkbcomp new_secondary.xkb :0
+xkbcomp new_secondary.xkb $DISPLAY

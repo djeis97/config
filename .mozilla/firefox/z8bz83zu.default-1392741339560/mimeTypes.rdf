@@ -1,53 +1,21 @@
 <?xml version="1.0"?>
 <RDF:RDF xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                   NC:alwaysAsk="true"
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-ica"
                    NC:useSystemDefault="true"
-                   NC:saveToDisk="false">
-    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:mimetype:handler:application/x-gzip"
+                   NC:alwaysAsk="false" />
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-pdf"
                    NC:alwaysAsk="true"
-                   NC:useSystemDefault="true"
-                   NC:saveToDisk="false">
-    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-gzip"/>
+                   NC:useSystemDefault="true">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-pdf"/>
   </RDF:Description>
-  <RDF:Description RDF:about="urn:mimetype:handler:application/force-download"
-                   NC:alwaysAsk="true"
-                   NC:saveToDisk="true">
-    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/force-download"/>
+  <RDF:Description RDF:about="urn:mimetype:application/x-zip-compressed"
+                   NC:fileExtensions="zip"
+                   NC:description="Zip archive"
+                   NC:value="application/x-zip-compressed"
+                   NC:editable="true">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-zip-compressed"/>
   </RDF:Description>
-  <RDF:Description RDF:about="urn:scheme:handler:irc"
-                   NC:alwaysAsk="true">
-    <NC:possibleApplication RDF:resource="urn:handler:web:https://www.mibbit.com/?url=%s"/>
-    <NC:externalApplication RDF:resource="urn:scheme:externalApplication:irc"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:mimetype:handler:application/x-java-jnlp-file"
-                   NC:alwaysAsk="true"
-                   NC:saveToDisk="true">
-    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-java-jnlp-file"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:scheme:webcal"
-                   NC:value="webcal">
-    <NC:handlerProp RDF:resource="urn:scheme:handler:webcal"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:mimetype:binary/octet-stream"
-                   NC:value="binary/octet-stream"
-                   NC:editable="true"
-                   NC:fileExtensions="7z"
-                   NC:description="7-zip archive">
-    <NC:handlerProp RDF:resource="urn:mimetype:handler:binary/octet-stream"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:mimetype:handler:application/zip"
-                   NC:alwaysAsk="true"
-                   NC:useSystemDefault="true"
-                   NC:saveToDisk="false">
-    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/zip"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:handler:web:https://compose.mail.yahoo.com/?To=%s"
-                   NC:prettyName="Yahoo! Mail"
-                   NC:uriTemplate="https://compose.mail.yahoo.com/?To=%s" />
   <RDF:Description RDF:about="urn:mimetype:audio/mpeg"
                    NC:value="audio/mpeg"
                    NC:editable="true"
@@ -62,52 +30,81 @@
     <NC:fileExtensions>mpga</NC:fileExtensions>
     <NC:handlerProp RDF:resource="urn:mimetype:handler:audio/mpeg"/>
   </RDF:Description>
-  <RDF:Description RDF:about="urn:mimetype:audio/midi"
-                   NC:value="audio/midi"
-                   NC:editable="true"
-                   NC:description="MIDI audio">
-    <NC:fileExtensions>mid</NC:fileExtensions>
-    <NC:fileExtensions>kar</NC:fileExtensions>
-    <NC:fileExtensions>midi</NC:fileExtensions>
-    <NC:fileExtensions>rmi</NC:fileExtensions>
-    <NC:handlerProp RDF:resource="urn:mimetype:handler:audio/midi"/>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/rtf"
+                   NC:alwaysAsk="true"
+                   NC:saveToDisk="true">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/rtf"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:scheme:tg"
+                   NC:value="tg">
+    <NC:handlerProp RDF:resource="urn:scheme:handler:tg"/>
   </RDF:Description>
   <RDF:Description RDF:about="urn:scheme:handler:ircs"
                    NC:alwaysAsk="true">
     <NC:possibleApplication RDF:resource="urn:handler:web:https://www.mibbit.com/?url=%s"/>
   </RDF:Description>
-  <RDF:Description RDF:about="urn:mimetype:handler:application/x-xz"
-                   NC:alwaysAsk="true"
-                   NC:useSystemDefault="true"
-                   NC:saveToDisk="false">
-    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-xz"/>
-  </RDF:Description>
-  <RDF:Seq RDF:about="urn:schemes:root">
-    <RDF:li RDF:resource="urn:scheme:webcal"/>
-    <RDF:li RDF:resource="urn:scheme:ircs"/>
-    <RDF:li RDF:resource="urn:scheme:mailto"/>
-    <RDF:li RDF:resource="urn:scheme:irc"/>
-    <RDF:li RDF:resource="urn:scheme:telnet"/>
-  </RDF:Seq>
-  <RDF:Description RDF:about="urn:mimetype:handler:audio/mpeg"
-                   NC:alwaysAsk="true"
-                   NC:saveToDisk="true">
-    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:audio/mpeg"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:mimetype:application/x-java-jnlp-file"
-                   NC:value="application/x-java-jnlp-file"
+  <RDF:Description RDF:about="urn:mimetype:text/x-c"
+                   NC:value="text/x-c"
                    NC:editable="true"
-                   NC:fileExtensions="jnlp"
-                   NC:description="JNLP file">
-    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-java-jnlp-file"/>
+                   NC:description="C source code">
+    <NC:fileExtensions>c</NC:fileExtensions>
+    <NC:fileExtensions>cc</NC:fileExtensions>
+    <NC:fileExtensions>cpp</NC:fileExtensions>
+    <NC:fileExtensions>cxx</NC:fileExtensions>
+    <NC:fileExtensions>dic</NC:fileExtensions>
+    <NC:fileExtensions>h</NC:fileExtensions>
+    <NC:fileExtensions>hh</NC:fileExtensions>
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:text/x-c"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/x-ms-dos-executable"
+                   NC:value="application/x-ms-dos-executable"
+                   NC:editable="true"
+                   NC:description="DOS/Windows executable">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-ms-dos-executable"/>
   </RDF:Description>
   <RDF:Description RDF:about="urn:handler:web:https://www.mibbit.com/?url=%s"
                    NC:prettyName="Mibbit"
                    NC:uriTemplate="https://www.mibbit.com/?url=%s" />
-  <RDF:Description RDF:about="urn:mimetype:handler:audio/midi"
+  <RDF:Description RDF:about="urn:mimetype:application/x-xz"
+                   NC:fileExtensions="xz"
+                   NC:description="XZ archive"
+                   NC:value="application/x-xz"
+                   NC:editable="true">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-xz"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:text/x-c"
                    NC:alwaysAsk="true"
                    NC:saveToDisk="true">
-    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:audio/midi"/>
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:text/x-c"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-iso9660-image"
+                   NC:alwaysAsk="true"
+                   NC:saveToDisk="true">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-iso9660-image"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:scheme:magnet"
+                   NC:value="magnet">
+    <NC:handlerProp RDF:resource="urn:scheme:handler:magnet"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-tar"
+                   NC:alwaysAsk="true"
+                   NC:useSystemDefault="true"
+                   NC:saveToDisk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-tar"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:root"
+                   NC:en-US_defaultHandlersVersion="4" />
+  <RDF:Description RDF:about="urn:mimetype:application/x-gzip"
+                   NC:fileExtensions="gz"
+                   NC:description="Gzip archive"
+                   NC:value="application/x-gzip"
+                   NC:editable="true">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-gzip"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-7z-compressed"
+                   NC:alwaysAsk="true"
+                   NC:saveToDisk="true">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-7z-compressed"/>
   </RDF:Description>
   <RDF:Description RDF:about="urn:mimetype:application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                    NC:fileExtensions="docx"
@@ -116,23 +113,61 @@
                    NC:editable="true">
     <NC:handlerProp RDF:resource="urn:mimetype:handler:application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
   </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:audio/mpeg"
+                   NC:alwaysAsk="true"
+                   NC:saveToDisk="true">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:audio/mpeg"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:scheme:handler:magnet"
+                   NC:useSystemDefault="true"
+                   NC:alwaysAsk="false" />
+  <RDF:Description RDF:about="urn:mimetype:application/pdf"
+                   NC:value="application/pdf">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/pdf"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/pdf"
+                   NC:handleInternal="true"
+                   NC:alwaysAsk="false" />
+  <RDF:Description RDF:about="urn:mimetype:application/x-bzip2"
+                   NC:value="application/x-bzip2"
+                   NC:editable="true"
+                   NC:description="Bzip archive">
+    <NC:fileExtensions>bz2</NC:fileExtensions>
+    <NC:fileExtensions>boz</NC:fileExtensions>
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-bzip2"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-bzip2"
+                   NC:alwaysAsk="true"
+                   NC:saveToDisk="true">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-bzip2"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:scheme:ircs"
+                   NC:value="ircs">
+    <NC:handlerProp RDF:resource="urn:scheme:handler:ircs"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:scheme:externalApplication:irc"
+                   NC:prettyName="Mibbit"
+                   NC:uriTemplate="https://www.mibbit.com/?url=%s" />
+  <RDF:Description RDF:about="urn:mimetype:application/rtf"
+                   NC:value="application/rtf"
+                   NC:editable="true"
+                   NC:fileExtensions="rtf"
+                   NC:description="RTF document">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/rtf"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                   NC:alwaysAsk="true"
+                   NC:useSystemDefault="true"
+                   NC:saveToDisk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:scheme:webcal"
+                   NC:value="webcal">
+    <NC:handlerProp RDF:resource="urn:scheme:handler:webcal"/>
+  </RDF:Description>
   <RDF:Description RDF:about="urn:scheme:telnet"
                    NC:value="telnet">
     <NC:handlerProp RDF:resource="urn:scheme:handler:telnet"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:mimetype:handler:text/plain"
-                   NC:alwaysAsk="true"
-                   NC:saveToDisk="true">
-    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:text/plain"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:handler:web:https://mail.google.com/mail/?extsrc=mailto&amp;url=%s"
-                   NC:prettyName="Gmail"
-                   NC:uriTemplate="https://mail.google.com/mail/?extsrc=mailto&amp;url=%s" />
-  <RDF:Description RDF:about="urn:scheme:handler:mailto"
-                   NC:useSystemDefault="true"
-                   NC:alwaysAsk="false">
-    <NC:possibleApplication RDF:resource="urn:handler:web:https://compose.mail.yahoo.com/?To=%s"/>
-    <NC:possibleApplication RDF:resource="urn:handler:web:https://mail.google.com/mail/?extsrc=mailto&amp;url=%s"/>
   </RDF:Description>
   <RDF:Seq RDF:about="urn:mimetypes:root">
     <RDF:li RDF:resource="urn:mimetype:application/pdf"/>
@@ -150,11 +185,140 @@
     <RDF:li RDF:resource="urn:mimetype:application/x-gzip"/>
     <RDF:li RDF:resource="urn:mimetype:application/zip"/>
     <RDF:li RDF:resource="urn:mimetype:binary/octet-stream"/>
+    <RDF:li RDF:resource="urn:mimetype:application/json"/>
+    <RDF:li RDF:resource="urn:mimetype:application/java-archive"/>
+    <RDF:li RDF:resource="urn:mimetype:audio/wav"/>
+    <RDF:li RDF:resource="urn:mimetype:application/x-bzip2"/>
+    <RDF:li RDF:resource="urn:mimetype:application/x-ica"/>
+    <RDF:li RDF:resource="urn:mimetype:application/msword"/>
+    <RDF:li RDF:resource="urn:mimetype:application/x-zip-compressed"/>
+    <RDF:li RDF:resource="urn:mimetype:text/x-c"/>
+    <RDF:li RDF:resource="urn:mimetype:application/x-iso9660-image"/>
+    <RDF:li RDF:resource="urn:mimetype:image/jpeg"/>
+    <RDF:li RDF:resource="urn:mimetype:application/x-pdf"/>
   </RDF:Seq>
-  <RDF:Description RDF:about="urn:mimetype:text/plain"
-                   NC:value="text/plain"
+  <RDF:Description RDF:about="urn:mimetype:application/zip"
+                   NC:fileExtensions="zip"
+                   NC:description="Zip archive"
+                   NC:value="application/zip"
+                   NC:editable="true">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/zip"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/force-download"
+                   NC:alwaysAsk="true"
+                   NC:saveToDisk="true">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/force-download"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:scheme:handler:tg"
+                   NC:useSystemDefault="true"
+                   NC:alwaysAsk="true" />
+  <RDF:Description RDF:about="urn:mimetype:handler:image/jpeg"
+                   NC:alwaysAsk="true"
+                   NC:saveToDisk="true">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:image/jpeg"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:audio/wav"
+                   NC:value="audio/wav"
                    NC:editable="true"
-                   NC:description="plain text document">
+                   NC:description="WAV audio">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:audio/wav"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/x-pdf"
+                   NC:value="application/x-pdf"
+                   NC:editable="true"
+                   NC:fileExtensions="pdf"
+                   NC:description="PDF document">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-pdf"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/x-iso9660-image"
+                   NC:value="application/x-iso9660-image"
+                   NC:editable="true"
+                   NC:fileExtensions="iso"
+                   NC:description="raw CD image">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-iso9660-image"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/x-ica"
+                   NC:value="application/x-ica">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-ica"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:scheme:handler:irc"
+                   NC:alwaysAsk="true">
+    <NC:possibleApplication RDF:resource="urn:handler:web:https://www.mibbit.com/?url=%s"/>
+    <NC:externalApplication RDF:resource="urn:scheme:externalApplication:irc"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:audio/wav"
+                   NC:alwaysAsk="true"
+                   NC:saveToDisk="true">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:audio/wav"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-java-jnlp-file"
+                   NC:alwaysAsk="true"
+                   NC:saveToDisk="true">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-java-jnlp-file"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/java-archive"
+                   NC:alwaysAsk="true"
+                   NC:saveToDisk="true">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/java-archive"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-ms-dos-executable"
+                   NC:alwaysAsk="true"
+                   NC:saveToDisk="true">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-ms-dos-executable"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:handler:web:https://compose.mail.yahoo.com/?To=%s"
+                   NC:prettyName="Yahoo! Mail"
+                   NC:uriTemplate="https://compose.mail.yahoo.com/?To=%s" />
+  <RDF:Description RDF:about="urn:schemes">
+    <NC:Protocol-Schemes RDF:resource="urn:schemes:root"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/java-archive"
+                   NC:value="application/java-archive"
+                   NC:editable="true"
+                   NC:fileExtensions="jar"
+                   NC:description="Java archive">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/java-archive"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/x-java-jnlp-file"
+                   NC:value="application/x-java-jnlp-file"
+                   NC:editable="true"
+                   NC:fileExtensions="jnlp"
+                   NC:description="JNLP file">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-java-jnlp-file"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-zip-compressed"
+                   NC:alwaysAsk="true"
+                   NC:saveToDisk="true"
+                   NC:useSystemDefault="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-zip-compressed"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:handler:web:https://mail.google.com/mail/?extsrc=mailto&amp;url=%s"
+                   NC:prettyName="Gmail"
+                   NC:uriTemplate="https://mail.google.com/mail/?extsrc=mailto&amp;url=%s" />
+  <RDF:Description RDF:about="urn:mimetype:handler:application/zip"
+                   NC:alwaysAsk="true"
+                   NC:saveToDisk="true"
+                   NC:useSystemDefault="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/zip"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:application/force-download"
+                   NC:value="application/force-download"
+                   NC:editable="true"
+                   NC:fileExtensions="pdf"
+                   NC:description="PDF document">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/force-download"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:binary/octet-stream"
+                   NC:fileExtensions="7z"
+                   NC:description="7-zip archive"
+                   NC:value="binary/octet-stream"
+                   NC:editable="true">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:binary/octet-stream"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:text/plain"
+                   NC:description="plain text document"
+                   NC:value="text/plain"
+                   NC:editable="true">
     <NC:fileExtensions>txt</NC:fileExtensions>
     <NC:fileExtensions>asc</NC:fileExtensions>
     <NC:fileExtensions>brf</NC:fileExtensions>
@@ -169,13 +333,73 @@
     <NC:fileExtensions>text</NC:fileExtensions>
     <NC:handlerProp RDF:resource="urn:mimetype:handler:text/plain"/>
   </RDF:Description>
-  <RDF:Description RDF:about="urn:mimetype:handler:application/x-ms-dos-executable"
+  <RDF:Description RDF:about="urn:scheme:mailto"
+                   NC:value="mailto">
+    <NC:handlerProp RDF:resource="urn:scheme:handler:mailto"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:text/plain"
+                   NC:alwaysAsk="true"
+                   NC:useSystemDefault="true"
+                   NC:saveToDisk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:text/plain"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:image/jpeg"
+                   NC:value="image/jpeg"
+                   NC:editable="true"
+                   NC:description="JPEG Image">
+    <NC:fileExtensions>jpg</NC:fileExtensions>
+    <NC:fileExtensions>jpe</NC:fileExtensions>
+    <NC:fileExtensions>jpeg</NC:fileExtensions>
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:image/jpeg"/>
+  </RDF:Description>
+  <RDF:Seq RDF:about="urn:schemes:root">
+    <RDF:li RDF:resource="urn:scheme:webcal"/>
+    <RDF:li RDF:resource="urn:scheme:ircs"/>
+    <RDF:li RDF:resource="urn:scheme:mailto"/>
+    <RDF:li RDF:resource="urn:scheme:irc"/>
+    <RDF:li RDF:resource="urn:scheme:telnet"/>
+    <RDF:li RDF:resource="urn:scheme:magnet"/>
+    <RDF:li RDF:resource="urn:scheme:tg"/>
+  </RDF:Seq>
+  <RDF:Description RDF:about="urn:mimetype:application/msword"
+                   NC:value="application/msword"
+                   NC:editable="true"
+                   NC:description="Microsoft Word Document">
+    <NC:fileExtensions>doc</NC:fileExtensions>
+    <NC:fileExtensions>dot</NC:fileExtensions>
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/msword"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-gzip"
+                   NC:alwaysAsk="true"
+                   NC:useSystemDefault="true"
+                   NC:saveToDisk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-gzip"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:scheme:handler:webcal"
+                   NC:alwaysAsk="true">
+    <NC:possibleApplication RDF:resource="urn:handler:web:https://30boxes.com/external/widget?refer=ff&amp;url=%s"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:scheme:handler:telnet"
+                   NC:useSystemDefault="true"
+                   NC:alwaysAsk="true" />
+  <RDF:Description RDF:about="urn:mimetype:handler:audio/midi"
                    NC:alwaysAsk="true"
                    NC:saveToDisk="true">
-    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-ms-dos-executable"/>
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:audio/midi"/>
   </RDF:Description>
   <RDF:Description RDF:about="urn:mimetypes">
     <NC:MIME-types RDF:resource="urn:mimetypes:root"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/x-xz"
+                   NC:alwaysAsk="true"
+                   NC:useSystemDefault="true"
+                   NC:saveToDisk="false">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-xz"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:application/json"
+                   NC:alwaysAsk="true"
+                   NC:saveToDisk="true">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/json"/>
   </RDF:Description>
   <RDF:Description RDF:about="urn:mimetype:application/x-tar"
                    NC:fileExtensions="tar"
@@ -184,52 +408,6 @@
                    NC:editable="true">
     <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-tar"/>
   </RDF:Description>
-  <RDF:Description RDF:about="urn:scheme:handler:webcal"
-                   NC:alwaysAsk="true">
-    <NC:possibleApplication RDF:resource="urn:handler:web:https://30boxes.com/external/widget?refer=ff&amp;url=%s"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:scheme:irc"
-                   NC:value="irc">
-    <NC:handlerProp RDF:resource="urn:scheme:handler:irc"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:mimetype:application/x-gzip"
-                   NC:fileExtensions="gz"
-                   NC:description="Gzip archive"
-                   NC:value="application/x-gzip"
-                   NC:editable="true">
-    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-gzip"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:mimetype:handler:application/x-tar"
-                   NC:alwaysAsk="true"
-                   NC:useSystemDefault="true"
-                   NC:saveToDisk="false">
-    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-tar"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:mimetype:handler:application/rtf"
-                   NC:alwaysAsk="true"
-                   NC:saveToDisk="true">
-    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/rtf"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:mimetype:application/rtf"
-                   NC:value="application/rtf"
-                   NC:editable="true"
-                   NC:fileExtensions="rtf"
-                   NC:description="RTF document">
-    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/rtf"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:handler:web:https://30boxes.com/external/widget?refer=ff&amp;url=%s"
-                   NC:prettyName="30 Boxes"
-                   NC:uriTemplate="https://30boxes.com/external/widget?refer=ff&amp;url=%s" />
-  <RDF:Description RDF:about="urn:mimetype:handler:application/pdf"
-                   NC:handleInternal="true"
-                   NC:alwaysAsk="false" />
-  <RDF:Description RDF:about="urn:mimetype:application/force-download"
-                   NC:value="application/force-download"
-                   NC:editable="true"
-                   NC:fileExtensions="pdf"
-                   NC:description="PDF document">
-    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/force-download"/>
-  </RDF:Description>
   <RDF:Description RDF:about="urn:mimetype:application/x-7z-compressed"
                    NC:value="application/x-7z-compressed"
                    NC:editable="true"
@@ -237,57 +415,45 @@
                    NC:description="7-zip archive">
     <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-7z-compressed"/>
   </RDF:Description>
-  <RDF:Description RDF:about="urn:scheme:mailto"
-                   NC:value="mailto">
-    <NC:handlerProp RDF:resource="urn:scheme:handler:mailto"/>
+  <RDF:Description RDF:about="urn:scheme:irc"
+                   NC:value="irc">
+    <NC:handlerProp RDF:resource="urn:scheme:handler:irc"/>
   </RDF:Description>
-  <RDF:Description RDF:about="urn:scheme:externalApplication:irc"
-                   NC:prettyName="Mibbit"
-                   NC:uriTemplate="https://www.mibbit.com/?url=%s" />
-  <RDF:Description RDF:about="urn:mimetype:application/x-ms-dos-executable"
-                   NC:value="application/x-ms-dos-executable"
+  <RDF:Description RDF:about="urn:handler:web:https://30boxes.com/external/widget?refer=ff&amp;url=%s"
+                   NC:prettyName="30 Boxes"
+                   NC:uriTemplate="https://30boxes.com/external/widget?refer=ff&amp;url=%s" />
+  <RDF:Description RDF:about="urn:mimetype:audio/midi"
+                   NC:value="audio/midi"
                    NC:editable="true"
-                   NC:description="DOS/Windows executable">
-    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-ms-dos-executable"/>
+                   NC:description="MIDI audio">
+    <NC:fileExtensions>mid</NC:fileExtensions>
+    <NC:fileExtensions>kar</NC:fileExtensions>
+    <NC:fileExtensions>midi</NC:fileExtensions>
+    <NC:fileExtensions>rmi</NC:fileExtensions>
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:audio/midi"/>
   </RDF:Description>
-  <RDF:Description RDF:about="urn:mimetype:application/x-xz"
-                   NC:fileExtensions="xz"
-                   NC:description="XZ archive"
-                   NC:value="application/x-xz"
-                   NC:editable="true">
-    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/x-xz"/>
+  <RDF:Description RDF:about="urn:mimetype:application/json"
+                   NC:value="application/json"
+                   NC:editable="true"
+                   NC:fileExtensions="json"
+                   NC:description="JSON document">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/json"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:scheme:handler:mailto"
+                   NC:useSystemDefault="true"
+                   NC:alwaysAsk="false">
+    <NC:possibleApplication RDF:resource="urn:handler:web:https://compose.mail.yahoo.com/?To=%s"/>
+    <NC:possibleApplication RDF:resource="urn:handler:web:https://mail.google.com/mail/?extsrc=mailto&amp;url=%s"/>
   </RDF:Description>
   <RDF:Description RDF:about="urn:mimetype:handler:binary/octet-stream"
                    NC:alwaysAsk="true"
-                   NC:useSystemDefault="true">
+                   NC:saveToDisk="true"
+                   NC:useSystemDefault="false">
     <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:binary/octet-stream"/>
   </RDF:Description>
-  <RDF:Description RDF:about="urn:scheme:handler:telnet"
-                   NC:useSystemDefault="true"
-                   NC:alwaysAsk="true" />
-  <RDF:Description RDF:about="urn:mimetype:handler:application/x-7z-compressed"
+  <RDF:Description RDF:about="urn:mimetype:handler:application/msword"
                    NC:alwaysAsk="true"
                    NC:saveToDisk="true">
-    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/x-7z-compressed"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:mimetype:application/zip"
-                   NC:fileExtensions="zip"
-                   NC:description="Zip archive"
-                   NC:value="application/zip"
-                   NC:editable="true">
-    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/zip"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:mimetype:application/pdf"
-                   NC:value="application/pdf">
-    <NC:handlerProp RDF:resource="urn:mimetype:handler:application/pdf"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:scheme:ircs"
-                   NC:value="ircs">
-    <NC:handlerProp RDF:resource="urn:scheme:handler:ircs"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:root"
-                   NC:en-US_defaultHandlersVersion="4" />
-  <RDF:Description RDF:about="urn:schemes">
-    <NC:Protocol-Schemes RDF:resource="urn:schemes:root"/>
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:application/msword"/>
   </RDF:Description>
 </RDF:RDF>

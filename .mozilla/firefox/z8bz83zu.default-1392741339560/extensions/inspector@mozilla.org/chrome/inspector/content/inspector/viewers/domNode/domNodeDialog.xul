@@ -9,6 +9,8 @@
 
 <dialog id="editInsertAttribute"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        style="min-width: 64ch;"
+        persist="width"
         buttons="accept,cancel"
         ondialogaccept="dialog.accept();">
   <script type="application/javascript"

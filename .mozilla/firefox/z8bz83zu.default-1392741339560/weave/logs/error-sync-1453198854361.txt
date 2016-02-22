@@ -1,0 +1,36 @@
+1453194355406	browserwindow.syncui	DEBUG	_loginFailed has sync state=success.login
+1453194355407	browserwindow.syncui	DEBUG	_loginFailed has sync state=success.login
+1453194355407	browserwindow.syncui	DEBUG	observed: weave:ui:sync:finish
+1453194355408	browserwindow.syncui	DEBUG	_loginFailed has sync state=success.login
+1453194355409	browserwindow.syncui	DEBUG	_loginFailed has sync state=success.login
+1453194356347	Sync.Tracker.Clients	DEBUG	Saving changed IDs to clients
+1453194356355	Sync.Tracker.Passwords	DEBUG	Saving changed IDs to passwords
+1453194356357	Sync.Tracker.Bookmarks	DEBUG	Saving changed IDs to bookmarks
+1453194356398	Sync.Tracker.Addons	DEBUG	Saving changed IDs to addons
+1453194356399	Sync.Tracker.Forms	DEBUG	Saving changed IDs to forms
+1453194356401	Sync.Tracker.History	DEBUG	Saving changed IDs to history
+1453197955407	Sync.Service	DEBUG	User-Agent: Firefox/43.0.4 FxSync/1.45.0.20160107040617.
+1453197955408	Sync.Service	INFO	Starting sync at 2016-01-19 05:05:55
+1453197955410	browserwindow.syncui	DEBUG	observed: weave:service:sync:start
+1453197955411	browserwindow.syncui	DEBUG	onActivityStart with numActive: 0
+1453197955413	Sync.SyncScheduler	DEBUG	Clearing sync triggers and the global score.
+1453197955414	Sync.Status	INFO	Resetting Status.
+1453197955415	Sync.Status	DEBUG	Status.service: success.status_ok => success.status_ok
+1453197955416	FirefoxAccounts	DEBUG	already verified
+1453197955417	Sync.BrowserIDManager	INFO	Getting an assertion from: https://token.services.mozilla.com/1.0/sync/1.5
+1453197955417	FirefoxAccounts	DEBUG	enter getAssertion()
+1453197955419	browserwindow.syncui	DEBUG	_loginFailed has sync state=success.login
+1453197955420	FirefoxAccounts	DEBUG	getKeypairAndCertificate: already have keyPair and certificate
+1453197955421	FirefoxAccounts	DEBUG	getAssertionFromCert
+1453197955422	browserwindow.syncui	DEBUG	_loginFailed has sync state=success.login
+1453197955422	FirefoxAccounts	DEBUG	getAssertionFromCert returning signed: true
+1453197955423	Sync.BrowserIDManager	DEBUG	Getting a token
+1453197955424	Common.TokenServerClient	DEBUG	Beginning BID assertion exchange: https://token.services.mozilla.com/1.0/sync/1.5
+1453198637271	Sync.BrowserIDManager	ERROR	Non-authentication error in _fetchTokenForUser: TokenServerClientNetworkError({"error":{}}) (resource://gre/modules/services-common/tokenserverclient.js:36:36) JS Stack trace: @tokenserverclient.js:36:36 < @browserid_identity.js:14:1 < @status.js:15:1 < SyncServiceObserver.init@sync.js:76:62 < @sync.js:459:1 < require@bootstrap.js:140:7 < @main.js:31:1 < require@bootstrap.js:140:7 < startup@bootstrap.js:24:3 < XPI_callBootstrapMethod@XPIProvider.jsm:4204:9 < XPI_startup@XPIProvider.jsm:2589:13 < callProvider@AddonManager.jsm:221:12 < _startProvider@AddonManager.jsm:828:5 < AMI_startup@AddonManager.jsm:996:9 < AMP_startup@AddonManager.jsm:2670:5 < AMC_observe@addonManager.js:58:7
+1453198637273	Sync.Status	DEBUG	Status.login: success.login => error.login.reason.network
+1453198637273	Sync.Status	DEBUG	Status.service: success.status_ok => error.login.failed
+1453198637274	Sync.BrowserIDManager	ERROR	Failed to fetch a token for authentication: TokenServerClientNetworkError({"error":{}}) (resource://gre/modules/services-common/tokenserverclient.js:36:36) JS Stack trace: @tokenserverclient.js:36:36 < @browserid_identity.js:14:1 < @status.js:15:1 < SyncServiceObserver.init@sync.js:76:62 < @sync.js:459:1 < require@bootstrap.js:140:7 < @main.js:31:1 < require@bootstrap.js:140:7 < startup@bootstrap.js:24:3 < XPI_callBootstrapMethod@XPIProvider.jsm:4204:9 < XPI_startup@XPIProvider.jsm:2589:13 < callProvider@AddonManager.jsm:221:12 < _startProvider@AddonManager.jsm:828:5 < AMI_startup@AddonManager.jsm:996:9 < AMP_startup@AddonManager.jsm:2670:5 < AMC_observe@addonManager.js:58:7
+1453198854357	browserwindow.syncui	DEBUG	observed: weave:service:sync:error
+1453198854357	browserwindow.syncui	DEBUG	onActivityStop with numActive: 1
+1453198854359	Sync.SyncScheduler	DEBUG	Next sync in 3600000 ms.
+1453198854360	Sync.ErrorHandler	ERROR	Sync encountered an error

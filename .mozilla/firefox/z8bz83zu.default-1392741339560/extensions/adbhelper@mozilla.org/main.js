@@ -1,105 +1,94 @@
-let {Cu} = require("chrome");
-Cu.import("resource://gre/modules/Services.jsm");
-let adb = require("./adb");
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+"use strict";
+
+const { defineLazyGetter } =
+  require("./devtools-require")("devtools/shared/DevToolsUtils");
+
 const events = require("sdk/event/core");
+const { when: unload } = require("sdk/system/unload");
+const system = require("sdk/system");
+const { Devices } =
+  require("./devtools-import")("resource://devtools/shared/apps/Devices.jsm");
+const { gDevToolsBrowser } =
+  require("./devtools-import")("resource://devtools/client/framework/gDevTools.jsm");
+defineLazyGetter(this, "adb", () => {
+  return require("./adb");
+});
+defineLazyGetter(this, "fastboot", () => {
+  return require("./fastboot");
+});
+defineLazyGetter(this, "Device", () => {
+  return require("./device");
+});
 
-const {devtools} = Cu.import("resource://gre/modules/devtools/Loader.jsm", {});
-const devtoolsRequire = devtools.require;
-const {ConnectionManager} = devtoolsRequire("devtools/client/connection-manager");
-let {Devices} = Cu.import("resource://gre/modules/devtools/Devices.jsm");
-const {when: unload} = require("sdk/system/unload");
+// Set this right away on startup
+Devices.helperAddonInstalled = true;
+unload(() => Devices.helperAddonInstalled = false);
 
-let promise;
-try {
-  promise = Cu.import("resource://gre/modules/commonjs/promise/core.js").Promise;
-} catch (e) {
-  promise = Cu.import("resource://gre/modules/commonjs/sdk/core/promise.js").Promise;
-}
-
-// As of Firefox 36, WebIDE exposes an API to register new runtimes.
-try {
-  let Runtimes = devtoolsRequire("devtools/webide/runtimes");
+function onADBStart() {
+  // As of Firefox 36, WebIDE exposes an API to register new runtimes.
+  let Runtimes =
+    require("./devtools-require")("devtools/client/webide/modules/runtimes");
   if (Runtimes && Runtimes.RuntimeScanners) {
     let scanner = require("./scanner");
     scanner.register();
   }
-} catch (e) {}
 
-Devices.helperAddonInstalled = true;
-exports.shutdown = function() {
-  Devices.helperAddonInstalled = false;
-  adb.stop(true);
-};
-
-adb.start().then(function () {
-  adb.trackDevices();
-});
+  adb.start().then(function() {
+    adb.trackDevices();
+  });
+}
+Devices.on("adb-start-polling", onADBStart);
+unload(() => Devices.off("adb-start-polling", onADBStart));
 
 /**
- * A Device instance is created and registered with the Devices module whenever
- * ADB notices a new device is connected.
- *
- * Any changes here should be examined carefully for backwards compatibility
- * issues.  Other add-ons, like the Tools Adapter, make use of these low-level
- * device objects too.
+ * For Firefox 41 and earlier, WebIDE does not emit "adb-start-polling" to
+ * enable this add-on lazily.  So, we check for WebIDE startup using a promise
+ * added in Firefox 39.
+ * For Firefox 38 and earlier, we don't have the WebIDE promise either, so we
+ * fallback to starting ADB at startup as we did before.
  */
-function Device(id) {
-  this.id = id;
+let version = Number.parseInt(system.version.split(".")[0]);
+if (system.id == "{ec8030f7-c20a-464f-9b0e-13a3a9e97384}" && version < 42) {
+  if (gDevToolsBrowser.isWebIDEInitialized) {
+    gDevToolsBrowser.isWebIDEInitialized.promise.then(onADBStart);
+  } else {
+    onADBStart();
+  }
 }
 
-Device.prototype = {
-  /**
-   * DEPRECATED: This is specific to how we connect to Firefox OS.  Use cases
-   * that interact with other kinds of devices should likely use the more
-   * general |forwardPort| method directly.
-   */
-  connect: function (remotePort) {
-    let port = ConnectionManager.getFreeTCPPort();
-    let local = "tcp:" + port;
-    let remote = "localfilesystem:/data/local/debugger-socket";
-    if (remotePort) {
-      remote = "tcp:" + remotePort;
-    }
-    return adb.forwardPort(local, remote)
-              .then(() => port);
-  },
+function onADBStop() {
+  adb.stop(true);
+}
+Devices.on("adb-stop-polling", onADBStop);
+unload(() => Devices.off("adb-stop-polling", onADBStop));
+unload(() => onADBStop());
 
-  shell: adb.shell.bind(adb),
-  forwardPort: adb.forwardPort.bind(adb),
-  push: adb.push.bind(adb),
-  pull: adb.pull.bind(adb),
+function onFastbootStart() {
+  fastboot.startPolling();
+}
+Devices.on("fastboot-start-polling", onFastbootStart);
+unload(() => Devices.off("fastboot-start-polling", onFastbootStart));
 
-  isRoot: function() {
-    return adb.shell("id").then(stdout => {
-      let uid = stdout.match(/uid=(\d+)/)[1];
-      return uid == "0";
-    });
-  },
-
-  summonRoot: function() {
-    return adb.root();
-  },
-
-  getModel: function() {
-    if (this._modelPromise) {
-      return this._modelPromise;
-    }
-    this._modelPromise = this.shell("getprop ro.product.model")
-                             .then(model => model.trim());
-    return this._modelPromise;
-  }
-};
+function onFastbootStop() {
+  fastboot.stopPolling();
+}
+Devices.on("fastboot-stop-polling", onFastbootStop);
+unload(() => Devices.off("fastboot-stop-polling", onFastbootStop));
+unload(() => onFastbootStop());
 
 /**
  * It may seem at first that registering devices with Device.jsm is no longer
  * needed, since they are now consumed in this same add-on in scanner.js (at
  * least for Firefox 36+ with new WebIDE API).  However, there are still use
  * cases for the Devices.jsm registry, as other add-ons can make use of these
- * low-level ADB devices if they know about other new runtimes to support on the
- * device.  This the approach used in the Fever Dream / Valence add-on to find
- * Chrome on Android, for example.
+ * low-level ADB devices if they know about other new runtimes to support on
+ * the device.  This the approach used in the Valence add-on to find Chrome on
+ * Android, for example.
  */
-
 function onConnected(deviceId) {
   console.log("CONNECTED: " + deviceId);
   let device = new Device(deviceId);

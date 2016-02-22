@@ -2,7 +2,6 @@ require("data")
 local latches = require("latches")
 -- {{ audio stuff
 
-utils.run_once("pulseaudio")
 local audio = {}
 audio.pulseaudioMax = 655.36
 audio.pulseStep = 2

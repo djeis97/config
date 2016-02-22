@@ -1,3 +1,4 @@
+capi = {screen=screen, tag=tag, keygrabber=keygrabber}
 -- Standard awesome library
 gears = require("gears")
 awful = require("awful")
@@ -13,7 +14,6 @@ naughty = require("naughty")
 
 menubar = require("menubar")
 
-capi = {screen=screen}
 
 -- My libraries
 

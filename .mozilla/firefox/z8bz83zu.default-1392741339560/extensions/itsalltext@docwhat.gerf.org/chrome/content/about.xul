@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE window SYSTEM "chrome://itsalltext/locale/about.dtd" >
+<window    id="itsalltext_about"
+        title="&title;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <vbox style="max-width: 40em">
+    <description style="white-space: pre; margin: 1em;">&description;</description>
+    <hbox align="right">
+      <button oncommand="window.close();" tabindex="1">
+        <description>&close;</description>
+      </button>
+    </hbox>
+  </vbox>  
+</window>

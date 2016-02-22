@@ -64,12 +64,12 @@ for s = 1, screen.count() do
     mypromptbox[s] = awful.widget.prompt()
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
-    mylayoutbox[s] = awful.widget.layoutbox(s)
-    mylayoutbox[s]:buttons(awful.util.table.join(
-                           awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
-                           awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
-                           awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
-                           awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
+--  mylayoutbox[s] = awful.widget.layoutbox(s)
+--  mylayoutbox[s]:buttons(awful.util.table.join(
+--                         awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
+--                         awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
+--                         awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
+--                         awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
     -- Create a taglist widget
     mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
@@ -77,7 +77,8 @@ for s = 1, screen.count() do
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
     -- Create the wibox
-    myUpperWibox[s] = awful.wibox({ position = "top", screen = s })
+    myUpperWibox[s] = awful.wibox({ position = "top", screen = s})
+    myUpperWibox[s].height = 13
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
@@ -95,20 +96,18 @@ for s = 1, screen.count() do
     right_layout:add(mkarr("arrl4"))
     right_layout:add(currentLatch)
     right_layout:add(mkarr("arrr4"))
-    right_layout:add(mkarr("arrl4"))
-    right_layout:add(currentMode)
-    right_layout:add(mkarr("arrr4"))
     if s == 1 then right_layout:add(mkarr("arrl1")) right_layout:add(wibox.widget.systray()) right_layout:add(mkarr("arrr1")) end
     right_layout:add(mkarr("arrl4"))
     right_layout:add(mytextclock)
     right_layout:add(mkarr("arrr4"))
-    right_layout:add(mylayoutbox[s])
+--  right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
     layout:set_left(left_layout)
     layout:set_middle(mytasklist[s])
     layout:set_right(right_layout)
+    local otherlayout = wibox.layout.fixed.horizontal
 
     myUpperWibox[s]:set_widget(layout)
 end
