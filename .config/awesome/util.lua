@@ -373,11 +373,10 @@ end
 
 function utils.updateTransparency (c)
   if not c then
-    for i,client in ipairs(awful.client.visible(1)) do
-      utils.updateTransparency(client)
-    end
-    for i,client in ipairs(awful.client.visible(2)) do
-      utils.updateTransparency(client)
+    for s=1,screen.count() do
+      for i,client in ipairs(awful.client.visible(1)) do
+        utils.updateTransparency(client)
+      end
     end
     return nil
   end
