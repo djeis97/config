@@ -284,9 +284,11 @@ for i, k in ipairs({1, 2, 3, 4, 5, 6, 7, 8, 9}) do
                                       {{{  }, "" .. i,
                                           function ()
                                             local tag = tags[mouse.screen][tags[mouse.screen].grp][i]
-                                            local neighbortag = tags[(mouse.screen%2)+1][tags[mouse.screen].grp][i]
-                                            utils.summonAll(neighbortag, tag)
                                             if tag then
+                                              for s=1,screen.count() do
+                                                local neighbortag = tags[s][tags[mouse.screen].grp][i]
+                                                utils.summonAll(neighbortag, tag)
+                                              end
                                               awful.tag.viewonly(tag)
                                             end
                                           end,},
@@ -299,16 +301,7 @@ for i, k in ipairs({1, 2, 3, 4, 5, 6, 7, 8, 9}) do
                                               end
                                             end
                                           end,},
-                                        {{"Control"}, "" .. i,
-                                          function ()
-                                            utils.prevTagGrp()
-                                            local tag = tags[mouse.screen][tags[mouse.screen].grp][i]
-                                            local neighbortag = tags[(mouse.screen%2)+1][tags[mouse.screen].grp][i]
-                                            utils.summonAll(neighbortag, tag)
-                                            if tag then
-                                              awful.tag.viewonly(tag)
-                                            end
-  end}})
+  })
 end
 
 
