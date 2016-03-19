@@ -286,6 +286,7 @@ layers configuration."
                                            (enter-newline-mode 0)))
   (evil-leader/set-key-for-mode 'lisp-mode "dm" 'spacemacs/macrostep-micro-state)
 
+  (global-prettify-symbols-mode 1)
   ;;  (define-key evil-insert-state-map (kbd "S-<return>") (lambda () (interactive) (newline-and-indent)))
   ;;  (define-key evil-insert-state-map (kbd "RET") (kbd "<escape>"))
 )
