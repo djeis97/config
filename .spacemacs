@@ -42,6 +42,7 @@
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    dotspacemacs-additional-packages '(macrostep
+                                      adjust-parens
                                       hc-zenburn-theme
                                       slime-company
                                       gruber-darker-theme
@@ -174,7 +175,7 @@ layers configuration."
   (setq powerline-default-separator 'curve)
   (slime-setup '(slime-company))
   (load-file "~/.emacs.d/anchored-transpose.el")
-  
+  (load-file "~/.emacs.d/adjust-parens.el")
   (defun fake-key (key)
     (let ((command (key-binding (kbd "RET")))
           (keys (function 'this-command-keys))
@@ -198,6 +199,27 @@ layers configuration."
                                        (funcall read-key-seq-vec)))
         (setq this-command command)
         (call-interactively command))))
+  (define-minor-mode paren-management
+    "Bindings to better manage parens."
+    :keymap (let ((map (make-sparse-keymap)))
+              (define-key map (kbd "<C-tab>") 'lisp-indent-adjust-parens)
+              (define-key map (kbd "<C-iso-lefttab>") 'lisp-dedent-adjust-parens)
+              (define-key map (kbd "(") (lambda ()
+                                          (interactive)
+                                          (sp-insert-pair "(")
+                                          (sp-forward-slurp-sexp '(4))))
+              (define-key map (kbd ")") (lambda ()
+                                          (interactive)
+                                          (sp-forward-barf-sexp '(4))
+                                          (right-char)))
+              (define-key map (kbd "RET") (lambda ()
+                                            (interactive)
+                                            (newline-and-indent)
+                                            (if (char-equal (char-after (point)) ?\))
+                                                (save-excursion
+                                                  (newline-and-indent)))
+                                            (indent-according-to-mode)))
+              map))
   (defvar use-enter-escape-mode t)
   (define-minor-mode enter-escape-mode
     "Advanced enter key."
@@ -289,7 +311,8 @@ layers configuration."
   (global-prettify-symbols-mode 1)
   ;;  (define-key evil-insert-state-map (kbd "S-<return>") (lambda () (interactive) (newline-and-indent)))
   ;;  (define-key evil-insert-state-map (kbd "RET") (kbd "<escape>"))
-)
+  (add-hook 'lisp-mode-hook 'paren-management)
+  )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
