@@ -8,7 +8,7 @@ AUDIO_COM_NAME = "MusicTerm"
 JACK_EQ_CLASS = "Jackeq"
 CONKY_CLASS = "Conky"
 PULSE_CONTROL_CLASS = "Pavucontrol"
-JACK_CONTROL_CLASS = "Qjackctl"
+JACK_CONTROL_CLASS = "qjackctl"
 JACK_MIXER_CLASS = "Jack_mixer"
 SKYPE_CLASS = "Skype"
 STEAM_CLASS = "Steam"
@@ -55,6 +55,4 @@ audio_card = "1"
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 
-
-
-
+fullscreen_count = 0

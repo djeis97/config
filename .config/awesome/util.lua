@@ -394,4 +394,11 @@ function utils.updateTransparency (c)
     c.opacity = 0.7
   end
 end
+function utils.updateDPMS ()
+  if fullscreen_count > 0 then
+    awful.util.spawn_with_shell("xset s off -dpms")
+  else
+    awful.util.spawn_with_shell("xset s on +dpms")
+  end
+end
 return utils

@@ -14,6 +14,14 @@ client.connect_signal("manage", function (c, startup)
                         c:connect_signal("property::floating", function(c)
                                            c.ontop = awful.client.floating.get(c)
                         end)
+                        c:connect_signal("property::fullscreen", function (c)
+                                           if c.fullscreen then
+                                             fullscreen_count = fullscreen_count + 1
+                                           else
+                                             fullscreen_count = fullscreen_count - 1
+                                           end
+                                           utils.updateDPMS()
+                        end)
                         c.ontop = awful.client.floating.get(c)
                         if not startup then
                           -- Set the windows at the slave,
