@@ -19,12 +19,6 @@ return {
           skip_taskbar = true,
           border_width = 0
       } },
-    { rule = { class = GIMP_CLASS },
-      properties = { floating = false, tag=tags[1][1][5] } },
-    { rule = { class = SKYPE_CLASS },
-      properties = { tag=tags[1][1][7] } },
-    { rule = { class = STEAM_CLASS },
-      properties = { tag=tags[1][1][8] } },
     { rule = { name = AUDIO_COM_NAME },
       properties = { tag=tags[1][3][7] } },
     { rule = { class = JACK_EQ_CLASS },
@@ -35,6 +29,4 @@ return {
       properties = { tag=tags[1][1][9] } },
     { rule = { class = JACK_CONTROL_CLASS },
       properties = { tag=tags[1][3][8] } },
-    { rule = { class = FIREFOX_CLASS },
-      properties = { tag=tags[1][1][4], border_width="0" } },
 }
