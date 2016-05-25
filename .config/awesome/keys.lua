@@ -306,6 +306,7 @@ end
 
 
 globalkeys = awful.util.table.join(
+    globalkeys,
     mousekeys,
     utils.key({"Mod1" }, "w", latches.latch("Command-Mode", commandkeys)),
     utils.key({ }, "F20", latches.latch("Command-Mode", commandkeys)))

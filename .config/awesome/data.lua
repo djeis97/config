@@ -1,5 +1,6 @@
 local modality = require("modality")
 local max = require("awful.layout.suit.max")
+local tile = require("awful.layout.suit.tile")
 local mymax = require("max")
 
 -- Indep Constants
@@ -18,7 +19,7 @@ GLOBULATION_CLASS = "glob2"
 
 layouts =
 {
-    max,
+    tile,
     mymax,
 }
 

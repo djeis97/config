@@ -384,7 +384,9 @@ function utils.updateTransparency (c)
     c.opacity = 0.5
     return nil
   end
-  if c == client.focus then
+  if c.class == "sbcl" then
+    c.opacity = 0.4
+  elseif c == client.focus then
     c.opacity = 0.95
   elseif c.sticky then
     c.opacity = 0.95

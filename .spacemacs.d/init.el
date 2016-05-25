@@ -200,6 +200,21 @@ layers configuration."
                                        (funcall read-key-seq-vec)))
         (setq this-command command)
         (call-interactively command))))
+  (defun close-paren ()
+    (interactive)
+    (let ((next-line-only-close-parens (save-excursion
+                                         (next-line)
+                                         (beginning-of-line)
+                                         (looking-at "\s*\)+\s*$"))))
+      (sp-forward-barf-sexp '(4))
+      (save-excursion
+        (next-line)
+        (beginning-of-line)
+        (if (and next-line-only-close-parens
+                 (looking-at "\s*$"))
+            (ignore-errors
+              (kill-whole-line)))))
+    (right-char))
   (define-minor-mode paren-management
     "Bindings to better manage parens."
     :keymap (let ((map (make-sparse-keymap)))
@@ -209,10 +224,7 @@ layers configuration."
                                           (interactive)
                                           (sp-insert-pair "(")
                                           (sp-forward-slurp-sexp '(4))))
-              (define-key map (kbd ")") (lambda ()
-                                          (interactive)
-                                          (sp-forward-barf-sexp '(4))
-                                          (right-char)))
+              (define-key map (kbd ")") 'close-paren)
               (define-key map (kbd "RET") (lambda ()
                                             (interactive)
                                             (newline-and-indent)

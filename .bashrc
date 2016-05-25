@@ -9,3 +9,4 @@ alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
 eval $(thefuck --alias)
+. virtualenvwrapper.sh

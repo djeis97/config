@@ -170,7 +170,6 @@ local alsaLatch = latches.latch("Sound-Alsa", {
 
 local soundsLatch = latches.latch("Sound-Sounds", {
                   { n= "Easy", {   }, "e", utils.keyspawn("cvlc /home/jay/Downloads/Easy.ogg vlc://quit"), latches.exit}})
-              
 local MPDControlLatch = latches.latch("MPD Control", {
     { n="command", {}, "c", audio.MPDPrompt, latches.continue},
     { n="playlist", {}, "l", function () audio.MPDPrompt("mpc playlist ") end, latches.continue},
