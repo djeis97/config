@@ -1,5 +1,5 @@
 ;; -*- mode: dotspacemacs -*-
-;; This file is loaded by Spacemacs at startup.
+
 ;; It must be stored in your home directory.
 
 (defun dotspacemacs/layers ()
@@ -41,12 +41,15 @@
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
-   dotspacemacs-additional-packages '(macrostep
+   dotspacemacs-additional-packages '(load-theme-buffer-local
+                                      arduino-mode
+                                      macrostep
                                       adjust-parens
                                       hc-zenburn-theme
                                       slime-company
                                       gruber-darker-theme
-                                      apropospriate-theme)
+                                      apropospriate-theme
+                                      evil-cleverparens)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'
@@ -80,7 +83,8 @@ before layers configuration."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(zen-and-art
+   dotspacemacs-themes '(cyberpunk
+                         zen-and-art
                          hc-zenburn
                          gruber-darker-theme
                          apropospriate-dark
@@ -163,11 +167,36 @@ before layers configuration."
   ;; User initialization goes here
   )
 
-(defun dotspacemacs/config ()
+
+(defun dotspacemacs/user-config ()
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
   (setq inferior-lisp-program "sbcl")
+  (require 'tramp)
+  (with-eval-after-load 'evil-cleverparens
+    (define-key evil-lisp-state-major-mode-map (kbd "<")
+      (evil-lisp-state-enter-command evil-cp-<))
+    (define-key evil-lisp-state-major-mode-map (kbd ">")
+      (evil-lisp-state-enter-command evil-cp->))
+    (define-key evil-lisp-state-map (kbd "<")
+      (evil-lisp-state-enter-command evil-cp-<))
+    (define-key evil-lisp-state-map (kbd ">")
+      (evil-lisp-state-enter-command evil-cp->))
+    (dolist (x evil-cp-additional-bindings)
+      (let ((key (car x))
+            (cmd (cdr x)))
+        (eval
+         `(progn
+            (if evil-lisp-state-global
+                (define-key evil-lisp-state-map ,(kbd key)
+                  (evil-lisp-state-enter-command ,cmd))
+              (define-key evil-lisp-state-major-mode-map ,(kbd key)
+                (evil-lisp-state-enter-command ,cmd))))))))
+  (with-eval-after-load 'smartparens
+    (add-hook 'smartparens-enabled-hook #'evil-cleverparens-mode))
+
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
   (defadvice switch-to-buffer (before save-buffer-now activate)
     (when buffer-file-name (save-buffer)))
   (defadvice other-window (before other-window-now activate)
@@ -346,19 +375,18 @@ layers configuration."
  '(custom-enabled-themes (quote (LCARS)))
  '(custom-safe-themes
    (quote
-    ("868f73b5cf78e72ca2402e1d48675e49cc9a9619c5544af7bf216515d22b58e7" "27b2ef08bfb2f93f90c74bcb36162593bec9fe5c30c05621259baac95edb7137" "34e91dd54521213bfc88b0fd851d434f9de3ce8c1120bfc32b4c2972b2cfb288" "3302a3c048adfaefe36f3c46819e608fbda46c42662d390e905655bb8ecc8b3a" "7c63592fde37aa731a057ea6f9aa96966230785f7aba108357fb175c0191c6f6" "bf478be41439d9cc355f9c2d1b307e1dfebba7bf9b16e6ea651b1469b6307f66" "44d23f972730816fd6ebb0d621820344fa39bfeafb7a5246ca1c0b71b2e9e451" "c7ba6ff9a5db0a64f858b3a49ab410de51988fa2c52630eeb95aee847a6711b3" "f9adafd67c2ec471d1b304fb545efa14fe7265355839bf7c6812c4271714a05c" default)))
+    ("66132890ee1f884b4f8e901f0c61c5ed078809626a547dbefbb201f900d03fd8" "51e228ffd6c4fff9b5168b31d5927c27734e82ec61f414970fc6bcce23bc140d" "868f73b5cf78e72ca2402e1d48675e49cc9a9619c5544af7bf216515d22b58e7" "27b2ef08bfb2f93f90c74bcb36162593bec9fe5c30c05621259baac95edb7137" "34e91dd54521213bfc88b0fd851d434f9de3ce8c1120bfc32b4c2972b2cfb288" "3302a3c048adfaefe36f3c46819e608fbda46c42662d390e905655bb8ecc8b3a" "7c63592fde37aa731a057ea6f9aa96966230785f7aba108357fb175c0191c6f6" "bf478be41439d9cc355f9c2d1b307e1dfebba7bf9b16e6ea651b1469b6307f66" "44d23f972730816fd6ebb0d621820344fa39bfeafb7a5246ca1c0b71b2e9e451" "c7ba6ff9a5db0a64f858b3a49ab410de51988fa2c52630eeb95aee847a6711b3" "f9adafd67c2ec471d1b304fb545efa14fe7265355839bf7c6812c4271714a05c" default)))
+ '(evil-cleverparens-use-additional-bindings nil)
+ '(evil-cleverparens-use-additional-movement-keys nil)
  '(evil-emacs-state-cursor (quote ("#E57373" bar)) t)
  '(evil-insert-state-cursor (quote ("#E57373" hbar)) t)
  '(evil-normal-state-cursor (quote ("#FFEE58" box)) t)
  '(evil-visual-state-cursor (quote ("#C5E1A5" box)) t)
+ '(evil-want-Y-yank-to-eol nil)
+ '(fci-rule-character-color "#192028")
  '(fci-rule-color "#eee8d5" t)
  '(frame-brackground-mode (quote dark))
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
- '(highlight-symbol-colors
-   (--map
-    (solarized-color-blend it "#fdf6e3" 0.25)
-    (quote
-     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
  '(highlight-symbol-foreground-color "#586e75")
  '(highlight-tail-colors
    (quote
@@ -379,11 +407,10 @@ layers configuration."
  '(magit-diff-use-overlays nil)
  '(pos-tip-background-color "#eee8d5")
  '(pos-tip-foreground-color "#586e75")
- '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
- '(tabbar-background-color "#353535")
- '(term-default-bg-color "#fdf6e3")
- '(term-default-fg-color "#657b83")
- '(vc-annotate-background nil)
+ '(tabbar-background-color "#353535" t)
+ '(term-default-bg-color "#fdf6e3" t)
+ '(term-default-fg-color "#657b83" t)
+ '(vc-annotate-background nil t)
  '(vc-annotate-color-map
    (quote
     ((20 . "#dc322f")
@@ -403,11 +430,11 @@ layers configuration."
      (300 . "#2898af")
      (320 . "#2793ba")
      (340 . "#268fc6")
-     (360 . "#268bd2"))))
- '(vc-annotate-very-old-color nil)
+     (360 . "#268bd2"))) t)
+ '(vc-annotate-very-old-color nil t)
  '(weechat-color-list
    (quote
-    (unspecified "#fdf6e3" "#eee8d5" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#657b83" "#839496"))))
+    (unspecified "#fdf6e3" "#eee8d5" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#657b83" "#839496")) t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
