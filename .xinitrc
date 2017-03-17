@@ -1,8 +1,8 @@
-xmodmap .Xmodmap
-xmodmap -e "clear lock"
+# xmodmap .Xmodmap
+# xmodmap -e "clear lock"
 #cd xstarts
 #exec gnome-session
-awesome &
+#awesome &
 #exec qtile
 #python2 -c "while True:	pass"
 
@@ -16,4 +16,5 @@ sleep 2
 pulseaudio &
 #sleep 5
 #./startupScript
-exec xterm
+exwm-start
+# exec xterm
