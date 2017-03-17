@@ -4,6 +4,7 @@ local modality = require("modality")
 local audio = require("audio")
 local mousey = require("mousey")
 local tag = require("awful.tag")
+local sessionControls = require("sessionControls")
 --local myLayout = require("myLayout")
 local keygrabber = require("awful.keygrabber")
 
@@ -100,7 +101,7 @@ globalkeys = awful.util.table.join(
                              x = io.popen(command)
                              output = x:read("*a")
                              naughty.notify {text=output}
-                           end)end))
+    end)end))
 
 commandkeys = {
   {{}, "F20", latches.exit},
@@ -165,7 +166,8 @@ commandkeys = {
                               {n="Telegram", {   }, "t", utils.keyspawn("/home/jay/installs/Telegram/Telegram")}})},
   {{  }, "g", latches.latch("Programs-Gaming", {
                               {n="Steam", {  }, "s", utils.keyspawn("steam")},
-                              {n="feedthebeast", {  }, "f", utils.keyspawn("feedthebeast")}})}
+                              {n="feedthebeast", {  }, "f", utils.keyspawn("feedthebeast")}})},
+  {{ "Mod1" }, "l", sessionControls.latch}
 }
 
 mousekeys = awful.util.table.join(
