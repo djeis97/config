@@ -2,7 +2,6 @@ capi = {screen=screen, tag=tag, keygrabber=keygrabber}
 -- Standard awesome library
 gears = require("gears")
 awful = require("awful")
-lain = require("lain")
 awful.rules = require("awful.rules")
 require("awful.autofocus")
 -- Widget and layout library
