@@ -2,7 +2,7 @@
 # xmodmap -e "clear lock"
 #cd xstarts
 #exec gnome-session
-#awesome &
+# exec awesome
 #exec qtile
 #python2 -c "while True:	pass"
 
@@ -13,7 +13,6 @@
 #exec startNwm
 #stumpwm >.stumplog &
 sleep 2
-pulseaudio &
 #sleep 5
 #./startupScript
 exwm-start
