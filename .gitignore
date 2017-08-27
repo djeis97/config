@@ -5,3 +5,6 @@
 !.gitignore
 !.*
 .#*
+.spacemacs.d/layers/*
+.spacemacs.d/themes/*
+
