@@ -12,7 +12,7 @@
    dotspacemacs-configuration-layers
    '(
      djeis97-common
-     work
+     djeis97-work
      c-c++
      javascript
      csv
