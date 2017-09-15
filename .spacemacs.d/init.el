@@ -64,7 +64,7 @@ before layers configuration."
    dotspacemacs-emacs-leader-key "<f20>"
    dotspacemacs-major-mode-leader-key ","
    ;; Major mode leader key accessible in `emacs state' and `insert state'
-   dotspacemacs-major-mode-emacs-leader-key "<M-F20>"
+   dotspacemacs-major-mode-emacs-leader-key "<M-f20>"
    dotspacemacs-command-key ":"
    dotspacemacs-enable-paste-micro-state t
    dotspacemacs-guide-key-delay 0.4
