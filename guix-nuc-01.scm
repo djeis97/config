@@ -8,9 +8,9 @@
              ((gnu packages containers) #:select (podman))
              ((gnu packages storage) #:select (ceph))
              ((gnu packages linux) #:select (lvm2))
-             ((gnu packages certs) #:select (nss-certs))
              ((gnu packages rsync) #:select (rsync))
              ((gnu packages samba) #:select (samba))
+             ((gnu packages file-systems) #:select (fuse-overlayfs))
              (gnu system nss)
              (gnu system image)
              (gnu system vm)
@@ -26,11 +26,10 @@
              (guix utils)
              (nongnu packages linux)
              (nongnu system linux-initrd)
-             ((djeis keys) #:select (elijah-key nonguix-key))
+             ((djeis keys) #:select (xana-tampa-key elijah-key nonguix-key))
              (djeis services ceph)
              (djeis services libvirt-vms)
-             (djeis services autofs)
-             (djeis packages fuse-overlayfs))
+             (djeis services autofs))
 
 (define-public sshd-config
   (openssh-configuration
@@ -58,14 +57,15 @@ runroot = \"/run/containers/storage\"
 graphroot = \"/var/lib/containers/storage\"
 [storage.options]
 additionalimagestores = [ \"/auto/cephfs/containers/registry\" ]
+mount_program = \"" (file-append fuse-overlayfs "/bin/fuse-overlayfs") "\"
 "))
 
 (define ceph-file-system
   (file-system
-   (mount-point "cephfs")
-   (device "192.168.86.105:6789:/")
-   (type "ceph")
-   (options "name=admin")))
+    (mount-point "cephfs")
+    (device "192.168.0.137:6789:/")
+    (type "ceph")
+    (options "name=admin")))
 (define autofs-auto-map
   (plain-file "autofs.auto" (file-system->autofs-line ceph-file-system)))
 (define autofs-master-map
@@ -134,218 +134,236 @@ additionalimagestores = [ \"/auto/cephfs/containers/registry\" ]
   wide links = yes
 "))
 
-(operating-system
-  (host-name "guix-nuc-01")
-  (timezone "America/New_York")
-  (locale "en_US.utf8")
+(define system
+  (operating-system
+    (host-name "guix-nuc-01")
+    (timezone "America/New_York")
+    (locale "en_US.utf8")
 
-  (kernel linux)
-  (firmware (cons linux-firmware %base-firmware))
-  (initrd microcode-initrd)
+    (kernel linux)
+    (kernel-arguments (cons "elogind.legacy_elogind_cgroup_controller=1 systemd.unified_cgroup_hierarchy=0" %default-kernel-arguments))
+    (firmware (cons linux-firmware %base-firmware))
+    (initrd microcode-initrd)
 
-  ;; Use the UEFI variant of GRUB with the EFI System
-  ;; Partition mounted on /boot/efi.
-  (bootloader (bootloader-configuration
-               (bootloader grub-efi-bootloader)
-               (targets '("/boot/efi/"))))
+    ;; Use the UEFI variant of GRUB with the EFI System
+    ;; Partition mounted on /boot/efi.
+    (bootloader (bootloader-configuration
+                 (bootloader grub-efi-bootloader)
+                 (targets '("/boot/efi/"))))
 
-  (packages (cons* rsync podman nss-certs %base-packages))
+    (packages (cons* rsync podman %base-packages))
 
-  (users (cons* (user-account
-                 (name "ceph")
-                 (group "ceph")
-                 (system? #t))
-                (user-account
-                 (name "jay")
-                 (uid 1000)
-                 (group "users")
-                 (comment "Elijah Malaby"))
-                (user-account
-                 (name "sophia")
-                 (uid 1001)
-                 (group "users")
-                 (comment "Sophia Jones"))
-                %base-user-accounts))
-  (groups (cons* (user-group (name "ceph")) %base-groups))
+    (users (cons* (user-account
+                   (name "ceph")
+                   (group "ceph")
+                   (system? #t))
+                  (user-account
+                   (name "jay")
+                   (uid 1000)
+                   (group "users")
+                   (comment "Elijah Malaby"))
+                  (user-account
+                   (name "sophia")
+                   (uid 1001)
+                   (group "users")
+                   (comment "Sophia Jones"))
+                  %base-user-accounts))
+    (groups (cons* (user-group (name "ceph")) %base-groups))
 
-  (file-systems (append
-                 (list (file-system
-                         (device (uuid btrfs-uuid))
-                         (mount-point "/")
-                         (type "btrfs")
-                         (options "subvol=@"))
-                       (file-system
-                         (device (uuid "60F1-27D6" 'fat))
-                         (mount-point "/boot/efi/")
-                         (type "vfat"))
-                       (file-system
-                         (device (uuid btrfs-uuid))
-                         (mount-point "/gnu/store")
-                         (type "btrfs")
-                         (options "subvol=@guix/store"))
-                       (file-system
-                         (device (uuid btrfs-uuid))
-                         (mount-point "/var/guix")
-                         (type "btrfs")
-                         (options "subvol=@guix/var"))
-                       (file-system
-                         (device (uuid btrfs-uuid))
-                         (mount-point "/.snapshots")
-                         (type "btrfs")
-                         (options "subvol=@snapshots")))
-                 %control-groups
-                 %base-file-systems))
+    (file-systems (append
+                   (list (file-system
+                           (device (uuid btrfs-uuid))
+                           (mount-point "/")
+                           (type "btrfs")
+                           (options "subvol=@"))
+                         (file-system
+                           (device (uuid "60F1-27D6" 'fat))
+                           (mount-point "/boot/efi/")
+                           (type "vfat"))
+                         (file-system
+                           (device (uuid btrfs-uuid))
+                           (mount-point "/gnu/store")
+                           (type "btrfs")
+                           (options "subvol=@guix/store"))
+                         (file-system
+                           (device (uuid btrfs-uuid))
+                           (mount-point "/var/guix")
+                           (type "btrfs")
+                           (options "subvol=@guix/var"))
+                         (file-system
+                           (device (uuid btrfs-uuid))
+                           (mount-point "/.snapshots")
+                           (type "btrfs")
+                           (options "subvol=@snapshots")))
+                   %control-groups
+                   %base-file-systems))
 
-  (swap-devices
-   (list
-    (swap-space
-     (target (uuid "a8b607a4-16f2-4b2a-b6bd-da483dbd9772"))
-     (discard? #t))))
+    (swap-devices
+     (list
+      (swap-space
+       (target (uuid "a8b607a4-16f2-4b2a-b6bd-da483dbd9772"))
+       (discard? #t))))
 
-  (services (append (list (simple-service samba shepherd-root-service-type
-                                          (list
-                                           (shepherd-service
-                                            (provision '(samba))
-                                            (requirement '(automount user-processes networking))
-                                            (start #~(make-forkexec-constructor
-                                                      (list #$(file-append samba "/sbin/smbd")
-                                                            "-s" #$samba-config
-                                                            "--foreground" "--no-process-group")))
-                                            (stop #~(make-kill-destructor)))))
-                          (service openssh-service-type sshd-config)
-                          (service dhcp-client-service-type)
-                          (service ddclient-service-type)
-                          (service static-networking-service-type
-                                   (list
-                                    (static-networking
-                                     (provision '(virt-bridge))
-                                     (links (list
-                                             (network-link
-                                              (name "virt-bridge")
-                                              (type "bridge")
-                                              (arguments (list)))))
-                                     (addresses (list)))
-                                    (static-networking
-                                     (provision '(virt-bridge-address))
-                                     (requirement '(virt-bridge))
-                                     (addresses (list
-                                                 (network-address
-                                                  (device "virt-bridge")
-                                                  (value "192.168.87.1/24")))))))
-                          (service libvirt-service-type (libvirt-configuration))
-                          (service virtlog-service-type (virtlog-configuration))
-                          (service ceph-mon-service host-name)
-                          (service ceph-mgr-service host-name)
-                          (service ceph-mds-service (string-append host-name "-a"))
-                          (service automount-service-type
-                                   (automount-config
-                                    (autofs-conf (plain-file "autofs.conf" ""))
-                                    (autofs-master autofs-master-map)))
-                          (simple-service 'gtnh-container shepherd-root-service-type
-                                          (list (shepherd-service
-                                                 (auto-start? #f)
-                                                 (provision '(gtnh))
-                                                 (requirement '(networking automount))
-                                                 (start #~(make-forkexec-constructor
-                                                           (list #$(file-append podman "/bin/podman")
-                                                                 "run" "-i" "--name=gtnh" "--net=host" "--rm"
-                                                                 "--memory=15g" "--memory-swap=20g"
-                                                                 "-e" "PUID=0" "-e" "PGID=0"
-                                                                 "-v" "/auto/cephfs/containers/GTNHServer:/GTNHServer"
-                                                                 "-v" "/opt/GTNHWorld/:/GTNHServer/world"
-                                                                 "-w" "/GTNHServer"
-                                                                 "amazoncorretto:17-alpine" "./startserver-java9.sh")))
-                                                 (stop #~(make-kill-destructor)))))
-                          (simple-service 'atm8-container shepherd-root-service-type
-                                          (list (shepherd-service
-                                                 (auto-start? #f)
-                                                 (provision '(atm8))
-                                                 (requirement '(networking automount))
-                                                 (start #~(make-forkexec-constructor
-                                                           (list #$(file-append podman "/bin/podman")
-                                                                 "run" "-i" "--name=atm8" "--net=host" "--rm"
-                                                                 "--memory=15g" "--memory-swap=20g"
-                                                                 "-e" "PUID=0" "-e" "PGID=0"
-                                                                 "-v" "/auto/cephfs/containers/ATM8Server:/ATM8Server"
-                                                                 "-v" "/opt/ATM8World/:/ATM8Server/World"
-                                                                 "-w" "/ATM8Server"
-                                                                 "openjdk:17-alpine" "./run.sh")))
-                                                 (stop #~(make-kill-destructor)))))
-                                        ;(simple-service 'aqm3-container shepherd-root-service-type
-                                        ;                (list (shepherd-service
-                                        ;                       (provision '(aqm3))
-                                        ;                       (requirement '(networking automount))
-                                        ;                       (start #~(make-forkexec-constructor
-                                        ;                                 (list #$(file-append podman "/bin/podman")
-                                        ;                                       "run" "--name=aqm3" "--net=host" "--rm"
-                                        ;                                       "--memory=15g" "--memory-swap=20g"
-                                        ;                                       "-e" "PUID=0" "-e" "PGID=0"
-                                        ;                                       "-v" "/auto/cephfs/containers/AQM3Server:/AQM3Server"
-                                        ;                                       "-w" "/AQM3Server"
-                                        ;                                       "openjdk:17-alpine" "sh" "./start.sh")))
-                                        ;                       (stop #~(make-kill-destructor)))))
-                                        ;(simple-service 'plex-container shepherd-root-service-type
-                                        ;                (list (shepherd-service
-                                        ;                       (provision '(plex))
-                                        ;                       (requirement '(networking automount))
-                                        ;                       (start #~(make-forkexec-constructor
-                                        ;                                 (list #$(file-append podman "/bin/podman")
-                                        ;                                       "run" "--name=plex" "--net=host" "--rm"
-                                        ;                                       "--memory=4g" "--memory-swap=6g"
-                                        ;                                       "-e" "PUID=0" "-e" "PGID=0"
-                                        ;                                       "-v" "/auto/cephfs/containers/plex:/config"
-                                        ;                                       "-v" "/auto/cephfs/media:/media-drive:rw"
-                                        ;                                       "lscr.io/linuxserver/plex:1.26.2")))
-                                        ;                       (stop #~(make-kill-destructor)))))
-                          (simple-service 'home-containers shepherd-root-service-type
-                                          (list (shepherd-service
-                                                 (provision '(mosquitto))
-                                                 (requirement '(networking automount))
-                                                 (start #~(make-forkexec-constructor
-                                                           (list #$(file-append podman "/bin/podman")
-                                                                 "run" "--name=mosquitto" "--net=host" "--rm"
-                                                                 "--memory=512m"
-                                                                 "-v" "/auto/cephfs/containers/mosquitto/:/mosquitto/config/"
-                                                                 "docker.io/library/eclipse-mosquitto:2.0.14")))
-                                                 (stop #~(make-kill-destructor)))
-                                                (shepherd-service
-                                                 (provision '(openhab))
-                                                 (requirement '(networking automount udev))
-                                                 (start #~(make-forkexec-constructor
-                                                           (list #$(file-append podman "/bin/podman")
-                                                                 "run" "--name=openhab" "--net=host" "--rm"
-                                                                 "--memory=1g" "--memory-swap=2g"
-                                                                 "-e" "GROUP_ID=995" "--device=/dev/ttyACM0"
-                                                                 "-e" #$(string-append "EXTRA_JAVA_OPTS=-Duser.timezone=" timezone)
-                                                                 "-v" "/etc/localtime:/etc/localtime:ro"
-                                                                 "-v" "/etc/timezone:/etc/timezone:ro"
-                                                                 "-v" "/auto/cephfs/containers/openhab/conf:/openhab/conf"
-                                                                 "-v" "/auto/cephfs/containers/openhab/addons:/openhab/addons"
-                                                                 "-v" "/auto/cephfs/containers/openhab/userdata:/openhab/userdata"
-                                                                 "docker.io/openhab/openhab:3.2.0-debian")))
-                                                 (stop #~(make-kill-destructor)))
-                                                ))
-                          (extra-special-file "/etc/containers/policy.json" podman-containers-policy)
-                          (extra-special-file "/etc/containers/storage.conf" podman-containers-storage)
-                          )
-                    (map (lambda (pair) (service ceph-osd-service (ceph-osd-config (osd-id (car pair)) (fsid (cdr pair)))))
-                         '((0 . "44000608-0dc6-4b9d-af17-e01c5b36fcc2")
-                           (1 . "bb11606b-f170-438a-824e-baacf6cf5bda")
-                           (2 . "c62fbe43-0b7c-4554-bf9f-502a983bf021")
-                           (3 . "e88c198b-e531-4b4a-a672-0b179d1a6ab4")
-                           (4 . "1e2c7fc6-01c3-43dc-ab4d-8f9bb3d83098")
-                           (5 . "e58072fe-6fea-4502-a8b7-2a0ee32cd74c")))
-                    (modify-services %base-services
-                      (guix-service-type config =>
-                                         (guix-configuration
-                                          (inherit config)
-                                          (substitute-urls (cons "https://substitutes.nonguix.org"
-                                                                 %default-substitute-urls))
-                                          (authorized-keys (cons* nonguix-key %default-authorized-guix-keys))))
-                      (sysctl-service-type config =>
-                                           (sysctl-configuration
-                                            (settings (append '(("net.ipv4.ip_forward" . "1"))
-                                                              %default-sysctl-settings)))))))
+    (services (append (list
+                       (simple-service samba shepherd-root-service-type
+                                       (list
+                                        (shepherd-service
+                                         (provision '(samba))
+                                         (requirement '(automount user-processes networking))
+                                         (start #~(make-forkexec-constructor
+                                                   (list #$(file-append samba "/sbin/smbd")
+                                                         "-s" #$samba-config
+                                                         "--foreground" "--no-process-group")))
+                                         (stop #~(make-kill-destructor)))))
+                       (service openssh-service-type sshd-config)
+                       (service dhcp-client-service-type)
+                       (service static-networking-service-type
+                                (list
+                                 (static-networking
+                                  (provision '(virt-bridge))
+                                  (links (list
+                                          (network-link
+                                           (name "virt-bridge")
+                                           (type 'bridge)
+                                           (arguments (list)))))
+                                  (addresses (list)))
+                                 (static-networking
+                                  (provision '(virt-bridge-address))
+                                  (requirement '(virt-bridge))
+                                  (addresses (list
+                                              (network-address
+                                               (device "virt-bridge")
+                                               (value "192.168.87.1/24")))))))
+                       ;;(service libvirt-service-type (libvirt-configuration))
+                       ;;(service virtlog-service-type (virtlog-configuration))
+                       (service automount-service-type
+                                (automount-config
+                                 (autofs-conf (plain-file "autofs.conf" ""))
+                                 (autofs-master autofs-master-map)))
+                       ;; (simple-service 'gtnh-container shepherd-root-service-type
+                       ;;                 (list (shepherd-service
+                       ;;                        (auto-start? #f)
+                       ;;                        (provision '(gtnh))
+                       ;;                        (requirement '(networking automount))
+                       ;;                        (start #~(make-forkexec-constructor
+                       ;;                                  (list #$(file-append podman "/bin/podman")
+                       ;;                                        "run" "-i" "--name=gtnh" "--net=host" "--rm"
+                       ;;                                        "--memory=15g" "--memory-swap=20g"
+                       ;;                                        "-e" "PUID=0" "-e" "PGID=0"
+                       ;;                                        "-v" "/auto/cephfs/containers/GTNHServer:/GTNHServer"
+                       ;;                                        "-v" "/opt/GTNHWorld/:/GTNHServer/World"
+                       ;;                                        "-w" "/GTNHServer"
+                       ;;                                        "eclipse-temurin:17-alpine" "./startserver-java9.sh"))) 
+                       ;;                        (stop #~(make-kill-destructor)))))
+                       ;; (simple-service 'atm8-container shepherd-root-service-type
+                       ;;                 (list (shepherd-service
+                       ;;                        (auto-start? #f)
+                       ;;                        (provision '(atm8))
+                       ;;                        (requirement '(networking automount))
+                       ;;                        (start #~(make-forkexec-constructor
+                       ;;                                  (list #$(file-append podman "/bin/podman")
+                       ;;                                        "run" "-i" "--name=atm8" "--net=host" "--rm"
+                       ;;                                        "--memory=15g" "--memory-swap=20g"
+                       ;;                                        "-e" "PUID=0" "-e" "PGID=0"
+                       ;;                                        "-v" "/auto/cephfs/containers/ATM8Server:/ATM8Server"
+                       ;;                                        "-v" "/opt/ATM8World/:/ATM8Server/world"
+                       ;;                                        "-w" "/ATM8Server"
+                       ;;                                        "openjdk:17-alpine" "./run.sh")))
+                       ;;                        (stop #~(make-kill-destructor)))))
+                       ;;             ;(simple-service 'aqm3-container shepherd-root-service-type
+                       ;;             ;                (list (shepherd-service
+                       ;;             ;                       (provision '(aqm3))
+                       ;;             ;                       (requirement '(networking automount))
+                       ;;             ;                       (start #~(make-forkexec-constructor
+                       ;;             ;                                 (list #$(file-append podman "/bin/podman")
+                       ;;             ;                                       "run" "--name=aqm3" "--net=host" "--rm"
+                       ;;             ;                                       "--memory=15g" "--memory-swap=20g"
+                       ;;             ;                                       "-e" "PUID=0" "-e" "PGID=0"
+                       ;;             ;                                       "-v" "/auto/cephfs/containers/AQM3Server:/AQM3Server"
+                       ;;             ;                                       "-w" "/AQM3Server"
+                       ;;             ;                                       "openjdk:17-alpine" "sh" "./start.sh")))
+                       ;;             ;                       (stop #~(make-kill-destructor)))))
+                       (simple-service 'plex-container shepherd-root-service-type
+                                       (list (shepherd-service
+                                              (auto-start? #f)
+                                              (provision '(plex))
+                                              (requirement '(networking automount))
+                                              (start #~(make-forkexec-constructor
+                                                        (list #$(file-append podman "/bin/podman")
+                                                              "run" "--name=plex" "--net=host" "--rm"
+                                                              "--memory=4g" "--memory-swap=6g"
+                                                              "-e" "PUID=0" "-e" "PGID=0"
+                                                              "-v" "/auto/cephfs/containers/plex:/config"
+                                                              "-v" "/auto/cephfs/media:/media-drive:rw"
+                                                              "--device" "/dev/dri:/dev/dri"
+                                                              "lscr.io/linuxserver/plex:1.26.2")))
+                                              (stop #~(make-kill-destructor)))))
+                       ;; (simple-service 'home-containers shepherd-root-service-type
+                       ;;                 (list (shepherd-service
+                       ;;                        (auto-start? #f)
+                       ;;                        (provision '(mosquitto))
+                       ;;                        (requirement '(networking automount))
+                       ;;                        (start #~(make-forkexec-constructor
+                       ;;                                  (list #$(file-append podman "/bin/podman")
+                       ;;                                        "run" "--name=mosquitto" "--net=host" "--rm"
+                       ;;                                        "--memory=512m"
+                       ;;                                        "-v" "/auto/cephfs/containers/mosquitto/:/mosquitto/config/"
+                       ;;                                        "docker.io/library/eclipse-mosquitto:2.0.14")))
+                       ;;                        (stop #~(make-kill-destructor)))
+                       ;;                       (shepherd-service
+                       ;;                        (auto-start? #f)
+                       ;;                        (provision '(openhab))
+                       ;;                        (requirement '(networking automount udev))
+                       ;;                        (start #~(make-forkexec-constructor
+                       ;;                                  (list #$(file-append podman "/bin/podman")
+                       ;;                                        "run" "--name=openhab" "--net=host" "--rm"
+                       ;;                                        "--memory=1g" "--memory-swap=2g"
+                       ;;                                        "-e" "GROUP_ID=995" "--device=/dev/ttyACM0"
+                       ;;                                        "-e" #$(string-append "EXTRA_JAVA_OPTS=-Duser.timezone=" timezone)
+                       ;;                                        "-v" "/etc/localtime:/etc/localtime:ro"
+                       ;;                                        "-v" "/etc/timezone:/etc/timezone:ro"
+                       ;;                                        "-v" "/auto/cephfs/containers/openhab/conf:/openhab/conf"
+                       ;;                                        "-v" "/auto/cephfs/containers/openhab/addons:/openhab/addons"
+                       ;;                                        "-v" "/auto/cephfs/containers/openhab/userdata:/openhab/userdata"
+                       ;;                                        "docker.io/openhab/openhab:3.2.0-debian")))
+                       ;;                        (stop #~(make-kill-destructor)))
+                       ;;                       ))
+                       (extra-special-file "/etc/containers/policy.json" podman-containers-policy)
+                       (extra-special-file "/etc/containers/storage.conf" podman-containers-storage)
+                       (service ceph-mon-service host-name)
+                       (service ceph-mgr-service host-name)
+                       (service ceph-mds-service (string-append host-name "-a"))
+                       )
+                      (map (lambda (pair) (service ceph-osd-service (ceph-osd-config (osd-id (car pair)) (fsid (cdr pair)))))
+                           '((0 . "44000608-0dc6-4b9d-af17-e01c5b36fcc2")
+                             (1 . "bb11606b-f170-438a-824e-baacf6cf5bda")
+                             (2 . "c62fbe43-0b7c-4554-bf9f-502a983bf021")
+                             (3 . "e88c198b-e531-4b4a-a672-0b179d1a6ab4")
+                             (4 . "1e2c7fc6-01c3-43dc-ab4d-8f9bb3d83098")
+                             (5 . "e58072fe-6fea-4502-a8b7-2a0ee32cd74c")))
+                      (modify-services %base-services
+                        (guix-service-type config =>
+                                           (guix-configuration
+                                            (inherit config)
+                                            (substitute-urls (cons "https://substitutes.nonguix.org"
+                                                                   %default-substitute-urls))
+                                            (authorized-keys (cons* xana-tampa-key nonguix-key %default-authorized-guix-keys))))
+                        (sysctl-service-type config =>
+                                             (sysctl-configuration
+                                              (settings (append '(("net.ipv4.ip_forward" . "1"))
+                                                                %default-sysctl-settings)))))))
 
-  ;; Allow resolution of '.local' host names with mDNS.
-  (name-service-switch %mdns-host-lookup-nss))
+    ;; Allow resolution of '.local' host names with mDNS.
+    (name-service-switch %mdns-host-lookup-nss)))
+
+(list
+ (machine
+  (operating-system system)
+  (environment managed-host-environment-type)
+  (configuration
+   (machine-ssh-configuration
+    (host-name "192.168.0.137")
+    (system "x86_64-linux")
+    (user "root")
+    (safety-checks? #t)
+    (authorize? #t)))))
