@@ -1,0 +1,24 @@
+From 65eb24c92a38b6c8846f2724635ff2acc2d8d2ae Mon Sep 17 00:00:00 2001
+From: Elijah Malaby <emalaby@usf.edu>
+Date: Fri, 27 May 2022 15:34:14 -0400
+Subject: [PATCH] window-tab-line-height to top-body window-edges
+
+---
+ lisp/window.el | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/lisp/window.el b/lisp/window.el
+index b9b032c33e9..0b978dc9dbd 100644
+--- a/lisp/window.el
++++ b/lisp/window.el
+@@ -3818,6 +3818,7 @@ window-edges
+ 	 (top-body
+ 	  (when body
+ 	    (+ (window-pixel-top window) border-width
++               (window-tab-line-height window)
+ 	       (window-header-line-height window))))
+ 	 (right (+ left (if pixelwise
+ 			    (window-pixel-width window)
+-- 
+2.41.0
+
