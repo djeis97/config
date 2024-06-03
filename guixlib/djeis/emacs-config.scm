@@ -82,13 +82,15 @@
                   (server-start)
                   (winner-mode)
                   (tab-bar-mode)
+                  (tab-bar-history-mode 1)
                   (window-divider-mode 1)
                   (menu-bar-mode -1)
                   (tool-bar-mode -1)
                   (scroll-bar-mode -1)
                   (tooltip-mode -1))))
     (prologue (setq-default treesit-extra-load-path '(#$emacs-ts-modules)))
-    (use-package browse-at-remote)
+    (use-package browse-at-remote
+      :custom (browse-at-remote-prefer-symbolic nil))
     (use-package djeis97
       :demand t)
     (use-package app-launcher
@@ -104,7 +106,9 @@
       :custom (xref-show-xrefs-function 'consult-xref)
       :general
       (djeis-leader
-       "s d" 'consult-ripgrep)
+       "b b" 'consult-buffer
+       "s d" 'consult-ripgrep
+       "p b" 'consult-project-buffer)
       ("M-g l" 'consult-line
        "M-g i" 'consult-imenu))
     (use-package corfu :hook (after-init . global-corfu-mode))
@@ -348,19 +352,18 @@
        "p" (or (lookup-key djeis-menu-map (kbd "p"))
                (make-composed-keymap nil project-prefix-map))
        "p t" 'project-other-tab-command
-       "p b" 'consult-project-buffer
        "w" (or (lookup-key djeis-menu-map (kbd "w"))
                (make-composed-keymap nil 'evil-window-map))
        "w -" 'split-window-below
        "w /" 'split-window-right
        "w c" 'tab-bar-new-tab
+       "w u" 'tab-bar-history-back
+       "w r" 'tab-bar-history-forward
        "w d" 'delete-window
        "w m" 'delete-other-windows
                                         ;             "w t" (or (lookup-key djeis-menu-map (kbd "w t"))
                                         ;                       (make-composed-keymap nil tab-prefix-map))
                                         ;             "w t d" 'tab-close
-       "w u" 'winner-undo
-       "w r" 'winnder-redo
        "q q" 'save-buffers-kill-emacs)
       ;; Keep the generated stuff separate, so that I can re-eval the static stuff more easily...
       (djeis-leader

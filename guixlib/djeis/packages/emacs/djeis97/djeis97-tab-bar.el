@@ -233,13 +233,20 @@
 
 (defvar djeis97-tab-bar-timer nil)
 
+(defun djeis97-tab-bar-group-name-shorten (group)
+  (let ((split (split-string group "[ _\\-]")))
+    (if (< 1 (length split))
+        (upcase (concat (seq-subseq (cl-first split) 0 1)
+                        (seq-subseq (cl-second split) 0 1)))
+      (capitalize (seq-subseq group 0 2)))))
+
 ;;;###autoload
 (defun djeis97-tab-bar-tab-name-format (tab i)
   (let ((current-p (eq (car tab) 'current-tab))
         (group (funcall tab-bar-tab-group-function tab)))
     (concat
      (if group
-         (propertize (concat (capitalize (seq-subseq group 0 2)) " ")
+         (propertize (concat (djeis97-tab-bar-group-name-shorten group) " ")
                      'face (list :inherit (tab-bar-tab-face-default tab)
                                  :foreground "#000000"
                                  :background (djeis97-utils-color-hash group)
