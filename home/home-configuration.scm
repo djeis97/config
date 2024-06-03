@@ -66,13 +66,13 @@
                               sshuttle
                               (map specification->package
                                    '("python" "curl" "rlwrap" "kubectl" "nftables"
-                                     "podman" "git-crypt" "leiningen" "node" "mysql")))
+                                     "podman" "git-crypt" "leiningen" "node" "mysql"
+                                     "ruby-solargraph")))
                        (cons* "coq"
                               (map specification->package
                                    '("coq" "coq-equations")))))
         (service home-dbus-service-type)
         (service home-pipewire-service-type)
-
         (simple-service 'clojure-config home-xdg-configuration-files-service-type
                         `(("clojure/deps.edn" ,(plain-file "deps.edn" "\
 {:aliases {:djeis/nrepl {:extra-deps {nrepl/nrepl {:mvn/version \"1.0.0\"}} :main-opts [\"-m\" \"nrepl.cmdline\"]}}}"))))
