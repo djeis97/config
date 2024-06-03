@@ -18,5 +18,6 @@ xana-backup:
     sudo umount /dev/nbd0
     sudo rbd-nbd unmap rbd-meta/XANA-tampa-snapshots
     
-
+xana-steam:
+    XMODIFIERS= guix shell -f home/xana-tampa-steam.scm -- steam
 
