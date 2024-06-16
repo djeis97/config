@@ -1,5 +1,5 @@
 (define-module (djeis packages emacs)
-  #:use-module ((djeis packages) #:prefix djeis:)
+  #:use-module ((djeis channel) #:prefix djeis:)
   #:use-module (gnu packages emacs)
   #:use-module ((gnu packages emacs-xyz) #:prefix gnu:)
   #:use-module ((gnu packages tree-sitter) #:select (tree-sitter))

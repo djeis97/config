@@ -1,4 +1,4 @@
-(define-module (djeis packages)
+(define-module (djeis channel)
   #:use-module ((gnu packages) #:prefix gnu:)
   #:use-module (guix diagnostics)
   #:use-module (guix i18n)
