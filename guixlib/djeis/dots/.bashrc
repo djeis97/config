@@ -10,12 +10,6 @@ if [ "$SHLVL" -gt 1 ]; then
     fi
 fi
 
-if [ -n "$GUIX_ENVIRONMENT" ]; then
-    if [[ $PS1 =~ (.*)"\\$" ]]; then
-        PS1="${BASH_REMATCH[1]} [env]\\\$ "
-    fi
-fi
-
 function vterm_printf(){
     if [ -n "$TMUX" ]; then
         # tell tmux to pass the escape sequences through
