@@ -2,7 +2,8 @@
   #:use-module (gnu packages)
   #:use-module (srfi srfi-1)
   #:use-module (djeis services emacs-config)
-  #:use-module (djeis packages emacs))
+  #:use-module (djeis packages emacs)
+  #:use-module ((gnu packages coq) #:select (proof-general)))
 
 (define-public emacs-basics
   (emacs-config-service emacs-basics
@@ -87,7 +88,7 @@
                   (menu-bar-mode -1)
                   (tool-bar-mode -1)
                   (scroll-bar-mode -1)
-                  (tooltip-mode -1))))
+                  (tooltip-mode +1))))
     (prologue (setq-default treesit-extra-load-path '(#$emacs-ts-modules)))
     (use-package browse-at-remote
       :custom (browse-at-remote-prefer-symbolic nil))
@@ -278,7 +279,7 @@
       :config (jarchive-mode +1))
     (use-package sly)
     (use-package proof-general
-      (package (specification->package "proof-general")))
+      (package proof-general))
     ;; (use-package eglot
     ;;   :config
     ;;   (add-to-list 'eglot-server-programs '((clojure-mode clojurescript-mode) "clojure-lsp")))

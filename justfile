@@ -1,14 +1,10 @@
 home-reconfigure:
-    guix home build --no-grafts -L $PWD/guixlib home/home-configuration.scm -M 8
-    guix home reconfigure -L $PWD/guixlib home/home-configuration.scm -M 8
+    guix home build --no-grafts -e '((@ (djeis home) get-this-host-home-config))' -M 8
+    guix home reconfigure -e '((@ (djeis home) get-this-host-home-config))' -M 8
 
-laptop-reconfigure:
-    sudo guix system build --no-grafts -L $PWD/guixlib laptop.scm -M 6
-    sudo guix system reconfigure -L $PWD/guixlib laptop.scm -M 6
-
-xana-reconfigure:
-    sudo guix system build --no-grafts -L $PWD/guixlib xana-tampa.scm -M 6
-    sudo guix system reconfigure -L $PWD/guixlib xana-tampa.scm -M 6
+system-reconfigure:
+    sudo -E guix system build --no-grafts -e '((@ (djeis system) get-this-host-os))' -M 6
+    sudo -E guix system reconfigure -e '((@ (djeis system) get-this-host-os))' -M 6
 
 xana-backup:
     sudo modprobe nbd
@@ -18,6 +14,5 @@ xana-backup:
     sudo umount /dev/nbd0
     sudo rbd-nbd unmap rbd-meta/XANA-tampa-snapshots
     
-xana-steam:
-    XMODIFIERS= guix shell -f home/xana-tampa-steam.scm -- steam
-
+bootstrap-home:
+    guix home container -N -L $PWD/guixlib --expose=$PWD --expose=/gnu --expose=/var/guix/daemon-socket -e '((@ (djeis home) bootstrapping-home-config))'

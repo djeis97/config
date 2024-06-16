@@ -4,9 +4,6 @@
 
 # If not running interactively, don't do anything
 
-alias ls='ls --color=auto'
-PS1='[\u@\h \W]\$ '
-
 if [ "$SHLVL" -gt 1 ]; then
     if [[ $PS1 =~ (.*)"\\$" ]]; then
         PS1="${BASH_REMATCH[1]} [L$SHLVL]\\\$ "
@@ -75,38 +72,38 @@ vterm_cmd() {
         fi
     }
 
-    gwith ()
-    {
-        local PACKAGES=()
-        local ARGS=()
+gwith ()
+{
+    local PACKAGES=()
+    local ARGS=()
 
-        while [[ $1 ]]
-        do
-            case "$1" in
-                --)
-                    shift
-                    break
-                    ;;
-                *)
-                    PACKAGES+=("$1")
-                    shift
-            esac
-        done
+    while [[ $1 ]]
+    do
+        case "$1" in
+            --)
+                shift
+                break
+                ;;
+            *)
+                PACKAGES+=("$1")
+                shift
+        esac
+    done
 
-        while [[ $1 ]]
-        do
-            case "$1" in
-                *)
-                    ARGS+=("$1")
-                    shift
-            esac
-        done
+    while [[ $1 ]]
+    do
+        case "$1" in
+            *)
+                ARGS+=("$1")
+                shift
+        esac
+    done
 
-        if [[ $ARGS[0] ]]; then
-            guix shell glibc ${PACKAGES[@]} -- sh -c "\$GUIX_ENVIRONMENT/lib/ld-linux-x86-64.so.2 --library-path \$GUIX_ENVIRONMENT/lib ${ARGS[*]}"
-        else
-            echo "You need a -- to indicate pacakges."
-        fi
-    }
+    if [[ $ARGS[0] ]]; then
+        guix shell glibc ${PACKAGES[@]} -- sh -c "\$GUIX_ENVIRONMENT/lib/ld-linux-x86-64.so.2 --library-path \$GUIX_ENVIRONMENT/lib ${ARGS[*]}"
+    else
+        echo "You need a -- to indicate pacakges."
+    fi
+}
 
-    eval "$(direnv hook bash)"
+eval "$(direnv hook bash)"

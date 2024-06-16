@@ -74,9 +74,7 @@
    (host-name "a-vm")
    (timezone "America/New_York")
    (locale "en_US.utf8")
-   (bootloader (bootloader-configuration
-                (bootloader grub-bootloader)
-                (targets '("error"))))
+   (bootloader #f)
    (initrd (lambda (file-systems . rest)
              (apply base-initrd file-systems
                     #:volatile-root? #t

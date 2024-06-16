@@ -21,7 +21,7 @@ FILE-NAME found in %PATCH-PATH."
 
 (define %channel-root
   (find (lambda (path)
-          (file-exists? (string-append path "/djeis/packages.scm")))
+          (file-exists? (string-append path "/djeis/channel.scm")))
         %load-path))
 
 (define %patch-path
