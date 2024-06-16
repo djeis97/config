@@ -32,6 +32,7 @@
     (list (service-extension home-service-type manifests->profiles)))
    (compose concatenate)
    (extend append)
+   (default-value (list))
    (description "")))
 
 
