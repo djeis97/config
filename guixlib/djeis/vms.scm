@@ -70,28 +70,28 @@
    %base-services))
 
 (define-public basic-libvirt+ceph-vm-system
-  (operating-sytem
-   (host-name "a-vm")
-   (timezone "America/New_York")
-   (locale "en_US.utf8")
-   (bootloader #f)
-   (initrd (lambda (file-systems . rest)
-             (apply base-initrd file-systems
-                    #:volatile-root? #t
-                    rest)))
-   (file-systems (cons* (file-system
-                         (mount-point "/")
-                         (device "/dev/vda1")
-                         (type "ext4"))
-                        (file-system
-                         (mount-point "/gnu/store")
-                         (device "guix-store")
-                         (flags '(read-only))
-                         (options "loose,trans=virtio,msize=512000")
-                         (type "9p")
-                         (needed-for-boot? #t)
-                         (create-mount-point? #t))
-                        (append %control-groups %base-file-systems)))))
+  (operating-system
+    (host-name "a-vm")
+    (timezone "America/New_York")
+    (locale "en_US.utf8")
+    (bootloader #f)
+    (initrd (lambda (file-systems . rest)
+              (apply base-initrd file-systems
+                     #:volatile-root? #t
+                     rest)))
+    (file-systems (cons* (file-system
+                           (mount-point "/")
+                           (device "/dev/vda1")
+                           (type "ext4"))
+                         (file-system
+                           (mount-point "/gnu/store")
+                           (device "guix-store")
+                           (flags '(read-only))
+                           (options "loose,trans=virtio,msize=512000")
+                           (type "9p")
+                           (needed-for-boot? #t)
+                           (create-mount-point? #t))
+                         (append %control-groups %base-file-systems)))))
 
 (define (basic-libvirt+ceph-vm system uuid host-lan-interface host-bridge)
   (libvirt-vm
