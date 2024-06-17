@@ -66,6 +66,7 @@
                                                  'project-try-vc)
                     eglot-connect-timeout 120
                     auto-save-file-name-transforms (list (list ".*" "~/.cache/emacs/auto-saves/" t))
+                    warning-suppress-types '((comp))
                     )
       (push (cons 'alpha-background 0.85) default-frame-alist)
       (push (cons 'internal-border-width 10) default-frame-alist)
