@@ -1,0 +1,9 @@
+Unless otherwise indicated, code I (djeis97, Elijah Malaby) have written
+defining guix packages in this respository (the scheme code comprising package
+definitions authored by me in guixlib/djeis/packages/) is released to the public
+domain. Similarly, any software patches authored by me and referenced by those
+packages (to be found in guixlib/djeis/patches/) are released to the public
+domain. The rest of the code authored by me in this repository is released under
+CC BY-NC 4.0, the attribution-noncommercial creative commons license:
+
+https://creativecommons.org/licenses/by-nc/4.0/
