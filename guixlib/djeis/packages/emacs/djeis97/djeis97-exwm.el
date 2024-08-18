@@ -22,7 +22,7 @@
 (require 'exwm)
 (require 'exwm-randr)
 (require 'exwm-systemtray)
-                                        ;TEMP(require 'exwm-xim)
+(require 'exwm-xim)
 (require 'cl-lib)
 (require 'doom-modeline)
 ;; (require 'exwm-edit)
@@ -84,12 +84,12 @@
 
 (exwm-systemtray-enable)
 
-                                        ;TEMP(push ?\C-\\ exwm-input-prefix-keys)
-                                        ;TEMP(setenv "GTK_IM_MODULE" "xim")
-                                        ;TEMP(setenv "QT_IM_MODULE" "xim")
-                                        ;TEMP(setenv "CLUTTER_IM_MODULE" "xim")
-                                        ;TEMP(setenv "XMODIFIERS" "@im=exwm-xim")
-                                        ;TEMP(exwm-xim-enable)
+(push ?\C-\\ exwm-input-prefix-keys)
+(setenv "GTK_IM_MODULE" "xim")
+(setenv "QT_IM_MODULE" "xim")
+(setenv "CLUTTER_IM_MODULE" "xim")
+(setenv "XMODIFIERS" "@im=exwm-xim")
+(exwm-xim-enable)
 
 (defsubst djeis97/doom-modeline--exwm-title ()
   "The current buffer name."
