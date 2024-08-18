@@ -61,27 +61,29 @@
         #~(modify-phases #$phases
             (delete 'check)))))))
 
+
 (define (emacs-packaging-config->packages config)
-  (letrec ((the-emacs (emacs-packaging-config-emacs-package config))
-           (transformer (package-mapping
-                         (lambda (p)
-                           (let ((emacsen (list "emacs" "emacs-minimal"))
-                                 (untestworthy (list
-                                                ;; "emacs-helpful"
-                                                ;; "emacs-elisp-refs"
-                                                ;; "emacs-all-the-icons"
-                                                ;; "emacs-rainbow-delimiters"
-                                                ;; "emacs-lispy"
-                                                ;; "emacs-yasnippet"
-                                                ))
-                                 (sub-alist `(("emacs-powerline" . ,emacs-powerline)
-                                              ("emacs-general" . ,emacs-general))))
-                             (cond ((member (package-name p) emacsen) emacs-transp)
-                                   ((member (package-name p) untestworthy) (package-without-tests p))
-                                   ((assoc-ref sub-alist (package-name p)))
-                                   (else p))))
-                         (const #f)
-                         #:deep? #t)))
+  (let* ((the-emacs (emacs-packaging-config-emacs-package config))
+         (transformer (package-mapping
+                       (lambda (p)
+                         (let ((emacsen (list "emacs" "emacs-minimal"))
+                               (untestworthy (list
+                                              "emacs-ess"
+                                              ;; "emacs-helpful"
+                                              ;; "emacs-elisp-refs"
+                                              ;; "emacs-all-the-icons"
+                                              ;; "emacs-rainbow-delimiters"
+                                              ;; "emacs-lispy"
+                                              ;; "emacs-yasnippet"
+                                              ))
+                               (sub-alist `(("emacs-powerline" . ,emacs-powerline)
+                                            ("emacs-general" . ,emacs-general))))
+                           (cond ((member (package-name p) emacsen) the-emacs)
+                                 ((member (package-name p) untestworthy) (package-without-tests p))
+                                 ((assoc-ref sub-alist (package-name p)))
+                                 (else p))))
+                       (const #f)
+                       #:deep? #t)))
     (cons* the-emacs
            (map (lambda (package-pair)
                   (let ((package (car package-pair)))
