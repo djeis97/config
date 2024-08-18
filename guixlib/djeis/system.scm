@@ -48,7 +48,7 @@
               (servers
                '("/ec2.internal/127.10.0.1"
                  "/iris.internal/127.10.0.1"
-                 "1.1.1.1")))))
+                 "8.8.8.8")))))
    (modify-services
        %desktop-services
      (guix-service-type
