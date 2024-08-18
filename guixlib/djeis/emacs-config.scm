@@ -3,7 +3,8 @@
   #:use-module (srfi srfi-1)
   #:use-module (djeis services emacs-config)
   #:use-module (djeis packages emacs)
-  #:use-module ((gnu packages coq) #:select (proof-general)))
+  #:use-module ((gnu packages coq) #:select (proof-general))
+  #:use-module ((gnu packages tree-sitter) #:select (tree-sitter-json tree-sitter-dockerfile)))
 
 (define-public emacs-basics
   (emacs-config-service emacs-basics
@@ -259,6 +260,9 @@
       (org-src-preserve-indentation t)
       (org-startup-folded 'showall))
     (use-package org-contrib)
+    (use-package ob-async
+      :after org
+      :demand t)
     (use-package org-roam
       :custom
       (org-roam-directory "~/Dropbox/org/roam/")
@@ -289,7 +293,19 @@
     (use-package ob-restclient)
     (use-package yaml-mode)
     (use-package just-mode)
-    (use-package bqn-mode)))
+    (use-package bqn-mode)
+    (use-package ess)
+    (use-package dockerfile-ts-mode
+      (package tree-sitter-dockerfile)
+      :mode ("[/\\]\\(?:Containerfile\\|Dockerfile\\)\\(?:\\.[^/\\]*\\)?\\'"
+             . dockerfile-ts-mode)
+      :config (with-eval-after-load 'org
+                (add-to-list 'org-src-lang-modes (cons "dockerfile" 'dockerfile-ts))))
+    (use-package json-ts-mode
+      (package tree-sitter-json)
+      :mode ("\\.json\\'" . json-ts-mode)
+      :config (with-eval-after-load 'org
+                (add-to-list 'org-src-lang-modes (cons "json" 'json-ts))))))
 
 (define-public emacs-keys
   (emacs-config-service emacs-keys
