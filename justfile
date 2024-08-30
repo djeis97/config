@@ -3,8 +3,15 @@ home-reconfigure:
     guix home reconfigure -e '((@ (djeis home) get-this-host-home-config))' -M 8
 
 system-reconfigure:
-    sudo -E guix system build --no-grafts -e '((@ (djeis system) get-this-host-os))' -M 6
+    sudo mv /var/guix/profiles/current-system-graftless-build /var/guix/profiles/current-system-graftless-build.bak
+    sudo -E guix system build -r /var/guix/profiles/current-system-graftless-build --no-grafts -e '((@ (djeis system) get-this-host-os))' -M 8
+    sudo rm /var/guix/profiles/current-system-graftless-build.bak
     sudo -E guix system reconfigure -e '((@ (djeis system) get-this-host-os))' -M 6
+
+system-update:
+    guix pull
+    sudo -E guix system build --no-grafts -e '((@ (djeis system) get-this-host-os))' -M 8
+    sudo -E guix system reconfigure -e '((@ (djeis system) get-this-host-os))' -M 8
 
 xana-backup:
     sudo modprobe nbd
