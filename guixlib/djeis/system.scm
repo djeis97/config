@@ -48,7 +48,12 @@
               (servers
                '("/ec2.internal/127.10.0.1"
                  "/iris.internal/127.10.0.1"
-                 "8.8.8.8")))))
+                 "8.8.8.8"))))
+    (service guix-publish-service-type
+             (guix-publish-configuration
+              (port 81)
+              (host "0.0.0.0")
+              (advertise? #t))))
    (modify-services
        %desktop-services
      (guix-service-type
@@ -58,9 +63,11 @@
        (substitute-urls (cons* "https://substitutes.nonguix.org"
                                "https://guix.bordeaux.inria.fr"
                                %default-substitute-urls))
-       (authorized-keys (cons* nonguix-key
+       (authorized-keys (cons* xana-tampa-key
+                               nonguix-key
                                bordeaux-inria-key
-                               %default-authorized-guix-keys)))))))
+                               %default-authorized-guix-keys))
+       (discover? #t))))))
 
 (define %djeis-common-desktop-os
   (operating-system
