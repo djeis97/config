@@ -18,6 +18,7 @@
   #:use-module (djeis packages email)
   #:use-module (djeis packages sshuttle)
   #:use-module (djeis packages x2x)
+  #:use-module (djeis packages kubectl)
   #:use-module (djeis emacs-config)
   #:use-module (djeis services)
   #:use-module (srfi srfi-1))
@@ -75,10 +76,11 @@
                   (list (cons* "iris"
                                (list (specification->package "openjdk@17") "jdk")
                                sshuttle
+                               kubectl
                                (map specification->package
-                                    '("python" "curl" "rlwrap" "kubectl" "nftables"
-                                      "podman" "git-crypt" "leiningen" "node" "mysql"
-                                      "ruby-solargraph")))
+                                    '("python" "curl" "rlwrap" "nftables" "podman"
+                                      "git-crypt" "leiningen" "node" "mysql"
+                                      "ruby-solargraph" "postgresql")))
                         (cons* "coq"
                                (map specification->package
                                     '("coq" "coq-equations")))))

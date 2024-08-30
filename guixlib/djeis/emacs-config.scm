@@ -73,12 +73,14 @@
       (push (cons 'internal-border-width 10) default-frame-alist)
       (push (cons 'bottom-divider-width 10) default-frame-alist)
       (push (cons 'right-divider-width 10) default-frame-alist)
-      (push '(setq-local org-roam-directory
-                         (expand-file-name (locate-dominating-file
-                                            default-directory ".dir-locals.el")))
-            safe-local-eval-forms)
-      (push '(setq-local org-roam-db-location
-                         (expand-file-name "org-roam.db" org-roam-directory))
+      (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+      (push '(progn
+              (setq-local
+               org-roam-directory (expand-file-name (locate-dominating-file
+                                                     default-directory ".dir-locals.el")))
+              (setq-local
+               org-roam-db-location (expand-file-name "org-roam.db"
+                                                      org-roam-directory)))
             safe-local-eval-forms)
       (add-hook 'after-init-hook 
                 (lambda ()
