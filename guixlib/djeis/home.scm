@@ -94,13 +94,6 @@
                                 (provision '(syncthing))
                                 (start #~(make-forkexec-constructor '("syncthing" "-no-browser")))
                                 (stop #~(make-kill-destructor)))))
-         (simple-service 'davmail home-shepherd-service-type
-                         (list (shepherd-service
-                                (provision '(davmail))
-                                (start #~(make-forkexec-constructor '("java"
-                                                                      "-cp" #$(file-append davmail "/davmail.jar")
-                                                                      "davmail.DavGateway")))
-                                (stop #~(make-kill-destructor)))))
          emacs-basics
          emacs-appearance
          emacs-lang-config
@@ -132,7 +125,7 @@
                   "btrbk" "password-store" "firefox" "dunst"
                   "xautolock" "openjdk" "mu" "isync"
                   "qutebrowser" "remmina" "bluez" "sqlite"
-                  "unzip" "virt-manager" "openssh"
+                  "unzip" "virt-manager" "openssh" "xss-lock"
                   "playerctl" "w3m" "nss-certs" "clojure-lsp"))
            (minimal-home-packages))))
 

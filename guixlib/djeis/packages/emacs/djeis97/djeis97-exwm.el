@@ -144,10 +144,6 @@ directory, the file name, and its state (modified, read-only or non-existent)."
 (add-hook 'exwm-init-hook
           (lambda ()
             (interactive)
-            (djeis97-exwm/runner "dunst" "*Dunst*" "dunst")
-            (djeis97-exwm/runner "screenlock" "*screenlock*" "guix shell xss-lock -- xss-lock -- slock")
-            (djeis97-exwm/runner "playerctld" "*playerctld*" "playerctld")
-            ;; (djeis97-exwm/runner "davmail" "*davmail*" "java -cp $(guix build -L /home/jay/Dropbox/guix/lib/ davmail)/davmail.jar davmail.DavGateway")
             (exwm-workspace--modify-all-x-frames-parameters
              '((internal-border-width . 10)))
             (cl-loop for f in (frame-list) do
