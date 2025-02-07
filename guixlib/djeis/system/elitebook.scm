@@ -8,7 +8,7 @@
 (use-modules (gnu) (guix utils))
 (use-modules ((djeis keys) #:select (nonguix-key))
              (djeis system))
-(use-service-modules linux)
+(use-service-modules linux nix)
 
 (define (btrfs-fs subvol target)
   (file-system
@@ -34,6 +34,7 @@
                          (btrfs-fs "@guix/store" "/gnu/store")
                          (btrfs-fs "@guix/var" "/var/guix")
                          (btrfs-fs "@home" "/home")
+                         (btrfs-fs "@nix" "/nix")
                          (btrfs-fs "@snapshots" "/.snapshots")
                          %base-file-systems))
 
@@ -50,6 +51,7 @@
                                                       '("root:65536:65536"
                                                         "jay:16777216:65536")
                                                       "\n" 'suffix)))))
+                     (service nix-service-type)
                      (service zram-device-service-type
                               (zram-device-configuration
                                (size "4G")))

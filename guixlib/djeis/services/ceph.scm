@@ -69,7 +69,7 @@
     (provision '(ceph-mgr))
     (start #~(make-forkexec-constructor (list #$(file-append ceph "/bin/ceph-mgr") "-i" #$mgr-name "-f")
                                         #:environment-variables
-                                        (cons* (string-append "PYTHONPATH=" #$(file-append ceph "/lib/python3.9/site-packages"))
+                                        (cons* (string-append "PYTHONPATH=" #$(file-append ceph "/lib/python3.10/site-packages"))
                                                (default-environment-variables))))
     (stop #~(make-kill-destructor)))))
 

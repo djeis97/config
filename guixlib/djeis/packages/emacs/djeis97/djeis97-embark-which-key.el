@@ -52,7 +52,7 @@ targets."
   "Hide the which-key indicator immediately when using the completing-read prompter."
   (which-key--hide-popup-ignore-command)
   (let ((embark-indicators
-         (remq #'embark-which-key-indicator embark-indicators)))
+         (remq #'djeis97-embark-which-key-indicator embark-indicators)))
     (apply fn args)))
 
 (provide 'djeis97-embark-which-key)

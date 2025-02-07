@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source ~/.profile
+#source ~/.profile
 setxkbmap -option "ctrl:swapcaps"
 xmodmap -e "keycode any = F20"
 xcape -e "Alt_L=parenleft;Alt_R=parenright;#66=F20"

@@ -25,6 +25,12 @@
             epilogue
             emacs-config-service))
 
+;; (define (build-emacs-pdump emacs pkgs)
+;;   (with-imported-modules (source-module-closure '((guix build emacs-utils)))
+;;     #~(begin
+;;         (use-modules (guix build emacs-utils))
+;;         (setenv "PATH" ))))
+
 (define-record-type* <emacs-packaging-config>
   emacs-packaging-config make-emacs-packaging-config
   emacs-packaging-config?
@@ -69,15 +75,17 @@
                          (let ((emacsen (list "emacs" "emacs-minimal"))
                                (untestworthy (list
                                               "emacs-ess"
-                                              ;; "emacs-helpful"
+                                              "emacs-buttercup"
+                                              "emacs-helpful"
                                               ;; "emacs-elisp-refs"
                                               ;; "emacs-all-the-icons"
                                               ;; "emacs-rainbow-delimiters"
-                                              ;; "emacs-lispy"
-                                              ;; "emacs-yasnippet"
+                                              "emacs-lispy"
+                                              "emacs-yasnippet"
                                               ))
                                (sub-alist `(("emacs-powerline" . ,emacs-powerline)
-                                            ("emacs-general" . ,emacs-general))))
+                                            ("emacs-general" . ,emacs-general)
+                                            ("emacs-which-key" . ,the-emacs)))) ;; Which-key is built in now.
                            (cond ((member (package-name p) emacsen) the-emacs)
                                  ((member (package-name p) untestworthy) (package-without-tests p))
                                  ((assoc-ref sub-alist (package-name p)))

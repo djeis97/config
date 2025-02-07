@@ -149,6 +149,74 @@
                 (file-name (git-file-name (package-name gnu:emacs-general) version))
                 (sha256 (base32 "0c13kax2h14b06zjs8wj950y7ykzmabfwdmb8imwmpgfcaasycf2")))))))
 
+(define-public emacs-kele
+  (let ((commit "beec4a76c090101d8a98e631c292207be3c3a6a1"))
+    (package
+      (name "emacs-kele")
+      (version "0.6.0")
+      (source (origin
+                (method git-fetch)
+                (uri (git-reference
+                      (url "https://github.com/jinnovation/kele.el")
+                      (commit commit)))
+                (file-name (git-file-name name version))
+                (sha256 (base32 "0h67jvvql9z969wzzxx8g2hnnzxw5p1wqc211258bgyxm6p25yzq"))))
+      (build-system emacs-build-system)
+      (license #f)
+      (description "")
+      (synopsis "")
+      (home-page "https://github.com/jinnovation/kele.el")
+      (propagated-inputs (list gnu:emacs-dash
+                               gnu:emacs-async
+                               gnu:emacs-f
+                               gnu:emacs-ht
+                               gnu:emacs-memoize
+                               gnu:emacs-plz
+                               gnu:emacs-s
+                               gnu:emacs-yaml)))))
+
+(define-public emacs-kubed
+  (let ((commit "a429d82e05e4d097ee431cd385f1a6679f606815"))
+    (package
+      (name "emacs-kubed")
+      (version (git-version "0.4.1" "0" commit))
+      (source (origin
+                (method git-fetch)
+                (uri (git-reference
+                      (url "https://git.sr.ht/~eshel/kubed")
+                      (commit commit)))
+                (file-name (git-file-name name version))
+                (sha256 (base32 "1p37x82nkvmcbylp7cj5g6a9g8hih6zhiy1kwhvrplh9fcl9pzlf"))))
+      (build-system emacs-build-system)
+      (license #f)
+      (description "")
+      (synopsis "")
+      (home-page "https://eshelyaron.com/kubed.html"))))
+
+(define-public emacs-kubel
+  (let ((commit "7b4f967ee8733a1f8798c39255a26d71aff1f55b"))
+    (package
+      (name "emacs-kubel")
+      (version (git-version "3.0" "0" commit))
+      (source (origin
+                (method git-fetch)
+                (uri (git-reference
+                      (url "https://github.com/abrochard/kubel")
+                      (commit commit)))
+                (file-name (git-file-name name version))
+                (sha256 (base32 "07yn3g8znzgndkg2bajmkwywdzrdjslkvldzanj8cnhlmax80kvn"))))
+      (build-system emacs-build-system)
+      (license #f)
+      (description "")
+      (synopsis "")
+      (home-page "https://github.com/abrochard/kubel")
+      (propagated-inputs (list gnu:emacs-dash
+                               gnu:emacs-s
+                               gnu:emacs-yaml-mode
+                               gnu:emacs-transient
+                               gnu:emacs-evil)))))
+
+
 (define* (local-emacs-package base-name #:optional (deps (list)))
   (package
     (name (string-append "emacs-" base-name))

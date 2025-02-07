@@ -20,7 +20,8 @@
 ;;; Code:
 
 (require 'color)
- 
+(require 'vc)
+
 (defvar djeis97-utils-launcher--prompt "$ ")
 
 ;;;###autoload
@@ -144,6 +145,16 @@ normal-top-level... Maybe needed to be updated some day?"
 (defun djeis97-utils-vterm-ssh-rename (hostname)
   (interactive "s")
   (rename-buffer (concat "*vterm-" hostname "*")))
+
+;;;###autoload
+(defun djeis97-utils-auto-save-tweaks ()
+  (if (and buffer-file-name (vc-registered buffer-file-name))
+      (progn
+        (auto-save-mode 0)
+        (auto-save-visited-mode 1))
+    (progn
+      (auto-save-mode 1)
+      (auto-save-visited-mode 0))))
 
 (provide 'djeis97-utils)
 ;;; djeis97-utils.el ends here

@@ -71,7 +71,7 @@
         (when (and (eq action 'preview) (markerp cand) (marker-buffer cand) (not the-posframe))
           (setq the-posframe (djeis97-exwm-consult--show-preview-posframe (marker-buffer cand)))
           (setq shown-buffer (marker-buffer cand)))
-        (when the-posframe
+        (when (and the-posframe (frame-live-p the-posframe))
           (select-window (frame-first-window the-posframe)))
         (funcall orig-state action cand)
         (when-let ((mini (active-minibuffer-window)))

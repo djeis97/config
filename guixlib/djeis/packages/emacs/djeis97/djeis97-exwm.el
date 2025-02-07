@@ -80,16 +80,16 @@
 
 (add-hook 'exwm-init-hook #'djeis97/exwm-update-randr)
 (add-hook 'exwm-randr-refresh-hook #'djeis97/exwm-update-randr)
-(exwm-randr-enable)
+(exwm-randr-mode +1)
 
-(exwm-systemtray-enable)
+(exwm-systemtray-mode +1)
 
 (push ?\C-\\ exwm-input-prefix-keys)
 (setenv "GTK_IM_MODULE" "xim")
 (setenv "QT_IM_MODULE" "xim")
 (setenv "CLUTTER_IM_MODULE" "xim")
 (setenv "XMODIFIERS" "@im=exwm-xim")
-(exwm-xim-enable)
+(exwm-xim-mode +1)
 
 (defsubst djeis97/doom-modeline--exwm-title ()
   "The current buffer name."

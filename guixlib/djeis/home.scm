@@ -24,52 +24,53 @@
   #:use-module (srfi srfi-1))
 
 (define-public (minimal-home-services host-name)
-  (list (service home-channels-service-type
-                 (cons*
-                  ;; (channel
-                  ;;  (name 'guix-past)
-                  ;;  (url "https://gitlab.inria.fr/guix-hpc/guix-past")
-                  ;;  (introduction
-                  ;;   (make-channel-introduction
-                  ;;    "0c119db2ea86a389769f4d2b9c6f5c41c027e336"
-                  ;;    (openpgp-fingerprint
-                  ;;     "3CE4 6455 8A84 FDC6 9DB4  0CFB 090B 1199 3D9A EBB5"))))
-                  ;; (channel
-                  ;;  (name 'rekahsoft-guix)
-                  ;;  (url "https://git.rekahsoft.ca/rekahsoft/rekahsoft-guix"))
-                  (channel
-                   (name 'nonguix)
-                   (url "https://gitlab.com/nonguix/nonguix")
-                   (introduction
-                    (make-channel-introduction
-                     "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
-                     (openpgp-fingerprint
-                      "2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5"))))
-                  ;; (channel
-                  ;;  (name 'flat)
-                  ;;  (url "https://github.com/flatwhatson/guix-channel.git")
-                  ;;  (introduction
-                  ;;   (make-channel-introduction
-                  ;;    "33f86a4b48205c0dc19d7c036c85393f0766f806"
-                  ;;    (openpgp-fingerprint
-                  ;;     "736A C00E 1254 378B A982  7AF6 9DBE 8265 81B6 4490"))))
-                  %default-channels))
-        (service
-         home-bash-service-type
-         (home-bash-configuration
-          (bashrc
-           (list (local-file (string-append %channel-root "/djeis/dots/.bashrc")
-                             "bashrc")))))
-        (simple-service 'djeis-guixlib-package-path home-environment-variables-service-type
-                        `(("GUIX_PACKAGE_PATH" . ,%channel-root)))
-        (service home-dotfiles-service-type
-                 (home-dotfiles-configuration
-                  (source-directory %channel-root)
-                  (directories '("./djeis/dots"))
-                  (layout 'stow)
-                  (packages (if host-name
-                                (list host-name "common")
-                                (list "common")))))))
+  (cons* (service home-channels-service-type
+                  (cons*
+                   ;; (channel
+                   ;;  (name 'guix-past)
+                   ;;  (url "https://gitlab.inria.fr/guix-hpc/guix-past")
+                   ;;  (introduction
+                   ;;   (make-channel-introduction
+                   ;;    "0c119db2ea86a389769f4d2b9c6f5c41c027e336"
+                   ;;    (openpgp-fingerprint
+                   ;;     "3CE4 6455 8A84 FDC6 9DB4  0CFB 090B 1199 3D9A EBB5"))))
+                   ;; (channel
+                   ;;  (name 'rekahsoft-guix)
+                   ;;  (url "https://git.rekahsoft.ca/rekahsoft/rekahsoft-guix"))
+                   (channel
+                    (name 'nonguix)
+                    (url "https://gitlab.com/nonguix/nonguix")
+                    (introduction
+                     (make-channel-introduction
+                      "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
+                      (openpgp-fingerprint
+                       "2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5"))))
+                   ;; (channel
+                   ;;  (name 'flat)
+                   ;;  (url "https://github.com/flatwhatson/guix-channel.git")
+                   ;;  (introduction
+                   ;;   (make-channel-introduction
+                   ;;    "33f86a4b48205c0dc19d7c036c85393f0766f806"
+                   ;;    (openpgp-fingerprint
+                   ;;     "736A C00E 1254 378B A982  7AF6 9DBE 8265 81B6 4490"))))
+                   %default-channels))
+         (service
+          home-bash-service-type
+          (home-bash-configuration
+           (bashrc
+            (list (local-file (string-append %channel-root "/djeis/dots/.bashrc")
+                              "bashrc")))))
+         (simple-service 'djeis-guixlib-package-path home-environment-variables-service-type
+                         `(("GUIX_PACKAGE_PATH" . ,%channel-root)))
+         (service home-dotfiles-service-type
+                  (home-dotfiles-configuration
+                   (source-directory %channel-root)
+                   (directories '("./djeis/dots"))
+                   (layout 'stow)
+                   (packages (if host-name
+                                 (list host-name "common")
+                                 (list "common")))))
+         %base-home-services))
 
 (define-public (base-home-services host-name)
   (cons* (service home-extra-profiles-service-type
@@ -80,7 +81,8 @@
                                (map specification->package
                                     '("python" "curl" "rlwrap" "nftables" "podman"
                                       "git-crypt" "leiningen" "node" "mysql"
-                                      "ruby-solargraph" "postgresql")))
+                                      "ruby-solargraph" "postgresql"
+                                      "wireguard-tools")))
                         (cons* "coq"
                                (map specification->package
                                     '("coq" "coq-equations")))))

@@ -43,6 +43,8 @@
     (host-name "XANA-tampa")
 
     (kernel-arguments (cons* "modprobe.blacklist=nouveau"
+                             "nvidia_drm.fbdev=1"
+                             "nvidia_drm.modeset=1"
                              "elogind.legacy_elogind_cgroup_controller=1"
                              "systemd.unified_cgroup_hierarchy=0"
                              %default-kernel-arguments))

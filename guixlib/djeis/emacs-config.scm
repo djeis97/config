@@ -23,7 +23,7 @@
                     windmove-allow-all-windows t
                     vc-follow-symlinks t
                     enable-recursive-minibuffers t
-                    fill-column 80
+                    fill-column 120
                     indent-tabs-mode nil
                     tramp-use-ssh-controlmaster-options nil
                     tramp-shell-prompt-pattern "\\(?:\\(?:^\\|\\)[^]\n#-%>]*#?[]#-%>].*\\)"
@@ -33,9 +33,10 @@
                     window-divider-default-places t
                     use-package-always-defer t
                     auth-sources '(password-store)
-                    display-buffer-alist '(((lambda (buf act)
-                                              (when (active-minibuffer-window)
-                                                (select-window (minibuffer-selected-window) nil))))
+                    display-buffer-alist '(
+                                           ;; ((lambda (buf act)
+                                           ;;    (when (active-minibuffer-window)
+                                           ;;      (select-window (minibuffer-selected-window) nil))))
                                            ("^\\*Local" display-buffer-in-side-window)
                                            ("^ ?\\*Dirvish")
                                            ((lambda
@@ -52,7 +53,7 @@
                                            (".*"  (djeis97-utils-display-buffer-maybe-switch-to-project-tab
                                                    djeis97-utils-display-buffer-same-mode-same-window
                                                    display-buffer-reuse-mode-window)))
-                    switch-to-buffer-obey-display-actions t
+                    switch-to-buffer-obey-display-actions nil
                     dired-dwim-target t
                     dired-listing-switches "-Agoth --group-directories-first"
                     eldoc-echo-area-use-multiline-p 5
@@ -73,7 +74,8 @@
       (push (cons 'internal-border-width 10) default-frame-alist)
       (push (cons 'bottom-divider-width 10) default-frame-alist)
       (push (cons 'right-divider-width 10) default-frame-alist)
-      (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+      (with-eval-after-load 'tramp
+                            (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
       (push '(progn
               (setq-local
                org-roam-directory (expand-file-name (locate-dominating-file
@@ -85,6 +87,7 @@
       (add-hook 'after-init-hook 
                 (lambda ()
                   (server-start)
+                  (which-key-mode)
                   (winner-mode)
                   (tab-bar-mode)
                   (tab-bar-history-mode 1)
@@ -92,7 +95,8 @@
                   (menu-bar-mode -1)
                   (tool-bar-mode -1)
                   (scroll-bar-mode -1)
-                  (tooltip-mode +1))))
+                  (tooltip-mode +1)))
+      (add-hook 'find-file-hook 'djeis97-utils-auto-save-tweaks 90))
     (prologue (setq-default treesit-extra-load-path '(#$emacs-ts-modules)))
     (use-package browse-at-remote
       :custom (browse-at-remote-prefer-symbolic nil))
@@ -154,6 +158,9 @@
                 "h k" 'helpful-key
                 "h v" 'helpful-variable))
     (use-package justl)
+    ;; (use-package kele)
+    (use-package kubed)
+    (use-package kubel)
     (use-package marginalia
       :init (marginalia-mode)
       :config
@@ -269,6 +276,30 @@
       :custom
       (org-roam-directory "~/Dropbox/org/roam/")
       (org-roam-node-display-template "${title:80} (${file:10} > ${file-title} > ${olp})")
+      (org-roam-capture-templates
+       '(("d" "default" plain "%?"
+          :target
+          (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+          :unnarrowed t)
+         ("s" "clojure scratchspace" entry "* Scratchspace
+:PROPERTIES:
+:header-args+: :eval never-export :exports both
+:header-args:clojure+: :ns user.%<%Y%m%d>-${slug} :backend cider
+:END:
+** Setup
+#+begin_src clojure
+(ns user.%<%Y%m%d>-${slug}
+  (:require [iris-vars :refer [by-iris-environment]]))
+#+end_src
+
+#+begin_src clojure
+(def environment (by-iris-environment :staging))
+#+end_src
+
+%?
+"
+          :target (file+head "scratch/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+          :unnarrowed t)))
       :general
       (djeis-leader
        "n r f" 'org-roam-node-find
@@ -325,9 +356,6 @@
                               :global-prefix "M-<f20>")
       (with-eval-after-load 'exwm (exwm-input-set-key (kbd "<f20>") 'djeis-menu-command)))
     (use-package undo-tree)
-    (use-package which-key
-      :defer 2
-      :config (which-key-mode))
     (use-package evil
       :defer 2
       :init
