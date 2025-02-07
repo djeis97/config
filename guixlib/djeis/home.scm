@@ -120,16 +120,22 @@
    (append (map specification->package
                 '("direnv" "syncthing" "jq" "rsync"
                   "font-juliamono" "ripgrep" "ncurses"
-                  "flatpak" "xrdb" "xcape" "xmodmap" "xinit"
-                  "xterm" "xrandr" "picom" "feh" "libvterm"
+                  "xrdb" "xcape" "xmodmap" "xinit" "xterm"
+		  "xrandr" "picom" "feh" "libvterm"
                   "setxkbmap" "sqlite" "trayer-srg" "cmake"
                   "make" "gcc-toolchain" "guile" "gnupg"
-                  "btrbk" "password-store" "firefox" "dunst"
+                  "btrbk" "password-store" "dunst"
                   "xautolock" "openjdk" "mu" "isync"
-                  "qutebrowser" "remmina" "bluez" "sqlite"
-                  "unzip" "virt-manager" "openssh" "xss-lock"
-                  "playerctl" "w3m" "nss-certs" "clojure-lsp"))
+                  "bluez" "sqlite" "unzip" "openssh"
+		  "xss-lock" "playerctl" "w3m"
+		  "nss-certs" "clojure-lsp"))
            (minimal-home-packages))))
+
+(define-public (desktop-home-packages)
+  (append (map specification->package
+	       '("remmina" "firefox" "flatpak" "qutebrowser"))
+	  (base-home-packages)))
+
 
 (define-public (bootstrapping-home-config)
   (home-environment
@@ -140,7 +146,7 @@
 
 (define (base-home-config host-name)
   (home-environment
-   (packages (base-home-packages))
+   (packages (desktop-home-packages))
    (services (base-home-services host-name))))
 
 (define-public (get-home-config name)
