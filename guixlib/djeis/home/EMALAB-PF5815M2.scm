@@ -76,6 +76,9 @@
                 (prologue
                   (setq-default password-store-executable #$(file-append hacked-pass "/bin/pass"))))
               
+              (emacs-config-service emacs-system-keyremap
+                (prologue
+                  (define-key input-decode-map (kbd "<XF86AudioMicMute>") (kbd "<f20>"))))
               (service emacs-packages-service-type
                        (emacs-packaging-config (emacs emacs-next)))
               (base-home-services "EMALAB-PF5815M2")))))
