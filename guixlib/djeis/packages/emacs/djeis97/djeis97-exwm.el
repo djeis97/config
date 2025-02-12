@@ -145,10 +145,17 @@ directory, the file name, and its state (modified, read-only or non-existent)."
           (lambda ()
             (interactive)
             (exwm-workspace--modify-all-x-frames-parameters
-             '((internal-border-width . 10)))
+             '((alpha-background . 0.85)
+               (internal-border-width . 10)
+               (bottom-divider-width . 10)
+               (right-divider-width . 10)))
             (cl-loop for f in (frame-list) do
                      (if (not (eql (frame-parameter f 'minibuffer) 'only))
-                         (set-frame-parameter f 'internal-border-width 10)))))
+                         (progn
+                           (set-frame-parameter f 'alpha-background 0.85)
+                           (set-frame-parameter f 'internal-border-width 10)
+                           (set-frame-parameter f 'bottom-divider-width 10)
+                           (set-frame-parameter f 'right-divider-width 10))))))
 
 (defun djeis97/marginalia-annotate-bufler-buffer+exwm (cand)
   (let ((cand (replace-regexp-in-string ".* » " "" cand)))

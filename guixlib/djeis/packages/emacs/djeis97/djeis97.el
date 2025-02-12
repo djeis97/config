@@ -28,7 +28,7 @@
   (require 'djeis97-exwm)
   (with-eval-after-load 'consult
     (require 'djeis97-exwm-consult)
-    (djeis97-exwm-consult-setup)))
+    (add-hook 'exwm-init-hook 'djeis97-exwm-consult-setup)))
 
 (with-eval-after-load 'tab-bar
   (add-hook 'tab-bar-mode-hook 'djeis97-tab-bar-reset))
