@@ -269,9 +269,9 @@
       (org-src-preserve-indentation t)
       (org-startup-folded 'showall))
     (use-package org-contrib)
-    (use-package ob-async
-      :after org
-      :demand t)
+    ;; (use-package ob-async ; Tis busted on called code blocks.
+    ;;   :after org
+    ;;   :demand t)
     (use-package org-roam
       :custom
       (org-roam-directory "~/Dropbox/org/roam/")
