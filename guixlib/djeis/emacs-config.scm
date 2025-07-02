@@ -284,11 +284,11 @@
 ** Setup
 #+begin_src clojure
 (ns user.%<%Y%m%d>-${slug}
-  (:require [iris-vars :refer [by-iris-environment]]))
+  (:require [dev]))
 #+end_src
 
 #+begin_src clojure
-(def environment (by-iris-environment :staging))
+(dev/defenv environment :staging)
 #+end_src
 
 %?
