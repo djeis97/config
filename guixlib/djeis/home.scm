@@ -91,11 +91,6 @@
          (simple-service 'flatpak-xdg
                          home-environment-variables-service-type
                          '(("XDG_DATA_DIRS" . "/home/jay/.local/share/flatpak/exports/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}")))
-         (simple-service 'syncthing home-shepherd-service-type
-                         (list (shepherd-service
-                                (provision '(syncthing))
-                                (start #~(make-forkexec-constructor '("syncthing" "-no-browser")))
-                                (stop #~(make-kill-destructor)))))
          emacs-basics
          emacs-appearance
          emacs-lang-config

@@ -1,10 +1,14 @@
 (define-module (djeis home XANA-tampa)
   #:use-module (gnu home)
+  #:use-module (gnu services)
+  #:use-module (gnu home services)
+  #:use-module (gnu home services shepherd)
   #:use-module (djeis home)
   #:use-module (nongnu packages game-client)
   #:use-module (nonguix multiarch-container)
   #:use-module (gnu packages freedesktop)
   #:use-module (gnu packages lsof)
+  #:use-module (guix gexp)
   #:use-module (guix packages))
 
 
@@ -27,4 +31,10 @@
                             #:name "fhs-union-32"
                             #:system "i686-linux"))))
               (desktop-home-packages)))
-   (services (base-home-services "XANA-tampa"))))
+   (services (cons*
+              (simple-service 'syncthing home-shepherd-service-type
+                              (list (shepherd-service
+                                     (provision '(syncthing))
+                                     (start #~(make-forkexec-constructor '("syncthing" "-no-browser")))
+                                     (stop #~(make-kill-destructor)))))
+              (base-home-services "XANA-tampa")))))
