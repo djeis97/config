@@ -42,7 +42,7 @@
     (inherit %djeis-common-desktop-os)
     (host-name "XANA-tampa")
 
-    (kernel-arguments (cons* "modprobe.blacklist=nouveau"
+    (kernel-arguments (cons* "module_blacklist=nouveau,r8152" ; r8152 is the buggy driver for the network adapter in my KVM
                              "nvidia_drm.fbdev=1"
                              "nvidia_drm.modeset=1"
                              "elogind.legacy_elogind_cgroup_controller=1"

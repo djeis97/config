@@ -255,6 +255,44 @@ mount_program = \"" (file-append fuse-overlayfs "/bin/fuse-overlayfs") "\"
                        ;;                                        "-w" "/GTNHServer"
                        ;;                                        "eclipse-temurin:17-alpine" "./startserver-java9.sh"))) 
                        ;;                        (stop #~(make-kill-destructor)))))
+
+                       (simple-service 'atm9-container shepherd-root-service-type
+                                       (list (shepherd-service
+                                              (auto-start? #f)
+                                              (provision '(atm9))
+                                              (requirement '(networking automount))
+                                              (start #~(make-forkexec-constructor
+                                                        (list #$(file-append podman "/bin/podman")
+                                                              "run" "-i" "--name=atm9" "--net=host" "--rm"
+                                                              "--memory=15g" "--memory-swap=20g"
+                                                              "-e" "PUID=0" "-e" "PGID=0"
+                                                              "-v" "/auto/cephfs/containers/ATM9Server:/ATM9Server"
+                                                              "-v" "/opt/ATM9World/:/ATM9Server/world"
+                                                              "-w" "/ATM9Server"
+                                                              "amazoncorretto:20-alpine" "./run.sh")))
+                                              (stop #~(make-kill-destructor)))))
+                       (simple-service 'atm10-container shepherd-root-service-type
+                                       (list (shepherd-service
+                                              (auto-start? #f)
+                                              (provision '(atm10))
+                                              (requirement '(networking automount))
+                                              (start #~(make-forkexec-constructor
+                                                        (list #$(file-append podman "/bin/podman")
+                                                              "run" "-i" "--name=atm10" "--net=host" "--rm"
+                                                              "--memory=15g" "--memory-swap=20g"
+                                                              "-e" "UID=1000" "-e" "GID=998" "-e" "EULA=true"
+                                                              "-e" "MEMORY=12G"
+                                                              "-e" "SERVER_NAME=Djeis' Minecraft"
+                                                              "-e" "TYPE=AUTO_CURSEFORGE"
+                                                              "-e" "CF_SLUG=all-the-mods-10"
+                                                              "-e" "CF_EXCLUDE_MODS=1133580"
+                                                              "-e" "CURSEFORGE_FILES=distant-horizons:6387706"
+                                                              "-e" "MODRINTH_PROJECTS=dcintegration:Tvnxofx4"
+                                                              "--secret" "CF_API_KEY,type=env,target=CF_API_KEY"
+                                                              "-v" "/auto/cephfs/containers/ATM10Server:/data"
+                                                              "-v" "/opt/ATM10World/:/data/world"
+                                                              "minecraft-server:java21")))
+                                              (stop #~(make-kill-destructor)))))
                        ;; (simple-service 'atm8-container shepherd-root-service-type
                        ;;                 (list (shepherd-service
                        ;;                        (auto-start? #f)

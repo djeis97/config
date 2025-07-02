@@ -2,6 +2,7 @@
   #:use-module (gnu system)
   #:use-module (gnu system shadow)
   #:use-module (gnu services)
+  #:use-module (gnu services security-token)
   #:use-module (gnu services guix)
   #:use-module (gnu services base)
   #:use-module (gnu services desktop)
@@ -53,7 +54,8 @@
              (guix-publish-configuration
               (port 81)
               (host "0.0.0.0")
-              (advertise? #t))))
+              (advertise? #t)))
+    (service pcscd-service-type))
    (modify-services
        %desktop-services
      (guix-service-type

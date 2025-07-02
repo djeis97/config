@@ -2,6 +2,7 @@
 ;;; For more information see (info "(emacs) Directory Variables")
 
 ((scheme-mode
+  (geiser-repl--project . guix)
   (eval .
         (progn
           (make-variable-buffer-local 'geiser-guile-load-path)

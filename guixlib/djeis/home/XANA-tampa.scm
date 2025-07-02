@@ -26,5 +26,5 @@
                                   (list "portal" xdg-desktop-portal-gtk))
                             #:name "fhs-union-32"
                             #:system "i686-linux"))))
-              (base-home-packages)))
+              (desktop-home-packages)))
    (services (base-home-services "XANA-tampa"))))
