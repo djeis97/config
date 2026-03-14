@@ -43,13 +43,6 @@
               (password-authentication? #f)
               (x11-forwarding? #t)))
     (udev-rules-service 'pipewire pipewire)
-    (service dnsmasq-service-type
-             (dnsmasq-configuration
-              (no-resolv? #t)
-              (servers
-               '("/ec2.internal/127.10.0.1"
-                 "/iris.internal/127.10.0.1"
-                 "8.8.8.8"))))
     (service guix-publish-service-type
              (guix-publish-configuration
               (port 81)
@@ -62,8 +55,9 @@
       config =>
       (guix-configuration
        (inherit config)
-       (substitute-urls (cons* "https://substitutes.nonguix.org"
-                               "https://guix.bordeaux.inria.fr"
+       (substitute-urls (cons* "https://cuirass.genenetwork.org"
+                               "https://substitutes.nonguix.org"
+                               ;; "https://guix.bordeaux.inria.fr"
                                %default-substitute-urls))
        (authorized-keys (cons* xana-tampa-key
                                nonguix-key

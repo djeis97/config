@@ -77,9 +77,12 @@
                                               "emacs-ess"
                                               "emacs-buttercup"
                                               "emacs-helpful"
+                                              "emacs-org"
+                                              "emacs-evil"
                                               ;; "emacs-elisp-refs"
                                               ;; "emacs-all-the-icons"
                                               ;; "emacs-rainbow-delimiters"
+                                              "emacs-eldev"
                                               "emacs-lispy"
                                               "emacs-yasnippet"
                                               ))

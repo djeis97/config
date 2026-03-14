@@ -1,7 +1,6 @@
 (define-module (djeis system XANA-tampa)
   #:use-module (gnu)
   #:use-module (djeis system)
-  #:use-module (gnu packages storage)
   #:use-module (gnu system nss)
   #:use-module (guix utils)
   #:use-module (gnu packages linux)
@@ -11,7 +10,10 @@
   #:use-module (nongnu services nvidia)
   #:use-module ((djeis keys) #:select (nonguix-key bordeaux-inria-key))
   #:use-module (djeis services autofs)
+  #:use-module (djeis packages ceph-mount)
+  #:use-module (djeis packages tailscale)
   #:use-module (gnu services desktop)
+  #:use-module (gnu services shepherd)
   #:use-module (gnu services linux)
   #:use-module (gnu services xorg)
   #:use-module (gnu services sound)
@@ -41,6 +43,8 @@
   (operating-system
     (inherit %djeis-common-desktop-os)
     (host-name "XANA-tampa")
+
+    (kernel-loadable-modules (list v4l2loopback-linux-module))
 
     (kernel-arguments (cons* "module_blacklist=nouveau,r8152" ; r8152 is the buggy driver for the network adapter in my KVM
                              "nvidia_drm.fbdev=1"
@@ -82,9 +86,11 @@
 
 
     ;; This is where we specify system-wide packages.
-    (packages (cons* ceph nvidia-driver %base-packages))
+    (packages (cons* tailscale ceph-mount nvidia-driver %base-packages))
 
-    (services (append (list (service nix-service-type)
+    (services (append (list (service nix-service-type
+                                     (nix-configuration
+                                      (extra-config (list "secret-key-files = /nix/var/nix/keyring/XANA-tampa/secret\n"))))
                             (service nvidia-service-type)
                             (service automount-service-type
                                      (automount-config
@@ -96,17 +102,21 @@
                                       (memory-limit "17G")
                                       (priority 2000)))
                             (service bluetooth-service-type (bluetooth-configuration
-                                                             (multi-profile 'multiple))))
-                      (modify-services
-                          (djeis-common-desktop-services this-operating-system)
-                        (gdm-service-type
-                         config =>
-                         (gdm-configuration
-                          (inherit config)
-                          (xorg-configuration (xorg-configuration
-                                               (modules (cons* nvidia-driver %default-xorg-modules))
-                                               (server (replace-mesa xorg-server))
-                                               (drivers '("nvidia")))))))))
+                                                             (multi-profile 'multiple)))
+                            (simple-service 'tailscale-service shepherd-root-service-type
+                                            (list (shepherd-service
+                                                    (provision '(tailscaled))
+                                                    (requirement '(user-processes))
+                                                    (start #~(make-forkexec-constructor
+                                                              (list
+                                                               #$(file-append tailscale "/bin/tailscaled")
+                                                               "-state" "mem:"
+                                                               "-statedir" "/var/lib/tailscale/"))))))
+                            (set-xorg-configuration
+                             (xorg-configuration
+                              (modules (cons nvda %default-xorg-modules))
+                              (drivers '("nvidia")))))
+                      (djeis-common-desktop-services this-operating-system)))
 
     ;; Allow resolution of '.local' host names with mDNS.
     (name-service-switch %mdns-host-lookup-nss)))

@@ -3,7 +3,8 @@
   #:use-module (guix utils)
   #:use-module ((djeis keys) #:select (nonguix-key))
   #:use-module (djeis system)
-  #:use-module (gnu services linux))
+  #:use-module (gnu services linux)
+  #:use-module (gnu services xorg))
 
 (use-modules (gnu) (guix utils))
 (use-modules ((djeis keys) #:select (nonguix-key))
@@ -21,6 +22,8 @@
   (operating-system
     (inherit %djeis-common-desktop-os)
     (host-name "elitebook")
+
+    (kernel-arguments (cons* "module_blacklist=r8152" %default-kernel-arguments))
 
     (bootloader (bootloader-configuration
                  (bootloader grub-efi-bootloader)
@@ -51,10 +54,13 @@
                                                       '("root:65536:65536"
                                                         "jay:16777216:65536")
                                                       "\n" 'suffix)))))
-                     (service nix-service-type)
+                     (service nix-service-type
+                              (nix-configuration
+                               (extra-config (list "extra-trusted-public-keys = XANA-tampa:9htb3W8vceNG0NdY6UGPH8kJnRRvf+B5XlWSMCDQ3F0=jay@XANA-tampa\n"))))
                      (service zram-device-service-type
                               (zram-device-configuration
                                (size "4G")))
+                     (set-xorg-configuration (xorg-configuration))
                      (djeis-common-desktop-services this-operating-system)))
 
     ;; Allow resolution of '.local' host names with mDNS.

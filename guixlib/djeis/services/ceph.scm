@@ -5,6 +5,7 @@
   #:use-module (gnu services shepherd)
   #:use-module ((gnu packages linux) #:select (lvm2))
   #:use-module ((gnu packages storage) #:select (ceph))
+  #:use-module ((gnu packages containers) #:select (podman))
   #:export (ceph-osd-config
             ceph-osd-service
             ceph-mon-service
@@ -17,22 +18,36 @@
   (osd-id ceph-osd-config-osd-id)
   (fsid ceph-osd-config-fsid))
 
+(define osd-script
+  (mixed-text-file "start-osd.sh"
+                   "
+set -exuo pipefail
+ceph-volume activate --osd-id $1 --osd-uuid $2 --no-systemd --no-tmpfs >/var/log/ceph/lvm-$1
+ceph-osd -i $1 -f
+"))
+
 (define (ceph-osd-shepherd-services config)
   (let* ((osd-id (number->string (ceph-osd-config-osd-id config)))
          (prepare-service-name (string->symbol (string-append "ceph-lvm-osd-" osd-id))))
     (list
      (shepherd-service
-      (provision (list prepare-service-name))
-      (requirement '(user-processes))
-      (one-shot? #t)
-      (start #~(make-system-constructor "PATH=/run/setuid-programs:/run/current-system/profile/bin:/run/current-system/profile/sbin "
-                                        #$(file-append ceph "/sbin/ceph-volume")
-                                        " lvm activate " #$osd-id " " #$(ceph-osd-config-fsid config) " --no-systemd"
-                                        " >>/var/log/ceph-lvm-" #$osd-id " 2>&1")))
-     (shepherd-service
       (provision (list (string->symbol (string-append "ceph-osd-" osd-id))))
-      (requirement (list prepare-service-name))
-      (start #~(make-forkexec-constructor (list #$(file-append ceph "/bin/ceph-osd") "-i" #$osd-id "-f")))
+      (requirement '(user-processes))
+      (start #~(make-forkexec-constructor
+                (list
+                 #$(file-append podman "/bin/podman") "run"
+                 "--name" (string-append "ceph-osd-" #$osd-id) "--net" "host" "--rm"
+                 "--privileged"
+                 "-v" "/etc/ceph:/etc/ceph:ro"
+                 "-v" "/gnu:/gnu:ro"
+                 "-v" "/var/lib/ceph:/var/lib/ceph:O"
+                 "-v" "/var/log:/var/log:rw"
+                 "-v" "/dev:/dev"
+                 "-v" "/run/udev:/run/udev"
+                 "-v" "/sys:/sys"
+                 "ceph:v18.2.7" "/usr/bin/bash" #$osd-script #$osd-id #$(ceph-osd-config-fsid config))
+                #:environment-variables
+                (cons* "CONTAINERS_STORAGE_CONF=/etc/containers/storage.ceph.conf" (default-environment-variables))))
       (stop #~(make-kill-destructor))))))
 
 (define ceph-osd-service
@@ -41,16 +56,22 @@
                 (extensions
                  (list
                   (service-extension shepherd-root-service-type
-                                     ceph-osd-shepherd-services)
-                  (service-extension profile-service-type
-                                     (const (list lvm2 ceph)))))))
+                                     ceph-osd-shepherd-services)))))
 
 (define (ceph-mon-shepherd-services mon-name)
   (list
    (shepherd-service
     (provision '(ceph-mon))
     (requirement '(user-processes))
-    (start #~(make-forkexec-constructor (list #$(file-append ceph "/bin/ceph-mon") "-i" #$mon-name "-f")))
+    (start #~(make-forkexec-constructor (list
+                                         #$(file-append podman "/bin/podman") "run"
+                                         "--name" "ceph-mon" "--net" "host" "--rm"
+                                         "-v" "/etc/ceph:/etc/ceph:ro"
+                                         "-v" "/var/lib/ceph:/var/lib/ceph:rw"
+                                         "-v" "/var/log:/var/log:rw"
+                                         "ceph:v18.2.7" "/usr/bin/ceph-mon" "-i" #$mon-name "-f")
+                                        #:environment-variables
+                                        (cons* "CONTAINERS_STORAGE_CONF=/etc/containers/storage.ceph.conf" (default-environment-variables))))
     (stop #~(make-kill-destructor)))))
 
 (define ceph-mon-service
@@ -59,18 +80,21 @@
                 (extensions
                  (list
                   (service-extension shepherd-root-service-type
-                                     ceph-mon-shepherd-services)
-                  (service-extension profile-service-type
-                                     (const (list ceph)))))))
+                                     ceph-mon-shepherd-services)))))
 
 (define (ceph-mgr-shepherd-services mgr-name)
   (list
    (shepherd-service
     (provision '(ceph-mgr))
-    (start #~(make-forkexec-constructor (list #$(file-append ceph "/bin/ceph-mgr") "-i" #$mgr-name "-f")
+    (start #~(make-forkexec-constructor (list
+                                         #$(file-append podman "/bin/podman") "run"
+                                         "--name" "ceph-mgr" "--net" "host" "--rm"
+                                         "-v" "/etc/ceph:/etc/ceph:ro"
+                                         "-v" "/var/lib/ceph:/var/lib/ceph:rw"
+                                         "-v" "/var/log:/var/log:rw"
+                                         "ceph:v18.2.7" "/usr/bin/ceph-mgr" "-i" #$mgr-name "-f")
                                         #:environment-variables
-                                        (cons* (string-append "PYTHONPATH=" #$(file-append ceph "/lib/python3.10/site-packages"))
-                                               (default-environment-variables))))
+                                        (cons* "CONTAINERS_STORAGE_CONF=/etc/containers/storage.ceph.conf" (default-environment-variables))))
     (stop #~(make-kill-destructor)))))
 
 (define ceph-mgr-service
@@ -79,16 +103,23 @@
                 (extensions
                  (list
                   (service-extension shepherd-root-service-type
-                                     ceph-mgr-shepherd-services)
-                  (service-extension profile-service-type
-                                     (const (list ceph)))))))
+                                     ceph-mgr-shepherd-services)))))
 
 (define (ceph-mds-shepherd-services mds-name)
   (list
    (shepherd-service
-    (provision '(ceph-mds-a))
+    (provision (list (string->symbol (string-append "ceph-mds-" mds-name))))
     (requirement '(user-processes))
-    (start #~(make-forkexec-constructor (list #$(file-append ceph "/bin/ceph-mds") "-i" #$mds-name "-f")))
+    (start #~(make-forkexec-constructor
+              (list
+               #$(file-append podman "/bin/podman") "run"
+               "--name" (string-append "ceph-mds-" #$mds-name) "--net" "host" "--rm"
+               "-v" "/etc/ceph:/etc/ceph:ro"
+               "-v" "/var/lib/ceph:/var/lib/ceph:rw"
+               "-v" "/var/log:/var/log:rw"
+               "ceph:v18.2.7" "/usr/bin/ceph-mds" "-i" #$mds-name "-f")
+              #:environment-variables
+              (cons* "CONTAINERS_STORAGE_CONF=/etc/containers/storage.ceph.conf" (default-environment-variables))))
     (stop #~(make-kill-destructor)))))
 
 (define ceph-mds-service
@@ -97,6 +128,4 @@
                 (extensions
                  (list
                   (service-extension shepherd-root-service-type
-                                     ceph-mds-shepherd-services)
-                  (service-extension profile-service-type
-                                     (const (list ceph)))))))
+                                     ceph-mds-shepherd-services)))))

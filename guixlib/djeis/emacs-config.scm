@@ -4,7 +4,7 @@
   #:use-module (djeis services emacs-config)
   #:use-module (djeis packages emacs)
   #:use-module ((gnu packages coq) #:select (proof-general))
-  #:use-module ((gnu packages tree-sitter) #:select (tree-sitter-json tree-sitter-dockerfile)))
+  #:use-module ((gnu packages tree-sitter) #:select (tree-sitter-json tree-sitter-dockerfile tree-sitter-rust)))
 
 (define-public emacs-basics
   (emacs-config-service emacs-basics
@@ -25,6 +25,7 @@
                     enable-recursive-minibuffers t
                     fill-column 120
                     indent-tabs-mode nil
+                    tab-width 4
                     tramp-use-ssh-controlmaster-options nil
                     tramp-shell-prompt-pattern "\\(?:\\(?:^\\|\\)[^]\n#-%>]*#?[]#-%>].*\\)"
                     tramp-verbose 0
@@ -117,6 +118,40 @@
        "M-g i" 'consult-imenu))
     (use-package corfu :hook (after-init . global-corfu-mode))
     (use-package dirvish)
+    (use-package dired-hacks
+       :init
+       (use-package dired-filter
+          :after dired
+          :demand t)
+       (use-package dired-subtree
+          :after dired
+          :demand t)
+       (use-package dired-collapse
+          :demand t
+          :hook (dired-mode . dired-collapse-mode))
+       (use-package dired-rainbow
+         :demand t
+         :config
+         (dired-rainbow-define-chmod directory "#6cb2eb" "d.*")
+         (dired-rainbow-define html "#eb5286" ("css" "less" "sass" "scss" "htm" "html" "jhtm" "mht" "eml" "mustache" "xhtml"))
+         (dired-rainbow-define xml "#f2d024" ("xml" "xsd" "xsl" "xslt" "wsdl" "bib" "json" "msg" "pgn" "rss" "yaml" "yml" "rdata"))
+         (dired-rainbow-define document "#9561e2" ("docm" "doc" "docx" "odb" "odt" "pdb" "pdf" "ps" "rtf" "djvu" "epub" "odp" "ppt" "pptx"))
+         (dired-rainbow-define markdown "#ffed4a" ("org" "etx" "info" "markdown" "md" "mkd" "nfo" "pod" "rst" "tex" "textfile" "txt"))
+         (dired-rainbow-define database "#6574cd" ("xlsx" "xls" "csv" "accdb" "db" "mdb" "sqlite" "nc"))
+         (dired-rainbow-define media "#de751f" ("mp3" "mp4" "MP3" "MP4" "avi" "mpeg" "mpg" "flv" "ogg" "mov" "mid" "midi" "wav" "aiff" "flac"))
+         (dired-rainbow-define image "#f66d9b" ("tiff" "tif" "cdr" "gif" "ico" "jpeg" "jpg" "png" "psd" "eps" "svg"))
+         (dired-rainbow-define log "#c17d11" ("log"))
+         (dired-rainbow-define shell "#f6993f" ("awk" "bash" "bat" "sed" "sh" "zsh" "vim"))
+         (dired-rainbow-define interpreted "#38c172" ("py" "ipynb" "rb" "pl" "t" "msql" "mysql" "pgsql" "sql" "r" "clj" "cljs" "scala" "js"))
+         (dired-rainbow-define compiled "#4dc0b5" ("asm" "cl" "lisp" "el" "c" "h" "c++" "h++" "hpp" "hxx" "m" "cc" "cs" "cp" "cpp" "go" "f" "for" "ftn" "f90" "f95" "f03" "f08" "s" "rs" "hi" "hs" "pyc" ".java"))
+         (dired-rainbow-define executable "#8cc4ff" ("exe" "msi"))
+         (dired-rainbow-define compressed "#51d88a" ("7z" "zip" "bz2" "tgz" "txz" "gz" "xz" "z" "Z" "jar" "war" "ear" "rar" "sar" "xpi" "apk" "xz" "tar"))
+         (dired-rainbow-define packaged "#faad63" ("deb" "rpm" "apk" "jad" "jar" "cab" "pak" "pk3" "vdf" "vpk" "bsp"))
+         (dired-rainbow-define encrypted "#ffed4a" ("gpg" "pgp" "asc" "bfe" "enc" "signature" "sig" "p12" "pem"))
+         (dired-rainbow-define fonts "#6cb2eb" ("afm" "fon" "fnt" "pfb" "pfm" "ttf" "otf"))
+         (dired-rainbow-define partition "#e3342f" ("dmg" "iso" "bin" "nrg" "qcow" "toast" "vcd" "vmdk" "bak"))
+         (dired-rainbow-define vc "#0074d9" ("git" "gitignore" "gitattributes" "gitmodules"))
+         (dired-rainbow-define-chmod executable-unix "#38c172" "-.*x.*")))
     (use-package embark
       :init
       (use-package embark-consult
@@ -231,9 +266,6 @@
   (emacs-config-service emacs-lang-config
     (use-package magit
       :defer 2)
-    (use-package magit-stgit
-      :after magit
-      :demand t)
     (use-package smartparens
       :hook (prog-mode . smartparens-strict-mode)
       :general (smartparens-strict-mode-map
@@ -270,7 +302,7 @@
     (use-package org-roam
       :custom
       (org-roam-directory "~/Dropbox/org/roam/")
-      (org-roam-node-display-template "${title:80} (${file:10} > ${file-title} > ${olp})")
+      (org-roam-node-display-template "${title:80} (${file:10} > ${file-title:20} > ${olp:30}) [${tags}]")
       (org-roam-capture-templates
        '(("d" "default" plain "%?"
           :target
@@ -298,7 +330,9 @@
       :general
       (djeis-leader
        "n r f" 'org-roam-node-find
-       "n r i" 'org-roam-node-insert)
+       "n r i" 'org-roam-node-insert
+       "n r d d" 'org-roam-dailies-capture-today
+       "n r d t" 'org-roam-dailies-goto-today)
       :config (org-roam-db-autosync-mode +1))
     (use-package cider
       :custom
@@ -313,9 +347,9 @@
     (use-package sly)
     (use-package proof-general
       (package proof-general))
-    ;; (use-package eglot
-    ;;   :config
-    ;;   (add-to-list 'eglot-server-programs '((clojure-mode clojurescript-mode) "clojure-lsp")))
+    (use-package eglot
+      :config
+      (add-to-list 'eglot-server-programs '((rust-ts-mode rust-mod) "rust-analyzer" :initializationOptions (:checkOnSave t))))
     (use-package agda2-mode)
     (use-package restclient)
     (use-package ob-restclient)
@@ -323,6 +357,10 @@
     (use-package just-mode)
     (use-package bqn-mode)
     (use-package ess)
+    (use-package nix-mode)
+    (use-package rust-ts-mode
+       (package tree-sitter-rust)
+       :mode ("\\.rs\\'" . rust-ts-mode))
     (use-package dockerfile-ts-mode
       (package tree-sitter-dockerfile)
       :mode ("[/\\]\\(?:Containerfile\\|Dockerfile\\)\\(?:\\.[^/\\]*\\)?\\'"
@@ -333,7 +371,9 @@
       (package tree-sitter-json)
       :mode ("\\.json\\'" . json-ts-mode)
       :config (with-eval-after-load 'org
-                (add-to-list 'org-src-lang-modes (cons "json" 'json-ts))))))
+                (add-to-list 'org-src-lang-modes (cons "json" 'json-ts))))
+    (use-package typst-ts-mode
+      :mode ("\\.typ\\'" . typst-ts-mode))))
 
 (define-public emacs-keys
   (emacs-config-service emacs-keys

@@ -15,7 +15,7 @@
 
 (define win-gpg-dir "/mnt/c/Users/emalaby/gpg4win/bin/")
 
-(define gpg-exes
+(define (gpg-exes)
   (map (lambda (s) (cons (string-drop-right s 4)
                          (string-append win-gpg-dir s)))
        (scandir win-gpg-dir (lambda (s) (and (string-prefix? "gpg" s)
@@ -37,7 +37,7 @@
                  (map (lambda (exe)
                         (symlink (cdr exe)
                                  (string-append bin (car exe))))
-                      '#$gpg-exes)))))
+                      '#$(gpg-exes))))))
     (license #f)
     (description #f)
     (synopsis #f)

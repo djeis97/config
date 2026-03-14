@@ -36,7 +36,7 @@
 
 (define-public (basic-libvirt+ceph-vm-services host-ip)
   (cons*
-   (service dhcp-client-service-type)
+   (service dhcpcd-service-type)
    (service static-networking-service-type
             (list
              (static-networking

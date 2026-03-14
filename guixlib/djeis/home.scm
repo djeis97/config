@@ -25,35 +25,24 @@
 
 (define-public (minimal-home-services host-name)
   (cons* (service home-channels-service-type
-                  (cons*
-                   ;; (channel
-                   ;;  (name 'guix-past)
-                   ;;  (url "https://gitlab.inria.fr/guix-hpc/guix-past")
-                   ;;  (introduction
-                   ;;   (make-channel-introduction
-                   ;;    "0c119db2ea86a389769f4d2b9c6f5c41c027e336"
-                   ;;    (openpgp-fingerprint
-                   ;;     "3CE4 6455 8A84 FDC6 9DB4  0CFB 090B 1199 3D9A EBB5"))))
-                   ;; (channel
-                   ;;  (name 'rekahsoft-guix)
-                   ;;  (url "https://git.rekahsoft.ca/rekahsoft/rekahsoft-guix"))
-                   (channel
-                    (name 'nonguix)
-                    (url "https://gitlab.com/nonguix/nonguix")
-                    (introduction
-                     (make-channel-introduction
-                      "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
-                      (openpgp-fingerprint
-                       "2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5"))))
-                   ;; (channel
-                   ;;  (name 'flat)
-                   ;;  (url "https://github.com/flatwhatson/guix-channel.git")
-                   ;;  (introduction
-                   ;;   (make-channel-introduction
-                   ;;    "33f86a4b48205c0dc19d7c036c85393f0766f806"
-                   ;;    (openpgp-fingerprint
-                   ;;     "736A C00E 1254 378B A982  7AF6 9DBE 8265 81B6 4490"))))
-                   %default-channels))
+                  (list (channel
+                         (name 'nonguix)
+                         (url (string-append "file://" (getenv "HOME") "/Dropbox/Projects/nonguix"))
+                         (branch "pull")
+                         (introduction
+                          (make-channel-introduction
+                           "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
+                           (openpgp-fingerprint
+                            "2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5"))))
+                        (channel
+                         (name 'guix)
+                         (url (string-append "file://" (getenv "HOME") "/Dropbox/Projects/guix"))
+                         (branch "pull")
+                         (introduction
+                          (make-channel-introduction
+                           "9edb3f66fd807b096b48283debdcddccfea34bad"
+                           (openpgp-fingerprint
+                            "BBB0 2DDF 2CEA F6A8 0D1D  E643 A2A0 6DF2 A33A 54FA"))))))
          (service
           home-bash-service-type
           (home-bash-configuration
@@ -85,9 +74,15 @@
                                       "wireguard-tools")))
                         (cons* "coq"
                                (map specification->package
-                                    '("coq" "coq-equations")))))
+                                    '("coq" "coq-equations")))
+                        (cons* "typst" (list (specification->package "typst")))))
          (service home-dbus-service-type)
          (service home-pipewire-service-type)
+         (simple-service 'syncthing home-shepherd-service-type
+                         (list (shepherd-service
+                                (provision '(syncthing))
+                                (start #~(make-forkexec-constructor '("syncthing" "-no-browser")))
+                                (stop #~(make-kill-destructor)))))
          (simple-service 'flatpak-xdg
                          home-environment-variables-service-type
                          '(("XDG_DATA_DIRS" . "/home/jay/.local/share/flatpak/exports/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}")))
@@ -117,12 +112,12 @@
                   "font-juliamono" "ripgrep" "ncurses"
                   "xrdb" "xcape" "xmodmap" "xinit" "xterm"
 		  "xrandr" "picom" "feh" "libvterm"
-                  "setxkbmap" "sqlite" "trayer-srg" "cmake"
-                  "make" "gcc-toolchain" "guile" "gnupg"
+                  "setxkbmap" "sqlite" "trayer-srg"
+                  "guile" "gnupg"
                   "btrbk" "password-store" "dunst"
                   "xautolock" "openjdk" "mu" "isync"
                   "bluez" "sqlite" "unzip" "openssh"
-		  "xss-lock" "playerctl" "w3m"
+		  "xss-lock" "playerctl"
 		  "nss-certs" "clojure-lsp"))
            (minimal-home-packages))))
 

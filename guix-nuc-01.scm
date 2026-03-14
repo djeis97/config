@@ -6,7 +6,6 @@
              (gnu image)
              ((gnu packages base) #:select (coreutils))
              ((gnu packages containers) #:select (podman))
-             ((gnu packages storage) #:select (ceph))
              ((gnu packages linux) #:select (lvm2))
              ((gnu packages rsync) #:select (rsync))
              ((gnu packages samba) #:select (samba))
@@ -29,7 +28,8 @@
              ((djeis keys) #:select (xana-tampa-key elijah-key nonguix-key))
              (djeis services ceph)
              (djeis services libvirt-vms)
-             (djeis services autofs))
+             (djeis services autofs)
+             (djeis packages ceph-mount))
 
 (define-public sshd-config
   (openssh-configuration
@@ -57,6 +57,17 @@ runroot = \"/run/containers/storage\"
 graphroot = \"/var/lib/containers/storage\"
 [storage.options]
 additionalimagestores = [ \"/auto/cephfs/containers/registry\" ]
+mount_program = \"" (file-append fuse-overlayfs "/bin/fuse-overlayfs") "\"
+"))
+
+(define podman-ceph-containers-storage
+  (mixed-text-file "storage.conf"
+                   "
+[storage]
+driver = \"overlay\"
+runroot = \"/run/containers/storage\"
+graphroot = \"/opt/ceph_podman_root/\"
+[storage.options]
 mount_program = \"" (file-append fuse-overlayfs "/bin/fuse-overlayfs") "\"
 "))
 
@@ -151,7 +162,7 @@ mount_program = \"" (file-append fuse-overlayfs "/bin/fuse-overlayfs") "\"
                  (bootloader grub-efi-bootloader)
                  (targets '("/boot/efi/"))))
 
-    (packages (cons* rsync podman %base-packages))
+    (packages (cons* rsync podman ceph-mount %base-packages))
 
     (users (cons* (user-account
                    (name "ceph")
@@ -216,7 +227,7 @@ mount_program = \"" (file-append fuse-overlayfs "/bin/fuse-overlayfs") "\"
                                                          "--foreground" "--no-process-group")))
                                          (stop #~(make-kill-destructor)))))
                        (service openssh-service-type sshd-config)
-                       (service dhcp-client-service-type)
+                       (service dhcpcd-service-type)
                        (service static-networking-service-type
                                 (list
                                  (static-networking
@@ -256,6 +267,46 @@ mount_program = \"" (file-append fuse-overlayfs "/bin/fuse-overlayfs") "\"
                        ;;                                        "eclipse-temurin:17-alpine" "./startserver-java9.sh"))) 
                        ;;                        (stop #~(make-kill-destructor)))))
 
+                       (simple-service 'factorio-container shepherd-root-service-type
+                                       (list (shepherd-service
+                                              (auto-start? #f)
+                                              (provision '(factorio))
+                                              (requirement '(networking automount))
+                                              (start #~(make-forkexec-constructor
+                                                        (list #$(file-append podman "/bin/podman")
+                                                              "run" "-i" "--name=factorio" "--net=host" "--rm"
+                                                              "--memory=8g" "--memory-swap=16g"
+                                                              "-e" "CONSOLE_LOG_LOCATION=/factorio/console.log"
+                                                              "-e" "USERNAME=djeis"
+                                                              "-e" "UPDATE_MODS_ON_START=true"
+                                                              "-v" "/auto/cephfs/containers/factorio:/factorio"
+                                                              "--secret" "factorio_token,type=env,target=TOKEN"
+                                                              "factorio:2.0.73")))
+                                              (stop #~(let ((sd (make-system-destructor #$(file-append podman "/bin/podman") " exec -it factorio rcon /quit"))
+                                                            (kd (make-kill-destructor SIGINT #:grace-period 30)))
+                                                        (lambda args
+                                                          (and (apply sd args)
+                                                               (apply kd args))))))))
+                       (simple-service 'factorio-bot-container shepherd-root-service-type
+                                       (list (shepherd-service
+                                              (auto-start? #f)
+                                              (provision '(factorio-bot))
+                                              (requirement '(factorio networking automount))
+                                              (start #~(make-forkexec-constructor
+                                                        (list #$(file-append podman "/bin/podman")
+                                                              "run" "-i" "--name=factorio-bot" "--net=host" "--rm"
+                                                              "--memory=1g"
+                                                              "-e" "DISCORD_CHANNEL_ID=1411157034174382100"
+                                                              "-e" "RCON_IP=127.0.0.1"
+                                                              "-e" "RCON_PORT=27015"
+                                                              "-e" "FACTORIO_LOG=/factorio/console.log"
+                                                              "-e" "MOD_LOG=/factorio/script-output/factorigo-chat-bot/factorigo-chat-bot.log"
+                                                              "-e" "ALL_ROCKET_LAUNCHES=false"
+                                                              "--secret" "factorio_discord_token,type=env,target=DISCORD_TOKEN"
+                                                              "--secret" "factorio_rconpw,type=env,target=RCON_PASSWORD"
+                                                              "-v" "/auto/cephfs/containers/factorio:/factorio"
+                                                              "factorigo-chat-bot:latest")))
+                                              (stop #~(make-kill-destructor)))))
                        (simple-service 'atm9-container shepherd-root-service-type
                                        (list (shepherd-service
                                               (auto-start? #f)
@@ -286,7 +337,7 @@ mount_program = \"" (file-append fuse-overlayfs "/bin/fuse-overlayfs") "\"
                                                               "-e" "TYPE=AUTO_CURSEFORGE"
                                                               "-e" "CF_SLUG=all-the-mods-10"
                                                               "-e" "CF_EXCLUDE_MODS=1133580"
-                                                              "-e" "CURSEFORGE_FILES=distant-horizons:6387706"
+                                                              "-e" "CURSEFORGE_FILES=distant-horizons:6791190"
                                                               "-e" "MODRINTH_PROJECTS=dcintegration:Tvnxofx4"
                                                               "--secret" "CF_API_KEY,type=env,target=CF_API_KEY"
                                                               "-v" "/auto/cephfs/containers/ATM10Server:/data"
@@ -334,7 +385,7 @@ mount_program = \"" (file-append fuse-overlayfs "/bin/fuse-overlayfs") "\"
                                                               "-v" "/auto/cephfs/containers/plex:/config"
                                                               "-v" "/auto/cephfs/media:/media-drive:rw"
                                                               "--device" "/dev/dri:/dev/dri"
-                                                              "lscr.io/linuxserver/plex:1.26.2")))
+                                                              "lscr.io/linuxserver/plex:1.42.1")))
                                               (stop #~(make-kill-destructor)))))
                        ;; (simple-service 'home-containers shepherd-root-service-type
                        ;;                 (list (shepherd-service
@@ -368,6 +419,7 @@ mount_program = \"" (file-append fuse-overlayfs "/bin/fuse-overlayfs") "\"
                        ;;                       ))
                        (extra-special-file "/etc/containers/policy.json" podman-containers-policy)
                        (extra-special-file "/etc/containers/storage.conf" podman-containers-storage)
+                       (extra-special-file "/etc/containers/storage.ceph.conf" podman-ceph-containers-storage)
                        (service ceph-mon-service host-name)
                        (service ceph-mgr-service host-name)
                        (service ceph-mds-service (string-append host-name "-a"))

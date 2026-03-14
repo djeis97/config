@@ -1,10 +1,10 @@
 (define-module (djeis packages emacs)
   #:use-module ((djeis channel) #:prefix djeis:)
   #:use-module (gnu packages emacs)
+  #:use-module ((gnu packages emacs-build) #:prefix gnu:)
   #:use-module ((gnu packages emacs-xyz) #:prefix gnu:)
   #:use-module ((gnu packages tree-sitter) #:select (tree-sitter))
   #:use-module ((gnu packages xorg) #:select (libxrender libxt))
-  #:use-module ((gnu packages version-control) #:select (stgit-2))
   #:use-module (guix packages)
   #:use-module (guix download)
   #:use-module (guix git-download)
@@ -28,9 +28,7 @@
        (file-name (git-file-name name version))
        (patches
         (cons*
-         (local-file (djeis:search-patch "0001-Add-window-divider-transparency.patch"))
-         (local-file (djeis:search-patch "0001-window-tab-line-height-to-top-body-window-edges.patch"))
-         (local-file (djeis:search-patch "0002-Minor-refactor-make-inner-border-transparent.patch"))
+         (local-file (djeis:search-patch "0001-Make-border-and-dividers-transparent.patch"))
          (origin-patches (package-source emacs-next))))))
     (inputs (modify-inputs (package-inputs emacs-next) (prepend libxt) (prepend libxrender)))))
 
@@ -269,5 +267,4 @@
 ;;                                                                (list emacs-exwm
 ;;                                                                      gnu:emacs-consult
 ;;                                                                      gnu:emacs-posframe)))
-(define-public emacs-magit-stgit (local-emacs-package "magit-stgit" (list gnu:emacs-magit gnu:emacs-magit-popup stgit-2)))
 (define-public emacs-open-junk-file (local-emacs-package "open-junk-file"))

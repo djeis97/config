@@ -166,7 +166,7 @@ directory, the file name, and its state (modified, read-only or non-existent)."
           (marginalia-annotate-buffer cand))))))
 
 (with-eval-after-load 'marginalia
-  (push '(bufler-buffer djeis97/marginalia-annotate-bufler-buffer+exwm builtin none) marginalia-annotator-registry))
+  (push '(bufler-buffer djeis97/marginalia-annotate-bufler-buffer+exwm builtin none) marginalia-annotators))
 
 (setq-default exwm-workspace-minibuffer-position 'bottom)
 
