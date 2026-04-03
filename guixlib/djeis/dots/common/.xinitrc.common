@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+setxkbmap -option "ctrl:swapcaps"
+xrdb ~/.Xresources
+xmodmap -e "keycode any = F20"
+xcape -e "#66=F20"
+export _JAVA_AWT_WM_NONREPARENTING=1
+picom --backend=xrender &
+xss-lock -- slock &
+dunst &
+playerctld &
+feh --bg-scale ~/Dropbox/AltDesktop.jpg
+
+run_normal_wm () {
+    exec emacs -f exwm-wm-mode
+}
