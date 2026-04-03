@@ -10,7 +10,8 @@
             ceph-osd-service
             ceph-mon-service
             ceph-mgr-service
-            ceph-mds-service))
+            ceph-mds-service
+            ceph-rbd-udev))
 
 (define-record-type* <ceph-osd-config>
   ceph-osd-config make-ceph-osd-config
@@ -129,3 +130,67 @@ ceph-osd -i $1 -f
                  (list
                   (service-extension shepherd-root-service-type
                                      ceph-mds-shepherd-services)))))
+
+(define ceph-rbdnamer
+  (program-file "ceph-rbdnamer"
+                #~(begin
+                    (use-modules (ice-9 rdelim)
+                                 (ice-9 regex)
+                                 (ice-9 format))
+
+                    (define (read-file path)
+                      "Read entire file contents as a string, trimming whitespace"
+                      (if (file-exists? path)
+                          (string-trim-right (call-with-input-file path read-string))
+                          #f))
+
+                    (define (extract-num dev)
+                      "Extract device number from device name"
+                      (let* ((without-p (car (string-split dev #\p)))
+                             (num-str (regexp-substitute/global #f "[a-z]" without-p 'pre "" 'post)))
+                        num-str))
+
+                    (define (build-rbd-path dev)
+                      "Build RBD path from device name"
+                      (let* ((num (extract-num dev))
+                             (base-path (string-append "/sys/devices/rbd/" num))
+                             (pool (read-file (string-append base-path "/pool")))
+                             (pool-ns-path (string-append base-path "/pool_ns"))
+                             (namespace (read-file pool-ns-path))
+                             (image (read-file (string-append base-path "/name")))
+                             (snap (read-file (string-append base-path "/current_snap"))))
+                        
+                        (when (not pool)
+                          (error "Could not read pool information"))
+                        
+                        ;; Build output string
+                        (display pool)
+                        (when (and namespace (not (string=? namespace "")))
+                          (display "/")
+                          (display namespace))
+                        (display "/")
+                        (display image)
+                        (when (and snap (not (string=? snap "-")))
+                          (display "@")
+                          (display snap))
+                        (newline)))
+
+                    ;; Main entry point
+                    (define (main args)
+                      (if (< (length args) 2)
+                          (begin
+                            (format (current-error-port) "Usage: ~a DEVICE~%" (car args))
+                            (exit 1))
+                          (build-rbd-path (cadr args))))
+
+                    ;; Run if executed as script
+                    (when (batch-mode?)
+                      (main (command-line))))))
+
+(define ceph-rbd-udev
+  (mixed-text-file "rbd.rules"
+                   "
+KERNEL==\"rbd[0-9]*\", ENV{DEVTYPE}==\"disk\", PROGRAM=\"" ceph-rbdnamer " %k\", SYMLINK+=\"rbd/%c\"
+KERNEL==\"rbd[0-9]*\", ENV{DEVTYPE}==\"partition\", PROGRAM=\"" ceph-rbdnamer " %k\", SYMLINK+=\"rbd/%c-part%n\"
+"))
+
