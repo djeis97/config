@@ -81,7 +81,7 @@
          (simple-service 'syncthing home-shepherd-service-type
                          (list (shepherd-service
                                 (provision '(syncthing))
-                                (start #~(make-forkexec-constructor '("syncthing" "-no-browser")))
+                                (start #~(make-forkexec-constructor '("syncthing" "--no-browser")))
                                 (stop #~(make-kill-destructor)))))
          (simple-service 'flatpak-xdg
                          home-environment-variables-service-type
