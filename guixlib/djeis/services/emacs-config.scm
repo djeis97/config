@@ -78,16 +78,18 @@
                                               "emacs-buttercup"
                                               "emacs-helpful"
                                               "emacs-org"
-                                              "emacs-evil"
                                               ;; "emacs-elisp-refs"
                                               ;; "emacs-all-the-icons"
                                               ;; "emacs-rainbow-delimiters"
                                               "emacs-eldev"
                                               "emacs-lispy"
                                               "emacs-yasnippet"
+                                              "emacs-dash"
                                               ))
                                (sub-alist `(("emacs-powerline" . ,emacs-powerline)
                                             ("emacs-general" . ,emacs-general)
+                                            ("emacs-evil" . ,emacs-evil)
+                                            ("emacs-dired-hacks" . ,emacs-dired-hacks)
                                             ("emacs-which-key" . ,the-emacs)))) ;; Which-key is built in now.
                            (cond ((member (package-name p) emacsen) the-emacs)
                                  ((member (package-name p) untestworthy) (package-without-tests p))

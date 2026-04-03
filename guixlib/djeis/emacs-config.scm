@@ -152,6 +152,19 @@
          (dired-rainbow-define partition "#e3342f" ("dmg" "iso" "bin" "nrg" "qcow" "toast" "vcd" "vmdk" "bak"))
          (dired-rainbow-define vc "#0074d9" ("git" "gitignore" "gitattributes" "gitmodules"))
          (dired-rainbow-define-chmod executable-unix "#38c172" "-.*x.*")))
+    (use-package dired-sidebar
+       :commands (dired-sidebar-toggle-sidebar)
+       :init
+       (add-hook 'dired-sidebar-mode-hook
+                 (lambda ()
+                   (unless (file-remote-p default-directory)
+                     (auto-revert-mode +1))))
+       :config
+       (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
+       (push 'rotate-windows dired-sidebar-toggle-hidden-commands)
+       (setq dired-sidebar-theme 'icons)
+       (setq dired-sidebar-use-term-integration t)
+       (setq dired-sidebar-use-custom-font t))
     (use-package embark
       :init
       (use-package embark-consult
@@ -187,6 +200,8 @@
                 "h f" 'helpful-callable
                 "h k" 'helpful-key
                 "h v" 'helpful-variable))
+    (use-package ibuffer-sidebar
+      :commands (ibuffer-sidebar-toggle-sidebar))
     (use-package justl)
     ;; (use-package kele)
     (use-package kubed)
@@ -249,6 +264,8 @@
 (define-public emacs-appearance
   (emacs-config-service emacs-appearance
     (use-package all-the-icons)
+    (use-package all-the-icons-dired
+      :hook (dired-mode . all-the-icons-dired-mode))
     (use-package project-tab-groups
       :after djeis97
       :demand t
@@ -257,7 +274,12 @@
       :custom (x-no-window-manager t))
     (use-package doom-themes
       :demand t
-      :init (load-theme 'doom-acario-dark t))
+      :config
+      (setcdr (assoc 'gnus-group-news-low-empty doom-themes-base-faces)
+              '(:inherit 'gnus-group-mail-1-empty :weight 'normal))
+      (setcdr (assoc 'gnus-group-news-low doom-themes-base-faces)
+              '(:inherit 'gnus-group-mail-1-empty :weight 'normal))
+      (load-theme 'doom-acario-dark t))
     (use-package doom-modeline
       :defer 2
       :config (doom-modeline-mode 1))))
@@ -431,6 +453,7 @@
        "b R" 'revert-buffer
        "f f" 'find-file
        "f s" 'save-buffer
+       "f d" 'dired-sidebar-toggle-sidebar
        "h ." 'display-local-help
        "p" (or (lookup-key djeis-menu-map (kbd "p"))
                (make-composed-keymap nil project-prefix-map))

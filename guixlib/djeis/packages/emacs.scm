@@ -30,7 +30,44 @@
         (cons*
          (local-file (djeis:search-patch "0001-Make-border-and-dividers-transparent.patch"))
          (origin-patches (package-source emacs-next))))))
-    (inputs (modify-inputs (package-inputs emacs-next) (prepend libxt) (prepend libxrender)))))
+    (inputs (modify-inputs (package-inputs emacs-next) (prepend libxt) (prepend libxrender)))
+    (arguments
+     (substitute-keyword-arguments
+         (package-arguments emacs-next)
+       ((#:configure-flags flags) #~(cons "--without-compress-install" #$flags))
+       ((#:parallel-build? _ ) #t)))))
+
+(define-public emacs-evil
+  (let ((commit "729d9a58b387704011a115c9200614e32da3cefc"))
+    (package
+      (inherit gnu:emacs-evil)
+      (version (git-version "1.15.0" "1" commit))
+      (source
+       (origin
+         (inherit (package-source gnu:emacs-evil))
+         (method git-fetch)
+         (uri (git-reference
+                (url "https://github.com/emacs-evil/evil")
+                (commit commit)))
+         (file-name (git-file-name (package-name gnu:emacs-evil) version))
+         (sha256 (base32 "0scdws40fg4k9lqyznjghnn8svn7l0c6mq7h2aq5pzkm6hanzqn3"))))
+      (arguments (cons* #:tests? #f (package-arguments gnu:emacs-evil))))))
+
+(define-public emacs-evil-surround
+  (let ((commit "da05c60b0621cf33161bb4335153f75ff5c29d91"))
+    (package
+      (inherit gnu:emacs-evil-surround)
+      (version (git-version "1.1.1" "0" commit))
+      (source
+       (origin
+         (inherit (package-source gnu:emacs-evil-surround))
+         (method git-fetch)
+         (uri (git-reference
+                (url "https://github.com/emacs-evil/evil-surround")
+                (commit commit)))
+         (file-name (git-file-name (package-name gnu:emacs-evil-surround) version))
+         (sha256 (base32 "0wgxwvndhfaf0ha4pm392vj6yqyv2431hmvyivp1q16crd5g6bq5"))))
+      (arguments (cons* #:tests? #f (package-arguments gnu:emacs-evil-surround))))))
 
 (define-public emacs-doom-themes
   (let ((commit "dc25efea6f82494864f2bc83b7947bad953a3b87"))
@@ -42,8 +79,8 @@
          (inherit (package-source gnu:emacs-doom-themes))
          (method git-fetch)
          (uri (git-reference
-               (url "https://github.com/dalugm/emacs-doom-themes")
-               (commit commit)))
+                (url "https://github.com/dalugm/emacs-doom-themes")
+                (commit commit)))
          (file-name (git-file-name (package-name gnu:emacs-doom-themes) version))
          (sha256 (base32 "026brjv3ckjw364fp1fai09ys49429mflzs625yh9ajd219riicr")))))))
 
@@ -135,17 +172,18 @@
                 (sha256 (base32 "0k1n5pg8v3ybkqxcipw80jqv94ka0dp63qxl0hvjwlxk16gxp8kb")))))))
 
 (define-public emacs-general
-  (let ((commit "ced143c30de8e20f5a3761a465e684a1dc48471e"))
+  (let ((commit "a48768f85a655fe77b5f45c2880b420da1b1b9c3"))
     (package
       (inherit gnu:emacs-general)
-      (version (git-version "0" "5" commit))
+      (version (git-version "0" "6" commit))
       (source (origin
                 (method git-fetch)
                 (uri (git-reference
-                      (url "https://github.com/noctuid/general.el")
-                      (commit commit)))
+                       (url "https://github.com/noctuid/general.el")
+                       (commit commit)))
                 (file-name (git-file-name (package-name gnu:emacs-general) version))
-                (sha256 (base32 "0c13kax2h14b06zjs8wj950y7ykzmabfwdmb8imwmpgfcaasycf2")))))))
+                (sha256 (base32 "19k82p8pwyh3krq8i6l6calwy9wddqklj1klkdyawgh5ar230vb2"))))
+      (arguments `(#:tests? #f)))))
 
 (define-public emacs-kele
   (let ((commit "beec4a76c090101d8a98e631c292207be3c3a6a1"))
@@ -199,8 +237,8 @@
       (source (origin
                 (method git-fetch)
                 (uri (git-reference
-                      (url "https://github.com/abrochard/kubel")
-                      (commit commit)))
+                       (url "https://github.com/abrochard/kubel")
+                       (commit commit)))
                 (file-name (git-file-name name version))
                 (sha256 (base32 "07yn3g8znzgndkg2bajmkwywdzrdjslkvldzanj8cnhlmax80kvn"))))
       (build-system emacs-build-system)
@@ -213,6 +251,42 @@
                                gnu:emacs-yaml-mode
                                gnu:emacs-transient
                                gnu:emacs-evil)))))
+
+(define-public emacs-dired-hacks
+  (let ((commit "c90535a4457308865804c3af33eebf0f10e64801")
+        (revision "100"))
+    (package
+      (inherit gnu:emacs-dired-hacks)
+      (name "emacs-dired-hacks")
+      (version (git-version "0.0.1" revision commit))
+      (source (origin
+                (method git-fetch)
+                (uri (git-reference
+                      (url "https://github.com/emreyolcu/dired-hacks")
+                      (commit commit)))
+                (file-name (git-file-name name version))
+                (sha256
+                 (base32
+                  "1bxj6n4kanlz8d1cyhmd25md9k3lr4wx3ajy775prpkkahhzprz3")))))))
+
+(define-public emacs-ibuffer-sidebar
+  (let ((commit "fb685e1e43db979e25713081d8ae4073453bbd5e"))
+    (package
+      (name "emacs-ibuffer-sidebar")
+      (version (git-version "0.0.1" "0" commit))
+      (source (origin
+                (method git-fetch)
+                (uri (git-reference
+                      (url "https://github.com/jojojames/ibuffer-sidebar")
+                      (commit commit)))
+                (file-name (git-file-name name version))
+                (sha256 (base32 "04x87gngmvyj4nfq1dm3h9jr6b0kvikxsg1533kdkz9k72khs3n3"))))
+      (build-system emacs-build-system)
+      (license #f)
+      (description "")
+      (synopsis "")
+      (home-page "https://github.com/jojojames/ibuffer-sidebar")
+      (arguments `(#:tests? #f)))))
 
 
 (define* (local-emacs-package base-name #:optional (deps (list)))
