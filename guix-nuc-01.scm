@@ -281,7 +281,7 @@ mount_program = \"" (file-append fuse-overlayfs "/bin/fuse-overlayfs") "\"
                                                               "-e" "UPDATE_MODS_ON_START=true"
                                                               "-v" "/auto/cephfs/containers/factorio:/factorio"
                                                               "--secret" "factorio_token,type=env,target=TOKEN"
-                                                              "factorio:2.0.73")))
+                                                              "factorio:2.0.76")))
                                               (stop #~(let ((sd (make-system-destructor #$(file-append podman "/bin/podman") " exec -it factorio rcon /quit"))
                                                             (kd (make-kill-destructor SIGINT #:grace-period 30)))
                                                         (lambda args
