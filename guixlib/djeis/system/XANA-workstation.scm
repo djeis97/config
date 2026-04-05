@@ -24,6 +24,16 @@
   #:use-module ((gnu packages backup) #:select (btrbk))
   #:use-module ((gnu packages storage) #:select (ceph)))
 
+(define autofs-master-map
+  (let* ((cephfs (file-system
+                   (mount-point "cephfs")
+                   (device "::/")
+                   (type "ceph")
+                   (options "name=admin")))
+         (autofs-auto-map
+          (plain-file "autofs.auto" (file-system->autofs-line cephfs))))
+    (mixed-text-file "autofs.master" "/auto " autofs-auto-map "\n")))
+
 (define-public os
   (operating-system
     (inherit %djeis-common-desktop-os)
