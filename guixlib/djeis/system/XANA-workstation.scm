@@ -44,7 +44,8 @@
 
     (mapped-devices (list (mapped-device
                             (source (uuid "bb0f6c71-6ad3-439a-9b48-8022ec4f8862"))
-                            (target "workstation-root"))))
+                            (target "workstation-root")
+                            (type luks-device-mapping))))
 
     (file-systems (cons* (file-system
                            (device "/dev/mapper/workstation-root")
